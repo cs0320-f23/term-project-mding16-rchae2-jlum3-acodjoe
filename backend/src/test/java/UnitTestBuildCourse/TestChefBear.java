@@ -1,6 +1,6 @@
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import edu.brown.cs32.main.buildCourse.*;
+import edu.brown.cs32.buildCourse.*;
 import static
 
 public class TestChefBear(){

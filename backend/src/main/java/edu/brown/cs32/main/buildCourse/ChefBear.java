@@ -22,7 +22,10 @@ public class ChefBear{
    * Populating the database
    */
   public setUp(){
+    // ***************** FIRST LOOP ********************
     for region in regionToCountry.keys(){
+
+      // ***************** SECOND LOOP ********************
       for country in regionToCountry.get(region){
         // API CALL ONE: www.themealdb.com/api/json/v1/1/filter.php?a=Canadian
 
@@ -33,15 +36,27 @@ public class ChefBear{
           HttpURLConnection countryConnection = (HttpURLConnection) countryURL.openConnection();
           countryConnection.connect();
 
-          if (stateCodesConnection.getResponseCode() == 200) {
+          if (countryConnection.getResponseCode() == 200) {
             // If valid connection, deserialize response
-            Moshi moshi = new Moshi.Builder().build();
+            String jsonString = new Buffer().readFrom(stateCodesConnection.getInputStream());
             // MOSHI
+            Moshi moshi = new Moshi.Builder().build();
+            Type type = Types.newParameterizedType(Meal.class, SubMeal.class, String.class, Integer.class);
+            JsonAdapter<Meal> adapter = moshi.adapter(type);
+            Meal currMeal = adapter.fromJson(jsonString);
             countryConnection.disconnect();
-            this.stateCodes = new HashMap<>();
-            for (int i=1; i<jsonData.size(); i++){
-              this.stateCodes.put(jsonData.get(i).get(0), jsonData.get(i).get(1));
+
+            // ***************** THIRD LOOP ********************
+            for m in Meal.meals{
+              // API CALL 2
+              String mealAPICall = "www.themealdb.com/api/json/v1/1/search.php?s=" + m.strMeal;
+              URL countryURL = new URL(countryAPICall);
+              HttpURLConnection countryConnection = (HttpURLConnection) countryURL.openConnection();
+              countryConnection.connect();
+              // DESERIALIZE RECIPE RESPONSE --> INTERMEDIARY RECIPE OBJECT
+            
             }
+
           }
           else {
             throw new DatasourceException("unexpected: API connection not success status "
@@ -50,6 +65,7 @@ public class ChefBear{
         } catch (IOException | DatasourceException e) {
           e.printStackTrace();}
       }
+
       }
     }
   }
