@@ -1,18 +1,27 @@
+package edu.brown.cs32.main.buildCourse;
 
-import java.util.ArrayList;
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
+import com.squareup.moshi.Types;
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.Buffer;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import edu.brown.cs32.main.buildCourse.MoshiObjects.*;
+
 
 public class ChefBear{
-  private HashMap<String, String> regionToCountry = new HashMap<>();
+  private HashMap<String, List<String>> regionToCountry = new HashMap<>();
   private HashMap<String, List<Recipe>> regionToRecipeList = new HashMap<>();
   private List<String> RegionList = List.of();
 
   /**
    * Constructor for chefBear
    */
-  public chefBear(){
+  public ChefBear(){
     this.setup();
   }
 
@@ -21,12 +30,12 @@ public class ChefBear{
    * Calling API x2
    * Populating the database
    */
-  public setUp(){
+  public void setup(){
     // ***************** FIRST LOOP ********************
-    for region in regionToCountry.keys(){
+    for (String region: this.regionToCountry.keySet()){
 
       // ***************** SECOND LOOP ********************
-      for country in regionToCountry.get(region){
+      for (String country: this.regionToCountry.get(region)){
         // API CALL ONE: www.themealdb.com/api/json/v1/1/filter.php?a=Canadian
 
         try {
@@ -38,7 +47,7 @@ public class ChefBear{
 
           if (countryConnection.getResponseCode() == 200) {
             // If valid connection, deserialize response
-            String jsonString = new Buffer().readFrom(stateCodesConnection.getInputStream());
+            String jsonString = new Buffer().readFrom(countryConnection.getInputStream());
             // MOSHI
             Moshi moshi = new Moshi.Builder().build();
             Type type = Types.newParameterizedType(Meal.class, SubMeal.class, String.class, Integer.class);
@@ -47,44 +56,42 @@ public class ChefBear{
             countryConnection.disconnect();
 
             // ***************** THIRD LOOP ********************
-            for m in Meal.meals{
+            assert currMeal != null;
+            for (SubMeal submeal: currMeal.meals){
               // API CALL 2
-              String mealAPICall = "www.themealdb.com/api/json/v1/1/search.php?s=" + m.strMeal;
-              URL countryURL = new URL(countryAPICall);
-              HttpURLConnection countryConnection = (HttpURLConnection) countryURL.openConnection();
-              countryConnection.connect();
+//              String mealAPICall = "www.themealdb.com/api/json/v1/1/search.php?s=" + m.strMeal;
+//              URL countryURL = new URL(countryAPICall);
+//              HttpURLConnection countryConnection = (HttpURLConnection) countryURL.openConnection();
+//              countryConnection.connect();
               // DESERIALIZE RECIPE RESPONSE --> INTERMEDIARY RECIPE OBJECT
-            
+
             }
 
           }
-          else {
-            throw new DatasourceException("unexpected: API connection not success status "
-                +stateCodesConnection.getResponseMessage());
-          }
-        } catch (IOException | DatasourceException e) {
+
+        } catch (IOException e) {
           e.printStackTrace();}
       }
 
       }
     }
-  }
+
 
   /**
    * Setting up the region to country list
    */
-  public populateMap(){
+  private void populateMap(){
     List<String> asianCountries = List.of("Japanese", "Chinese", "Indian", "Vietnamese", "Thai", "Filipino", "Malaysian");
-    regionToCountry.put("Asian", asianCountries);
+    this.regionToCountry.put("Asian", asianCountries);
 
     List<String> europeanCountries = List.of("French", "Italian", "British", "Croatian", "Dutch", "Irish", "Spanish", "Polish", "Portugese", "Turkish", "Greek", "Russian");
-    regionToCountry.put("European", europeanCountries);
+    this.regionToCountry.put("European", europeanCountries);
 
     List<String> africanCaribbeanCountries = List.of("Jamaican", "Egyptian", "Moroccan", "Kenyan", "Tunisian");
-    cuisineMap.put("African/Caribbean", africanCaribbeanCountries);
+    this.regionToCountry.put("African/Caribbean", africanCaribbeanCountries);
 
     List<String> northAmericanCountries = List.of("Canadian", "American", "Mexican");
-    cuisineMap.put("North American", northAmericanCountries);
+    this.regionToCountry.put("North American", northAmericanCountries);
   }
 
 

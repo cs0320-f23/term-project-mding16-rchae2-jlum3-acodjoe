@@ -5,15 +5,12 @@ import static spark.Spark.after;
 
 /** Server class for using all endpoint including loadcsv, viewcsv, searchcsv, and broadbandcsv. */
 public class Server {
-  private GeneralDataSource state;
   private final int port = 3233;
 
   /** This is the constructor for the server class to get a port and use all api
-   *
-   * @param toUse
+
    */
   public Server() {
-    this.state = toUse;
     Spark.port(this.port);
     Spark.init();
 
