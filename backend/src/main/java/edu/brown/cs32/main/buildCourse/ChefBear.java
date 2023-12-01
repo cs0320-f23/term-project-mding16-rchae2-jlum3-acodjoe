@@ -37,7 +37,6 @@ public class ChefBear{
       // ***************** SECOND LOOP ********************
       for (String country: this.regionToCountry.get(region)){
         // API CALL ONE: www.themealdb.com/api/json/v1/1/filter.php?a=Canadian
-
         try {
           // Try to create a valid connection
           String countryAPICall = "https://www.themealdb.com/api/json/v1/1/filter.php?a=" + country;
@@ -57,23 +56,44 @@ public class ChefBear{
 
             // ***************** THIRD LOOP ********************
             assert currMeal != null;
-            for (SubMeal submeal: currMeal.meals){
+            for (SubMeal submeal: currMeal.meals){ // TODO: might have to change this bc currMeal.meals may not format into submeal properly
               // API CALL 2
-//              String mealAPICall = "www.themealdb.com/api/json/v1/1/search.php?s=" + m.strMeal;
-//              URL countryURL = new URL(countryAPICall);
-//              HttpURLConnection countryConnection = (HttpURLConnection) countryURL.openConnection();
-//              countryConnection.connect();
-              // DESERIALIZE RECIPE RESPONSE --> INTERMEDIARY RECIPE OBJECT
+              String recipeAPICall = "www.themealdb.com/api/json/v1/1/search.php?s=" + m.strMeal;
+              URL mealURL = new URL(mealURL);
+              HttpURLConnection recipeConnection = (HttpURLConnection) mealURL.openConnection();
+              recipeURL.connect();
+              if (submealConnection.getResponseCode() == 200){
+                jsonString = new Buffer().readFrom(recipeConnection.getInputStream());
+                // If valid connection, deserialize into recipe object
+                Moshi moshi = new Moshi.Builder().buildt();
+                Type type = Types.newParameterizedType(Recipe.class);
+                JsonAdapter<Recipe> adapter = moshi.adapter(type);
+                Recipe recipe = adapter.fromJson(jsonString);
 
+                // Adding Recipe to the regionToRecipeList
+                processRecipe(region, recipe);
+
+              }
+              else {
+                // NO SUCH RECIPE FOUND IN API
+              }
             }
-
+          } else{
+            // NO SUCH COUNTRY FOUND IN API
           }
 
         } catch (IOException e) {
-          e.printStackTrace();}
+          e.printStackTrace();
+        }
       }
-
+      // At the end of each region, create Region object and add it to the RegionList
+      Region regionObject = new Region(regionToRecipeList.get(region));
+      RegionList.add(regionObject);
       }
+    // After all of the regions are done iterating, add Regions to the database
+    // for (Region r : RegionList){
+    // TODO: CODE THAT ADDS REGION TO DATABASE IN STRING FORMAT (JER)
+    // }
     }
 
 
@@ -92,6 +112,20 @@ public class ChefBear{
 
     List<String> northAmericanCountries = List.of("Canadian", "American", "Mexican");
     this.regionToCountry.put("North American", northAmericanCountries);
+  }
+
+  /**
+   * Function that processes the recipe object and adds it to the regionToRecipeList hashmap
+   * @param region
+   * @param recipe
+   */
+  private void processRecipe(String region, Recipe recipe){
+    if (recipe != null){
+      if (!regionToRecipeList.containsKey(region)){
+        regionToRecipeList.put(region, new List<Recipe>();
+      }
+      regionToRecipeList.get(region).add(recipe)
+    }
   }
 
 
