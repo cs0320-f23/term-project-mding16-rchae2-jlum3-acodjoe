@@ -6,8 +6,8 @@ import java.util.List;
 public class Region{
   private List<Recipe> recipeList;
 
-  public Region(){
-    this.recipeList = new ArrayList<>();
+  public Region(List<Recipe> recipeList){
+    this.recipeList = recipeList;
   }
 
 }
