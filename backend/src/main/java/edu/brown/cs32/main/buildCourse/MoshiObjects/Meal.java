@@ -7,4 +7,14 @@ public class Meal{
 
   public Meal(){}
 
+  @Override
+  public String toString() {
+    return "Meal{" +
+        "meals=" + meals +
+        '}';
+  }
+
+
+
+
 }

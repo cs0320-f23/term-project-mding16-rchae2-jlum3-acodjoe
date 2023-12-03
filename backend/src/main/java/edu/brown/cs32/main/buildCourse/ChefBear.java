@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.Buffer;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import edu.brown.cs32.main.buildCourse.MoshiObjects.*;
@@ -18,14 +18,18 @@ import edu.brown.cs32.main.buildCourse.MoshiObjects.*;
 
 public class ChefBear{
   private HashMap<String, List<String>> regionToCountry = new HashMap<>();
-  private HashMap<String, List<Recipe>> regionToRecipeList = new HashMap<>();
-  private List<Region> RegionList = List.of();
+  private HashMap<String, List<ParsedRecipe>> regionToRecipeList = new HashMap<>();
+  private List<Region> RegionList = new ArrayList<>();
 
   /**
    * Constructor for chefBear
    */
-  public ChefBear(){
-    this.setup();
+  public static void main(String[] args){
+    ChefBear chefBear = new ChefBear();
+    chefBear.populateMap();
+    System.out.println(chefBear.regionToCountry);
+    chefBear.setup();
+    chefBear.printSampleData();
   }
 
   /**
@@ -37,7 +41,6 @@ public class ChefBear{
     // ***************** FIRST LOOP ********************
     //  LOOPING THROUGH EACH REGION IN MAP
     for (String region: this.regionToCountry.keySet()){
-
       // ***************** SECOND LOOP ********************
       // LOOPING THROUGH EACH COUNTRY IN A REGION
       for (String country: this.regionToCountry.get(region)){
@@ -62,50 +65,67 @@ public class ChefBear{
               }
               // MOSHI
               Moshi moshi = new Moshi.Builder().build();
-              Type type = Types.newParameterizedType(Meal.class); // output of json
+              Type type = Types.newParameterizedType(Meal.class, List.class, SubMeal.class); // output of json
               JsonAdapter<Meal> adapter = moshi.adapter(type);
+              System.out.println("Meal API Response" + stringBuilder.toString());
               Meal currMeal = adapter.fromJson(stringBuilder.toString());
-              countryConnection.disconnect();
-
+              System.out.println("Printing the Meal Class" + currMeal.toString());
               // ***************** THIRD LOOP ********************
               // LOOPING THROUGH EACH RECIPE PER COUNTRY
-              assert currMeal != null;
-              for (SubMeal submeal: currMeal.meals){ // TODO: might have to change this bc currMeal.meals may not format into submeal properly
-                // API CALL 2
-                String recipeAPICall = "www.themealdb.com/api/json/v1/1/search.php?s=" + submeal.strMeal;
-                URL mealURL = new URL(recipeAPICall);
-                HttpURLConnection recipeConnection = (HttpURLConnection) mealURL.openConnection();
-                recipeConnection.connect();
-                if (recipeConnection.getResponseCode() == 200){
-                  try {
-                    BufferedReader lineTraverseTwo = new BufferedReader(new InputStreamReader(countryConnection.getInputStream()));
-                    String lineTwo = lineTraverseTwo.readLine();
-                    StringBuilder stringBuilderTwo = new StringBuilder();
-                    while (lineTwo != null) {
-                      stringBuilderTwo.append(lineTwo);
-                      lineTwo = lineTraverseTwo.readLine();
+              if (currMeal != null && currMeal.meals != null && !currMeal.meals.isEmpty()) {
+                for (SubMeal submeal : currMeal.meals) { // TODO: might have to change this bc currMeal.meals may not format into submeal properly
+//                  System.out.println("ParsedSubmeal: " + submeal.toString());
+                  // API CALL 2
+                  String recipeAPICall =
+                      "https://www.themealdb.com/api/json/v1/1/search.php?s=" + submeal.strMeal;
+                  URL mealURL = new URL(recipeAPICall);
+                  HttpURLConnection recipeConnection = (HttpURLConnection) mealURL.openConnection();
+                  recipeConnection.connect();
+                  if (recipeConnection.getResponseCode() == 200) {
+                    try {
+                      BufferedReader lineTraverseTwo = new BufferedReader(
+                          new InputStreamReader(recipeConnection.getInputStream()));
+                      String lineTwo = lineTraverseTwo.readLine();
+                      StringBuilder stringBuilderTwo = new StringBuilder();
+                      while (lineTwo != null) {
+                        stringBuilderTwo.append(lineTwo);
+                        lineTwo = lineTraverseTwo.readLine();
+                      }
+                      lineTraverseTwo.close();
+                      Moshi moshiTwo = new Moshi.Builder().build();
+//                    // Type typeTwo = Recipe.class; // output of json
+                      JsonAdapter<RecipeWrapper> recipeAdapter = moshiTwo.adapter(RecipeWrapper.class);
+                      // System.out.println("JSON Version of RecipeWrapper: " + stringBuilderTwo.toString());
+                      RecipeWrapper currRecipe = recipeAdapter.fromJson(stringBuilderTwo.toString());
+
+                      Recipe recipeObject = currRecipe.meals.get(0);
+//                      System.out.println("Recipe Object " + recipeObject.toString());
+
+                      ParsedRecipe parsedRecipe = new ParsedRecipe(recipeObject);
+                      System.out.println("Parsed Object " + parsedRecipe.toString());
+
+//                    // System.out.println("Recipe Object" + currRecipe.toString());
+                      //Adding Recipe to the regionToRecipeList
+//                      processRecipe(region, currRecipe); // TODO: UNCOMMENT THIS
+                    } catch (IOException e ) {
+                      System.err.println(e);
+                    } catch (NoSuchFieldException e) {
+                      throw new RuntimeException(e);
+                    } catch (IllegalAccessException e) {
+                      throw new RuntimeException(e);
+                    } finally {
+                      recipeConnection.disconnect();
                     }
-//                    System.out.println("done reading");
-                    Moshi moshiTwo = new Moshi.Builder().build();
-                    Type typeTwo = Types.newParameterizedType(Recipe.class); // output of json
-                    JsonAdapter<Recipe> recipeAdapter = moshiTwo.adapter(typeTwo);
-                    Recipe currRecipe = recipeAdapter.fromJson(stringBuilderTwo.toString());
+                  } else {
+                    // NO SUCH RECIPE FOUND IN API
 
-                    // Adding Recipe to the regionToRecipeList
-                    processRecipe(region,currRecipe);
-                    recipeConnection.disconnect();
-
-                  } catch (IOException e) {
-                    System.err.println(e);
                   }
-                }
-                else {
-                  // NO SUCH RECIPE FOUND IN API
-                  
                 }
               }
             } catch (IOException e) {
               e.printStackTrace();
+            } finally {
+              countryConnection.disconnect();
             }
 
           } else{
@@ -125,7 +145,6 @@ public class ChefBear{
     // TODO: CODE THAT ADDS REGION TO DATABASE IN STRING FORMAT (JER)
     // }
     }
-
 
   /**
    * Setting up the region to country list
@@ -149,15 +168,23 @@ public class ChefBear{
    * @param region
    * @param recipe
    */
-  private void processRecipe(String region, Recipe recipe){
+  private void processRecipe(String region, ParsedRecipe recipe){
     if (recipe != null){
       if (!regionToRecipeList.containsKey(region)){
-//        regionToRecipeList.put(region, new List<Recipe>());
+          regionToRecipeList.put(region, new ArrayList<ParsedRecipe>());
       }
       regionToRecipeList.get(region).add(recipe);
     }
   }
 
+  private void printSampleData() {
+    for (String region: regionToRecipeList.keySet()){
+      System.out.print("Region: " + region);
+      for (ParsedRecipe recipe: regionToRecipeList.get(region)){
+        System.out.println("Recipe: " + recipe);
+      }
+    }
+  }
 
 }
 

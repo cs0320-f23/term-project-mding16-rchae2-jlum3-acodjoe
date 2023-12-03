@@ -1,12 +1,11 @@
 package edu.brown.cs32.main.buildCourse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Region{
-  private List<Recipe> recipeList;
+  private List<ParsedRecipe> recipeList;
 
-  public Region(List<Recipe> recipeList){
+  public Region(List<ParsedRecipe> recipeList){
     this.recipeList = recipeList;
   }
 
