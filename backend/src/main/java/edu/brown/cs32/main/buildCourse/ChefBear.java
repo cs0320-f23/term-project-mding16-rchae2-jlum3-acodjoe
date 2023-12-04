@@ -4,6 +4,9 @@ import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import com.squareup.moshi.Types;
 
+import edu.brown.cs32.main.database.Database;
+import edu.brown.cs32.main.database.RecipeDB;
+import edu.brown.cs32.main.database.RegionDB;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,12 +17,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import edu.brown.cs32.main.buildCourse.MoshiObjects.*;
+import java.util.Map;
 
 
 public class ChefBear{
   private HashMap<String, List<String>> regionToCountry = new HashMap<>();
   private HashMap<String, List<ParsedRecipe>> regionToRecipeList = new HashMap<>();
   private List<Region> RegionList = new ArrayList<>();
+  private Database db;
+  private RegionDB regionDB;
+  private RecipeDB recipeDB;
+
+  public ChefBear() {
+    this.db = new Database();
+    this.regionDB = new RegionDB(this.db.db);
+    this.recipeDB = new RecipeDB(this.db.db);
+  }
 
   /**
    * Constructor for chefBear
@@ -29,7 +42,10 @@ public class ChefBear{
     chefBear.populateMap();
     System.out.println(chefBear.regionToCountry);
     chefBear.setup();
-    chefBear.printSampleData();
+//    chefBear.recipeDB.get("Montreal Smoked Meat");
+//    System.out.println(chefBear.regionToRecipeList);
+//    System.out.println(chefBear.RegionList);
+//    chefBear.printSampleData();
   }
 
   /**
@@ -67,9 +83,9 @@ public class ChefBear{
               Moshi moshi = new Moshi.Builder().build();
               Type type = Types.newParameterizedType(Meal.class, List.class, SubMeal.class); // output of json
               JsonAdapter<Meal> adapter = moshi.adapter(type);
-              System.out.println("Meal API Response" + stringBuilder.toString());
+//              System.out.println("Meal API Response" + stringBuilder.toString());
               Meal currMeal = adapter.fromJson(stringBuilder.toString());
-              System.out.println("Printing the Meal Class" + currMeal.toString());
+//              System.out.println("Printing the Meal Class" + currMeal.toString());
               // ***************** THIRD LOOP ********************
               // LOOPING THROUGH EACH RECIPE PER COUNTRY
               if (currMeal != null && currMeal.meals != null && !currMeal.meals.isEmpty()) {
@@ -102,11 +118,11 @@ public class ChefBear{
 //                      System.out.println("Recipe Object " + recipeObject.toString());
 
                       ParsedRecipe parsedRecipe = new ParsedRecipe(recipeObject);
-                      System.out.println("Parsed Object " + parsedRecipe.toString());
+//                      System.out.println("Parsed Object " + parsedRecipe.toString());
 
 //                    // System.out.println("Recipe Object" + currRecipe.toString());
                       //Adding Recipe to the regionToRecipeList
-//                      processRecipe(region, currRecipe); // TODO: UNCOMMENT THIS
+                      processRecipe(region, parsedRecipe); // TODO: UNCOMMENT THIS
                     } catch (IOException e ) {
                       System.err.println(e);
                     } catch (NoSuchFieldException e) {
@@ -137,14 +153,20 @@ public class ChefBear{
         }
       }
       // At the end of each region, create Region object and add it to the RegionList
-      Region regionObject = new Region(regionToRecipeList.get(region));
+      Region regionObject = new Region(region, regionToRecipeList.get(region));
       RegionList.add(regionObject);
       }
     // After all of the regions are done iterating, add Regions to the database
-    // for (Region r : RegionList){
-    // TODO: CODE THAT ADDS REGION TO DATABASE IN STRING FORMAT (JER)
-    // }
-    }
+     for (Region r : RegionList){
+       Map<String, List<String>> levels = r.levelSort();
+       this.regionDB.add(r.getRegion(), levels);
+       for (ParsedRecipe recipe : r.getRecipeList()) {
+         this.recipeDB.add(recipe.name, recipe.difficultyScore, recipe.instructions, recipe.ingredients, recipe.image);
+       }
+       break; //TODO: edit this to eventually add everything
+       }
+  }
+
 
   /**
    * Setting up the region to country list

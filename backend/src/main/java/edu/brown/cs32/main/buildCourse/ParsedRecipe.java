@@ -8,13 +8,15 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ParsedRecipe {
-  private int difficultyScore;
-  private List<String> instructions;
+  public String name;
+  public int difficultyScore;
+  public List<String> instructions;
 
-  private List<String> ingredients;
-  private String image;
+  public List<String> ingredients;
+  public String image;
 
   public ParsedRecipe(Recipe recipe) throws NoSuchFieldException, IllegalAccessException {
+    this.name = recipe.strMeal;
     this.instructions = this.parseInstructions(recipe.strInstructions);
     this.image = recipe.strImageSource;
     this.ingredients = recipe.parseIngredients();
@@ -41,12 +43,13 @@ public class ParsedRecipe {
     String[] list = strInstructions.split("\\."); // confirm this works
     ArrayList<String> instruction = new ArrayList<>(Arrays.asList(list));
     return instruction;
-
   }
+
   @Override
   public String toString() {
     return "Recipe{" +
-        "difficultyScore=" + difficultyScore +
+        "name=" + name +
+        ", difficultyScore=" + difficultyScore +
         ", instructions=" + instructions +
         ", ingredients=" + ingredients +
         ", image='" + image + '\'' +
