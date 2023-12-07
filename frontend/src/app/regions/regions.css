@@ -1,0 +1,29 @@
+body, html {
+    background-color: #C5FFFC; 
+  }
+
+@font-face {
+    font-family: "RammettoOne-Regular";
+    src: url('RammettoOne-Regular.ttf');
+}
+.Header {
+    height: 15vh;
+    background-color: #41E4EE; 
+    color: #ffffff;
+    align-items: center;
+    font-family: "RammettoOne-Regular";
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  
+  }
+  body, html {
+    background-color: #C5FFFC; 
+  }
+  
+/* div {
+    font-family: myFirstFont;
+  } */
