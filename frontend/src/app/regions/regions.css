@@ -6,6 +6,79 @@ body, html {
     font-family: "RammettoOne-Regular";
     src: url('RammettoOne-Regular.ttf');
 }
+/* .Asia{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+.AsiaImage{
+    bottom:0;
+    left:5px;
+    width: 500px; 
+    height: auto;
+} */
+.Asia {
+    position: fixed;
+    bottom: 0px;
+    right: 100px;
+    width: 500px;
+    top: 51%;
+    height: auto;
+    font-family: "RammettoOne-Regular";
+    -webkit-text-stroke-width: 3px;
+    -webkit-text-stroke-color: black;
+  }
+  
+  .AsiaImage {
+    width: 100%;
+    height: auto;
+  }
+.Europe{
+    position: fixed;
+    bottom: 0;
+    left: 150px;
+}
+.EuropeImage{
+    bottom:0;
+    left:5px;
+    width: 420px; 
+    height: auto;
+}
+.Africa{
+    position: fixed;
+    top: 60;
+    left: 150px;
+}
+.AfricaImage{
+    bottom:0;
+    left:0;
+    width: 400px; 
+    height: auto;
+}
+ /* .NorthAmerica{
+    position: fixed;
+    top: 60;
+    right: 5px;
+} 
+
+.NorthAmericaImage{
+    bottom:0;
+    left:0;
+    width: 400px; 
+    height: auto;
+}  */
+.NorthAmerica {
+    position: fixed;
+    top: 100px; /* Adjust to align with Asia container */
+    right: 160px;
+    width: 400px;
+    height: auto;
+  }
+  
+  .NorthAmericaImage {
+    width: 100%;
+    height: auto;
+  }
 .Header {
     height: 15vh;
     background-color: #41E4EE; 
@@ -18,7 +91,6 @@ body, html {
     justify-content: center;
     align-items: center;
     text-align: center;
-  
   }
   body, html {
     background-color: #C5FFFC; 
