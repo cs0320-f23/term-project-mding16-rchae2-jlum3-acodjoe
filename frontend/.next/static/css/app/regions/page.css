@@ -8,7 +8,65 @@ body, html {
 @font-face {
     font-family: "RammettoOne-Regular";
     src: url(/_next/static/media/RammettoOne-Regular.1d518759.ttf);
+
 }
+.top {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    row-gap: 5px; 
+    column-gap: 90px; 
+    background-color: #C5FFFC;
+    position: fixed;
+    left: 50%; 
+    top: 150px;
+    transform: translateX(-50%);
+    width: 70%; /* Adjust the width of the grid */
+    max-height: 80vh; /* Set a maximum height for the grid */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+  }
+  
+  .AsiaCard,
+  .NorthAmericaCard,
+  .AfricaCard,
+  .EuropeCard {
+    background-color: #C5FFFC;
+    border: 0px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    height: 50%; /* Adjust the height of the cards */
+    width: 100%; /* Adjust the width of the cards */
+    align-items: center;
+    /* Remove 'top' property to avoid pushing cards down */
+  }
+  
+  
+/* .top {
+    display: grid;
+    grid-template-columns: repeat(2, 10fr); 
+    row-gap: 5px; 
+    column-gap: 90px; 
+    background-color: #050b0c;
+    size: 1000px;
+    position: fixed;
+    left: 50%; 
+    transform: translateX(-50%);
+    width: 45%;
+    height:40%
+  }
+  
+  .AsiaCard,
+  .NorthAmericaCard,
+  .AfricaCard,
+  .EuropeCard {
+    background-color: #C5FFFC;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    height: 80%;
+    width: 105%;
+    align-items: center;
+  } */
+  
 /* .Asia{
     position: fixed;
     bottom: 0;
@@ -34,7 +92,8 @@ body, html {
   
   .AsiaImage {
     width: 100%;
-    height: auto;
+    height: 130%;
+    right:50%;
   }
 .Europe{
     position: fixed;
@@ -44,7 +103,7 @@ body, html {
 .EuropeImage{
     bottom:0;
     left:5px;
-    width: 420px; 
+    width: 85%; 
     height: auto;
 }
 .Africa{
@@ -55,31 +114,19 @@ body, html {
 .AfricaImage{
     bottom:0;
     left:0;
-    width: 400px; 
+    width: 80%; 
     height: auto;
 }
- /* .NorthAmerica{
-    position: fixed;
-    top: 60;
-    right: 5px;
-} 
-
-.NorthAmericaImage{
-    bottom:0;
-    left:0;
-    width: 400px; 
-    height: auto;
-}  */
 .NorthAmerica {
     position: fixed;
-    top: 100px; /* Adjust to align with Asia container */
+    top: 100px; 
     right: 160px;
     width: 400px;
     height: auto;
   }
   
   .NorthAmericaImage {
-    width: 100%;
+    width: 80%;
     height: auto;
   }
 .Header {
