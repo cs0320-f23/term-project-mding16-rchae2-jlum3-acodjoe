@@ -10,20 +10,16 @@
       "static/chunks/main-app.js",
       "static/chunks/app/layout.js"
     ],
+    "/regions/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/regions/page.js"
+    ],
     "/recipes/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+      "static/css/app/recipes/page.css",
       "static/chunks/app/recipes/page.js"
-    ],
-    "/levels/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/levels/page.js"
-    ],
-    "/not-found": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/not-found.js"
     ]
   }
 }
