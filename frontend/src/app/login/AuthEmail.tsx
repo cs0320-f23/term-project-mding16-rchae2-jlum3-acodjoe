@@ -16,6 +16,7 @@ import {
 
 interface authProps {
     auth: firebase.auth.Auth
+    loading: boolean
 }
 
 export default function AuthEmail(props : authProps) {
@@ -43,10 +44,17 @@ export default function AuthEmail(props : authProps) {
     privacyPolicyUrl: function () {
       window.location.assign("<your-privacy-policy-url>");
     },
+    callbacks: {
+      signInSuccessWithAuthResult:(
+        authObject: firebase.auth.UserCredential,
+        redirectURL?: string
+      ) => {
+        // console.log(authObject)
+        // console.log(redirectURL)
+        return false
+      },
+    },
   };
-
-
-
 
   useEffect(
     () => {
@@ -55,9 +63,6 @@ export default function AuthEmail(props : authProps) {
 
       ui.start(".firebase-auth-container", uiConfig);
     },
-
-    // Cleanup the listener when the component unmounts
-    // return () => unsubscribe();
     [props.auth]
   );
 
