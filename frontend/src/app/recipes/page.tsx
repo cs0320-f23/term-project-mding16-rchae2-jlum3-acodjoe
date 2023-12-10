@@ -1,6 +1,7 @@
+"use client"
 import "./styles.css"
 import header from "./images/reciperec.png"
-import {useState} from "react"
+import {SetStateAction, useState} from "react"
 import Slider from 'react-slick'
 
 const headerImg = () => {
@@ -14,7 +15,7 @@ const headerImg = () => {
       <div id="selecttext">
         {"Select one of the following recipes."}
         <br></br>
-        {"Once you’ve completed it, select the done button,\
+        {"Once you’ve completed it, select the completed button,\
         and the next level will be unlocked!"}
         <br></br>
         {"Happy cooking!"}</div>
@@ -25,7 +26,7 @@ const headerImg = () => {
 const completeButton = () => {
   const tickimg = "https://lh3.googleusercontent.com/drive-viewer/AK7aPaCt9g6oQ7SqGsX3vlAHM6RprRARgUTtoYh_WytSQEvVFXNZ-k4vDtl-r7fx1OVLZvBVcGxCpgdeOxICYMKXRkjSd_HVug=s2560"
   return(
-    <button id="completebutton" className="center-horiz">
+    <button id="completebutton">
       <div id="buttontext">
         <img id="tick" src={tickimg}></img>
         Completed 
@@ -35,10 +36,9 @@ const completeButton = () => {
 }
 
 const recipepage = () => {
-  const duckimg = "https://lh3.googleusercontent.com/drive-viewer/AK7aPaDG-l_kXwjgYHiuPrH3mTx0dlkHD8FoJyhOKnm3yJa6qwVUgdyZ_RSXxZtG3ZDOIMCVcynq-ZebjhvAe66jpP-q6Vx6=s1600"
   const recipe1 = {
     name: "Peking Duck",
-    imagesrc: {duckimg},
+    imagesrc: "https://lh3.googleusercontent.com/drive-viewer/AK7aPaDG-l_kXwjgYHiuPrH3mTx0dlkHD8FoJyhOKnm3yJa6qwVUgdyZ_RSXxZtG3ZDOIMCVcynq-ZebjhvAe66jpP-q6Vx6=s1600",
     cooktime: "3 hours",
     ingredients: ["1 tablespoon soy sauce",
     "2 tablespoons honey, divided",
@@ -52,23 +52,64 @@ const recipepage = () => {
     instructions: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed doloremque minus repellendus ipsam, ratione perspiciatis esse ducimus modi amet dolor dicta in et voluptatum maxime iusto. Dolores quasi aut numquam!"
   }
 
-  const recipemap = {
-    recipe1: {recipe1},
-    recipe2: {recipe1},
-    recipe3: {recipe1}
+  const recipelist = [recipe1, recipe1, recipe1]
+
+  const [imageIndex, setImageIndex] = useState(0);
+
+  const settings = {
+      className: "center",
+      dots: true,
+      centerMode: true,
+      infinite: true,
+      centerPadding: "60px",
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      focusOnSelect: true,
+      speed: 500,
+      beforeChange: (current: any, next: any) => setImageIndex(next)
   }
 
-  return(<div>
-    <Slider> 
-
-    </Slider>
-  </div>)
+  /** CITE - carousel package + tutorial - react-slick
+   * https://react-slick.neostack.com/docs/get-started  
+   * https://www.youtube.com/watch?v=odSfSAoUREU
+   * */
+  
+  return(
+    <div id="recipeslider">
+      <Slider {...settings}
+        
+      >
+        {
+          recipelist.map((recipe, idx) => 
+          <div id="recipecontainer" className={idx===imageIndex? "slide activeSlide": "slide"} key={idx}>
+            <div id="rtext">
+              <div id="recipename">{recipe.name}</div>
+              <div id="recipebody"><b>Cook Time:</b> {recipe.cooktime}</div>
+              <div id="recipebody">
+                <b>Ingredients:</b>
+                {recipe.ingredients.map((item, index) => 
+                    (<li key={index}>{item}</li>))}
+              </div>
+              <div id="recipebody">
+                <b>Instructions:</b>
+                <br></br>
+                {recipe.instructions}</div>
+            </div>
+            <div id="rimgcontainer">
+              <img id="rimg" src={recipe.imagesrc}></img>
+            </div>
+            
+          </div>)
+        }
+      </Slider>
+    </div>
+  )
 }
 
 function Page() {
   
   return (
-    <div>
+    <div id="recipepage">
       {headerImg()}
       {recipepage()}
       {completeButton()}
