@@ -6,6 +6,7 @@
 /frontend/playwright-report
 /frontend/test-results
 /frontend/.vscode
+/frontend/.env.local
 
 #Backend ignored folders
 #IntelliJ default file
