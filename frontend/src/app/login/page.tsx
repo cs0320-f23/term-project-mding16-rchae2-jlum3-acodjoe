@@ -17,25 +17,19 @@ import {
   doc, getDoc
 } from "firebase/firestore";
 import { isReturnStatement } from "typescript";
-import { Firestore } from 'firebase/firestore';
-
-interface loginProps {
-    firestore: Firestore
-    auth: firebase.auth.Auth
-}
 
 
-export default function Page(props : loginProps) {
+export default function Page() {
 
-  // const firebaseConfig = {
-  //   apiKey: process.env.NEXT_PUBLIC_LOGIN_API_KEY,
-  //   authDomain: "termproj-d181a.firebaseapp.com",
-  //   projectId: "termproj-d181a",
-  //   storageBucket: "termproj-d181a.appspot.com",
-  //   messagingSenderId: process.env.NEXT_PUBLIC_MSG,
-  //   appId: process.env.NEXT_PUBLIC_APP,
-  //   measurementId: process.env.NEXT_PUBLIC_MSR,
-  // };
+  const firebaseConfig = {
+    apiKey: process.env.NEXT_PUBLIC_LOGIN_API_KEY,
+    authDomain: "termproj-d181a.firebaseapp.com",
+    projectId: "termproj-d181a",
+    storageBucket: "termproj-d181a.appspot.com",
+    messagingSenderId: process.env.NEXT_PUBLIC_MSG,
+    appId: process.env.NEXT_PUBLIC_APP,
+    measurementId: process.env.NEXT_PUBLIC_MSR,
+  };
 
   const [id, setID] = useState("");
   const [user, setUser] = useState("");
@@ -44,19 +38,20 @@ export default function Page(props : loginProps) {
 
 
   // Initialize Firebase
-  // var app = firebase.initializeApp(firebaseConfig);
-  // var auth = firebase.auth();
-  // var auth = getAuth(props.app)
-  // const firestore = getFirestore(app);
+  var app = firebase.initializeApp(firebaseConfig);
+  // const analytics = getAnalytics(app);
+  var auth = firebase.auth();
+  const firestore = getFirestore(app);
+  // const provider = new GoogleAuthProvider();
 
   useEffect(
     () => {
       
-        props.auth.onAuthStateChanged(async (user) => {
+        auth.onAuthStateChanged(async (user) => {
           if (user) {
             // User is signed in
             const userId = user.uid;
-            const document = doc(props.firestore, "users", userId);
+            const document = doc(firestore, "users", userId);
             const gotDoc = await getDoc(document);
 
             if (!gotDoc.exists()) {
@@ -97,11 +92,11 @@ export default function Page(props : loginProps) {
             console.log("Authentication error:", user);
           }
         });
-      }, [props.auth]
+      }, [auth]
   )
   const Auth = () => {
     return (
-      <AuthEmail auth={props.auth} loading={loading}></AuthEmail>
+      <AuthEmail auth={auth} loading={loading}></AuthEmail>
     )
   }
 

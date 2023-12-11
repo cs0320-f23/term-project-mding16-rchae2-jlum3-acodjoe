@@ -64,16 +64,20 @@ export default function Page() {
   const firestore = getFirestore(app);
   const auth = firebase.auth();
 
-
   
-
   //   const document = doc(firestore, "users", userId);
   // const gotDoc = await getDoc(document);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/"/>
+        <Route path="/" element={<Login/>}/>
+        <Route path="regions" element={<Regions/>}/>
+        <Route path="levels" element={<Levels regions={regions} progress={progress}/>}/>
+        <Route path="recipes" element={<Recipes/>}/>
       </Routes>
     </BrowserRouter>
   );
 }
+
+
+
