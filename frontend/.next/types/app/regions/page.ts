@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+<<<<<<<< HEAD:frontend/.next/types/app/regions/page.ts
 <<<<<<< HEAD:frontend/.next/types/app/page.ts
 // File: /Users/michelleding/Desktop/CS32Assignments/term-project-mding16-rchae2-jlum3-acodjoe/frontend/src/app/page.tsx
 import * as entry from '../../../src/app/page.js'
@@ -8,6 +10,25 @@ import * as entry from '../../../../src/app/regions/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
 type TEntry = typeof import('../../../../src/app/regions/page.js')
+========
+// File: /Users/jeremylum/Desktop/cs32/term-project-mding16-rchae2-jlum3-acodjoe/frontend/src/app/login/page.tsx
+import * as entry from '../../../../src/app/login/page.js'
+import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
+
+type TEntry = typeof import('../../../../src/app/login/page.js')
+>>>>>>>> db_frontend:frontend/.next/types/app/login/page.ts
+=======
+<<<<<<<< HEAD:frontend/.next/types/app/recipes/page.ts
+// File: /Users/michelleding/Desktop/CS32Assignments/term-project-mding16-rchae2-jlum3-acodjoe/frontend/src/app/recipes/page.tsx
+import * as entry from '../../../../src/app/recipes/page.js'
+========
+// File: /Users/jeremylum/Desktop/cs32/term-project-mding16-rchae2-jlum3-acodjoe/frontend/src/app/regions/page.tsx
+import * as entry from '../../../../src/app/regions/page.js'
+>>>>>>>> db_frontend:frontend/.next/types/app/regions/page.ts
+import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
+
+type TEntry = typeof import('../../../../src/app/regions/page.js')
+>>>>>>> db_frontend
 
 // Check that the entry is a valid entry
 checkFields<Diff<{

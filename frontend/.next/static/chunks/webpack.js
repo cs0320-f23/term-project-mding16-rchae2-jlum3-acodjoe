@@ -57,6 +57,13 @@
 /******/ 	__webpack_require__.i = [];
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/amd define */
+/******/ 	!function() {
+/******/ 		__webpack_require__.amdD = function () {
+/******/ 			throw new Error('define cannot be used indirect');
+/******/ 		};
+/******/ 	}();
+/******/ 	
 /******/ 	/* webpack/runtime/chunk loaded */
 /******/ 	!function() {
 /******/ 		var deferred = [];
@@ -193,10 +200,14 @@
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	!function() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 /******/ 		__webpack_require__.h = function() { return "a805c883b99d5820"; }
 =======
 /******/ 		__webpack_require__.h = function() { return "515a5104baf3d40a"; }
 >>>>>>> regionsCardMethod
+=======
+/******/ 		__webpack_require__.h = function() { return "f375b12314f1f159"; }
+>>>>>>> db_frontend
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

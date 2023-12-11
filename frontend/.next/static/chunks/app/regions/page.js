@@ -8,6 +8,7 @@
  */
 (self["webpackChunk_N_E"] = self["webpackChunk_N_E"] || []).push([["app/regions/page"],{
 
+<<<<<<< HEAD
 /***/ "(app-pages-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%2FUsers%2Farianacodjoe%2Fterm-project-mding16-rchae2-jlum3-acodjoe%2Ffrontend%2Fsrc%2Fapp%2Fregions%2Fregions.css&modules=%2FUsers%2Farianacodjoe%2Fterm-project-mding16-rchae2-jlum3-acodjoe%2Ffrontend%2Fnode_modules%2Fbootstrap%2Fdist%2Fcss%2Fbootstrap.css&server=false!":
 /*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%2FUsers%2Farianacodjoe%2Fterm-project-mding16-rchae2-jlum3-acodjoe%2Ffrontend%2Fsrc%2Fapp%2Fregions%2Fregions.css&modules=%2FUsers%2Farianacodjoe%2Fterm-project-mding16-rchae2-jlum3-acodjoe%2Ffrontend%2Fnode_modules%2Fbootstrap%2Fdist%2Fcss%2Fbootstrap.css&server=false! ***!
@@ -37,13 +38,26 @@ eval(__webpack_require__.ts("__webpack_require__.r(__webpack_exports__);\n/* har
 
 "use strict";
 eval(__webpack_require__.ts("__webpack_require__.r(__webpack_exports__);\n/* harmony default export */ __webpack_exports__[\"default\"] = (\"54b25cd696e8\");\nif (true) { module.hot.accept() }\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiKGFwcC1wYWdlcy1icm93c2VyKS8uL3NyYy9hcHAvcmVnaW9ucy9yZWdpb25zLmNzcyIsIm1hcHBpbmdzIjoiO0FBQUEsK0RBQWUsY0FBYztBQUM3QixJQUFJLElBQVUsSUFBSSxpQkFBaUIiLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly9fTl9FLy4vc3JjL2FwcC9yZWdpb25zL3JlZ2lvbnMuY3NzPzVjNTAiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGRlZmF1bHQgXCI1NGIyNWNkNjk2ZThcIlxuaWYgKG1vZHVsZS5ob3QpIHsgbW9kdWxlLmhvdC5hY2NlcHQoKSB9XG4iXSwibmFtZXMiOltdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///(app-pages-browser)/./src/app/regions/regions.css\n"));
+=======
+/***/ "(app-pages-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?server=false!":
+/*!*******************************************************************************************************!*\
+  !*** ./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?server=false! ***!
+  \*******************************************************************************************************/
+/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+
+
+>>>>>>> db_frontend
 
 /***/ })
 
 },
 /******/ function(__webpack_require__) { // webpackRuntimeModules
 /******/ var __webpack_exec__ = function(moduleId) { return __webpack_require__(__webpack_require__.s = moduleId); }
+<<<<<<< HEAD
 /******/ __webpack_require__.O(0, ["main-app"], function() { return __webpack_exec__("(app-pages-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%2FUsers%2Farianacodjoe%2Fterm-project-mding16-rchae2-jlum3-acodjoe%2Ffrontend%2Fsrc%2Fapp%2Fregions%2Fregions.css&modules=%2FUsers%2Farianacodjoe%2Fterm-project-mding16-rchae2-jlum3-acodjoe%2Ffrontend%2Fnode_modules%2Fbootstrap%2Fdist%2Fcss%2Fbootstrap.css&server=false!"); });
+=======
+/******/ __webpack_require__.O(0, ["main-app"], function() { return __webpack_exec__("(app-pages-browser)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?server=false!"); });
+>>>>>>> db_frontend
 /******/ var __webpack_exports__ = __webpack_require__.O();
 /******/ _N_E = __webpack_exports__;
 /******/ }

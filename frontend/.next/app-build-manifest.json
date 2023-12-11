@@ -5,16 +5,17 @@
       "static/chunks/main-app.js",
       "static/chunks/app/layout.js"
     ],
+    "/login/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/login/page.css",
+      "static/chunks/app/login/page.js"
+    ],
     "/regions/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-<<<<<<< HEAD
-      "static/css/app/recipes/page.css",
-      "static/chunks/app/recipes/page.js"
-=======
       "static/css/app/regions/page.css",
       "static/chunks/app/regions/page.js"
->>>>>>> regionsCardMethod
     ]
   }
 }

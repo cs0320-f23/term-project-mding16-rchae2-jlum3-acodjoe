@@ -26,7 +26,9 @@ public class Database {
 
   public Database() {
     try {
-      FileInputStream serviceAccount = new FileInputStream("./backend/src/main/java/edu/brown/cs32/main/database/ServiceAccountKey.json");
+      System.out.println("Current Working Directory: " + System.getProperty("user.dir"));
+
+      FileInputStream serviceAccount = new FileInputStream("./src/main/java/edu/brown/cs32/main/database/ServiceAccountKey.json");
       FirebaseOptions options = FirebaseOptions.builder().setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
       FirebaseApp.initializeApp(options);
       this.db = FirestoreClient.getFirestore();
