@@ -107,14 +107,19 @@ export default function Page(props : loginProps) {
 
   const WelcomeLogin = () => {
     return(
-      <div id="welcomelogin">
-        login
+      <div id="loginwrapper">
+        <div id="welcomelogin">
+          <div id="welcometext">
+            WELCOME TO CHEFBEAR
+          </div>
+          <div>{Auth()}</div>
+        </div>
       </div>
     )
   }
   const WelcomeBear = () => {
     return(
-      <div>welcomebear</div>
+      <div id="welcomebear">welcomebear</div>
     )
   }
   return (
