@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import edu.brown.cs32.main.buildCourse.MoshiObjects.*;
 import java.util.Map;
+import java.util.Objects;
 
 
 public class ChefBear{
@@ -157,14 +158,26 @@ public class ChefBear{
       RegionList.add(regionObject);
       }
     // After all of the regions are done iterating, add Regions to the database
+//    System.out.println(RegionList);
+//    for (Region r : RegionList){
+//      System.out.println(r);
+//      if (Objects.equals(r.getRegion(), "African/Caribbean")) {
+//        System.out.println(r.levelSort());
+//      }
+//
+//    }
+
+
      for (Region r : RegionList){
        Map<String, List<String>> levels = r.levelSort();
        this.regionDB.add(r.getRegion(), levels);
        for (ParsedRecipe recipe : r.getRecipeList()) {
          this.recipeDB.add(recipe.name, recipe.difficultyScore, recipe.instructions, recipe.ingredients, recipe.image);
        }
-       break; //TODO: edit this to eventually add everything
+       //break; //TODO: edit this to eventually add everything
        }
+
+
   }
 
 
@@ -179,7 +192,7 @@ public class ChefBear{
     this.regionToCountry.put("European", europeanCountries);
 
     List<String> africanCaribbeanCountries = List.of("Jamaican", "Egyptian", "Moroccan", "Kenyan", "Tunisian");
-    this.regionToCountry.put("African/Caribbean", africanCaribbeanCountries);
+    this.regionToCountry.put("AfriCarib", africanCaribbeanCountries);
 
     List<String> northAmericanCountries = List.of("Canadian", "American", "Mexican");
     this.regionToCountry.put("North American", northAmericanCountries);

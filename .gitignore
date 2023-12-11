@@ -1,12 +1,15 @@
 #MacOS default file
 .DS_Store
 
+/node_modules
+
 #Frontend ignored folders
 /frontend/node_modules
 /frontend/playwright-report
 /frontend/test-results
 /frontend/.vscode
 /frontend/.env.local
+/frontend/.next
 
 #Backend ignored folders
 #IntelliJ default file

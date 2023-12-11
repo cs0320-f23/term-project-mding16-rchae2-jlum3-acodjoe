@@ -22,6 +22,7 @@ public class RegionDB {
       Map<String, Object> data = new HashMap<>();
       data.put("region", region);
       data.put("levels", levels);
+      System.out.println(data);
       ApiFuture<WriteResult> future = this.db.collection("regions").document((String) data.get("region")).set(data);
       System.out.println("Successfully updated at: " + future.get().getUpdateTime());
     } catch (Exception e) {

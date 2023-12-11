@@ -63,10 +63,11 @@ public class Region{
 
   @Override
   public String toString() {
-    return "Region{" +
-        "name=" + this.region +
-        ", recipe list=" + this.recipeList +
-        '}';
+//    return "Region{" +
+//        "name=" + this.region +
+//        ", recipe list=" + this.recipeList +
+//        '}';
+    return "Region{" + this.region + '}';
   }
 
 }
