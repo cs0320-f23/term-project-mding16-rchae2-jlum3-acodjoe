@@ -22,7 +22,7 @@ export default function Page() {
         <div className="card-body">
       <h5 className="card-title">Asia</h5>
       <p className="card-text">Explore cuisines like  Japanese, Chinese, Indian, Vietnamese, Thai, Filipino, Malaysian  </p>
-      <a href="#" className="btn btn-primary">Go somewhere</a>
+      <a href="#" className="btn btn-primary">Go Here!</a>
       </div>
     </div>
 
@@ -36,7 +36,7 @@ export default function Page() {
         <div className="card-body">
       <h5 className="card-title">Europe</h5>
       <p className="card-text">Explore cuisines like French, Italian, British, Croatian, Dutch, Irish, Spanish, Polish, Portuguese, Turkish, Greek, Russian</p>
-      <a href="#" className="btn btn-primary">Go somewhere</a>
+      <a href="#" className="btn btn-primary">Go Here!</a>
       </div>
     {/* </div> */}
     </div>
@@ -54,7 +54,7 @@ export default function Page() {
         <div className="card-body">
       <h5 className="card-title">Africa</h5>
       <p className="card-text">Explore cusines like Jamaican, Egyptian, Moroccan, Kenyan, Tunisian</p>
-      <a href="#" className="btn btn-primary">Go somewhere</a>
+      <a href="#" className="btn btn-primary">Go Here!</a>
       </div>
     </div>
 
@@ -68,7 +68,7 @@ export default function Page() {
         <div className="card-body">
       <h5 className="card-title">North America</h5>
       <p className="card-text">Explore cuisines like Canadian, American, Mexican </p>
-      <a href="#" className="btn btn-primary">Go somewhere</a>
+      <a href="#" className="btn btn-primary">Go Here!</a>
       </div>
     </div>
       </div>
