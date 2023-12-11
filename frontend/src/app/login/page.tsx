@@ -1,4 +1,5 @@
 "use client";
+import './login.css';
 import React, { useEffect, useState } from "react";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -15,6 +16,7 @@ import {
   setDoc,
   doc, getDoc
 } from "firebase/firestore";
+import { isReturnStatement } from "typescript";
 
 
 export default function Page() {
@@ -92,10 +94,28 @@ export default function Page() {
         });
       }, [auth]
   )
-
-  return (
-    <div>
+  const Auth = () => {
+    return (
       <AuthEmail auth={auth} loading={loading}></AuthEmail>
+    )
+  }
+
+  const WelcomeLogin = () => {
+    return(
+      <div id="welcomelogin">
+        login
+      </div>
+    )
+  }
+  const WelcomeBear = () => {
+    return(
+      <div>welcomebear</div>
+    )
+  }
+  return (
+    <div id="welcome">
+        {WelcomeBear()}
+        {WelcomeLogin()}
     </div>
   );
 }
