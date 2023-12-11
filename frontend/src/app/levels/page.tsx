@@ -8,12 +8,12 @@ import Script from "next/script";
 declare module "*.png";
 
 interface PageProps {
-  children: React.ReactNode;
+  // children: React.ReactNode;
   progress: number;
+  regions: Map<String, String>;
 }
 
-
-const Page: React.FC<PageProps> = ({ children, progress }) => {
+const Page: React.FC<PageProps> = ({ progress }) => {
   useEffect(() => {
     // Initialize AOS when the component mounts on the client side
     import("aos").then((AOS) => {
@@ -30,7 +30,7 @@ const Page: React.FC<PageProps> = ({ children, progress }) => {
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
       </Head>
       <div>
-        {children}
+        {/* {children} */}
         <div className="header">
           <div className="country"> NORTH AMERICA </div>
           <div className="progress-container">
