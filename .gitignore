@@ -16,4 +16,4 @@
 /backend/.mvn
 /backend/.mvn-classpath
 /backend/pom.xml.bak
-backend/src/main/java/edu/brown/cs32/main/database/ServiceAccountKey.json
+/backend/src/main/java/edu/brown/cs32/main/database/ServiceAccountKey.json

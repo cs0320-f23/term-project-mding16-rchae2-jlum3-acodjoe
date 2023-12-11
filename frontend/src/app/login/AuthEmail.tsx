@@ -20,6 +20,7 @@ interface authProps {
 }
 
 export default function AuthEmail(props : authProps) {
+
   var uiConfig = {
     signInSuccessUrl: "/regions",
     signInFlow: "popup",
@@ -45,13 +46,16 @@ export default function AuthEmail(props : authProps) {
       window.location.assign("<your-privacy-policy-url>");
     },
     callbacks: {
-      signInSuccessWithAuthResult:(
+      signInSuccessWithAuthResult:  (
         authObject: firebase.auth.UserCredential,
         redirectURL?: string
       ) => {
-        // console.log(authObject)
-        // console.log(redirectURL)
-        return false
+
+        window.setTimeout(() => {
+          window.location.assign("/regions");
+        }, 2000);
+        
+        return false;
       },
     },
   };
@@ -60,7 +64,6 @@ export default function AuthEmail(props : authProps) {
     () => {
        const ui =
         firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(props.auth);
-
       ui.start(".firebase-auth-container", uiConfig);
     },
     [props.auth]

@@ -45,63 +45,53 @@ export default function Page() {
   useEffect(
     () => {
       
-      // var unsubscribe = 
         auth.onAuthStateChanged(async (user) => {
-          // console.log("im actually so done right now");
           if (user) {
-            // console.log("here");
             // User is signed in
             const userId = user.uid;
             const document = doc(firestore, "users", userId);
-            const gotDoc = await getDoc(document)
+            const gotDoc = await getDoc(document);
 
-              if (!gotDoc.exists()) {
-                const levels = {
-                  // Your data fields here
-                  AfriCarib: 0,
-                  Asia: 0,
-                  NorthAm: 0,
-                  Euro: 0,
-                };
+            if (!gotDoc.exists()) {
+              const levels = {
+                // Your data fields here
+                AfriCarib: 1,
+                Asia: 1,
+                NorthAm: 1,
+                Euro: 1,
+              };
 
-                const data = {
-                  // Your data fields here
-                  userID: user.uid,
-                  userEmail: user.email,
-                  regions: levels,
-                };
-                await setDoc(document, data)
-                  .then(() => {
-                    console.log("Document added with custom ID:", document);
-                    setID(user.uid);
-                    setUser(user.email ?? "");
-                    setRegions(levels);
-                    window.location.assign("/regions");
-                  })
-                  .catch((error) => {
-                    console.error("Error adding document:", error);
-                  });
-              } else {
-                console.log("You are already signed in!");
-                setID(gotDoc.id);
-                setUser(gotDoc.data().userEmail);
-                setRegions(gotDoc.data().regions);
-                console.log(gotDoc.id);
-                console.log(gotDoc.data().userEmail);
-                console.log(gotDoc.data().regions);
-                window.location.assign("/regions");
-              }
-            
+              const data = {
+                // Your data fields here
+                userID: user.uid,
+                userEmail: user.email,
+                regions: levels,
+              };
+              await setDoc(document, data)
+                .then(() => {
+                  console.log("Document added with custom ID:", document);
+                  setID(user.uid);
+                  setUser(user.email ?? "");
+                  setRegions(levels);
+                })
+                .catch((error) => {
+                  console.error("Error adding document:", error);
+                });
+            } else {
+              console.log("You are already signed in!");
+              setID(gotDoc.id);
+              setUser(gotDoc.data().userEmail);
+              setRegions(gotDoc.data().regions);
+              console.log(gotDoc.id);
+              console.log(gotDoc.data().userEmail);
+              console.log(gotDoc.data().regions);
+            }
           } else {
             console.log("Authentication error:", user);
           }
         });
-      }, []
+      }, [auth]
   )
-
-  // if (loading) {
-  //   return <p>Loading...</p>;
-  // }
 
   return (
     <div>

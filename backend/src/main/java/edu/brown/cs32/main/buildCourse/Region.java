@@ -16,6 +16,32 @@ public class Region{
   }
 
   public Map<String, List<String>> levelSort() {
+    Map<String, List<String>> diff = this.difficultySort();
+    Map<String, List<String>> output = new HashMap<>();
+
+    int levelCount = 1;
+    int counter = 0;
+    for (Map.Entry<String, List<String>> entry : diff.entrySet()) {
+      List<String> recipes = entry.getValue();
+      for (String recipe : recipes) {
+        if (output.containsKey(String.valueOf(levelCount))) {
+          output.get(String.valueOf(levelCount)).add(recipe);
+        } else {
+          output.put(String.valueOf(levelCount), new ArrayList<>(List.of(recipe)));
+        }
+        counter += 1;
+        if (counter == 3) {
+          counter = 0;
+          levelCount += 1;
+        }
+      }
+    }
+    return output;
+  }
+
+
+
+  public Map<String, List<String>> difficultySort() {
     Map<String, List<String>> output = new HashMap<>();
     for (ParsedRecipe recipe : this.recipeList) {
       if (output.containsKey(String.valueOf(recipe.difficultyScore))) {
