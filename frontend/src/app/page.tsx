@@ -33,17 +33,17 @@ export default function Page() {
   const [europe, setEurope] = useState({});
   const [northAm, setNorthAm] = useState({});
 
-  const afriCaribDoc = doc(firestore, "regions", "AfriCarib");
+  // const afriCaribDoc = doc(firestore, "regions", "AfriCarib");
 
 
             //   const document = doc(firestore, "users", userId);
             // const gotDoc = await getDoc(document);
   return <div>
-
+{/* 
     <Levels></Levels>
     <Login></Login>
     <Recipes></Recipes>
-    <Regions></Regions>
+    <Regions></Regions> */}
 
 
   </div>;
