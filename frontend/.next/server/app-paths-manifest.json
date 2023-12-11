@@ -1,4 +1,8 @@
 {
+<<<<<<< HEAD
   "/page": "app/page.js",
   "/recipes/page": "app/recipes/page.js"
+=======
+  "/regions/page": "app/regions/page.js"
+>>>>>>> regionsCardMethod
 }

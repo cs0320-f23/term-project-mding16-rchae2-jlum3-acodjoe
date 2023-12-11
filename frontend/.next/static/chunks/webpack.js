@@ -192,7 +192,11 @@
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	!function() {
+<<<<<<< HEAD
 /******/ 		__webpack_require__.h = function() { return "a805c883b99d5820"; }
+=======
+/******/ 		__webpack_require__.h = function() { return "515a5104baf3d40a"; }
+>>>>>>> regionsCardMethod
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

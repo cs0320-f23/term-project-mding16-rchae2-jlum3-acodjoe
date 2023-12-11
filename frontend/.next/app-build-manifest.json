@@ -1,20 +1,20 @@
 {
   "pages": {
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
-    ],
     "/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/layout.js"
     ],
-    "/recipes/page": [
+    "/regions/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
+<<<<<<< HEAD
       "static/css/app/recipes/page.css",
       "static/chunks/app/recipes/page.js"
+=======
+      "static/css/app/regions/page.css",
+      "static/chunks/app/regions/page.js"
+>>>>>>> regionsCardMethod
     ]
   }
 }
