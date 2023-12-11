@@ -1,5 +1,5 @@
-// File: /Users/arianacodjoe/term-project-mding16-rchae2-jlum3-acodjoe/frontend/src/app/regions/page.tsx
-import * as entry from '../../../../src/app/regions/page.js'
+// File: /Users/rachelchae/term-project-mding16-rchae2-jlum3-acodjoe/frontend/src/app/page.tsx
+import * as entry from '../../../src/app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
 type TEntry = typeof import('../../../../src/app/regions/page.js')

@@ -5,6 +5,7 @@
       "static/chunks/main-app.js",
       "static/chunks/app/layout.js"
     ],
+<<<<<<< HEAD
     "/regions/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -15,6 +16,13 @@
       "static/css/app/regions/page.css",
       "static/chunks/app/regions/page.js"
 >>>>>>> regionsCardMethod
+=======
+    "/levels/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/levels/page.css",
+      "static/chunks/app/levels/page.js"
+>>>>>>> levels
     ]
   }
 }

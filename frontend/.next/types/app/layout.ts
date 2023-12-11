@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 // File: /Users/michelleding/Desktop/CS32Assignments/term-project-mding16-rchae2-jlum3-acodjoe/frontend/src/app/layout.tsx
 =======
 // File: /Users/arianacodjoe/term-project-mding16-rchae2-jlum3-acodjoe/frontend/src/app/layout.tsx
 >>>>>>> regionsCardMethod
+=======
+// File: /Users/rachelchae/term-project-mding16-rchae2-jlum3-acodjoe/frontend/src/app/layout.tsx
+>>>>>>> levels
 import * as entry from '../../../src/app/layout.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

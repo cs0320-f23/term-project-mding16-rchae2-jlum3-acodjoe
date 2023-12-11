@@ -163,7 +163,7 @@
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = function(chunkId) {
 /******/ 			// return url for filenames based on template
-/******/ 			return undefined;
+/******/ 			return "static/chunks/" + chunkId + ".js";
 /******/ 		};
 /******/ 	}();
 /******/ 	
@@ -193,10 +193,14 @@
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	!function() {
 <<<<<<< HEAD
+<<<<<<< HEAD
 /******/ 		__webpack_require__.h = function() { return "a805c883b99d5820"; }
 =======
 /******/ 		__webpack_require__.h = function() { return "515a5104baf3d40a"; }
 >>>>>>> regionsCardMethod
+=======
+/******/ 		__webpack_require__.h = function() { return "d899af7edba1f017"; }
+>>>>>>> levels
 /******/ 	}();
 /******/ 	
 /******/ 	/* webpack/runtime/global */

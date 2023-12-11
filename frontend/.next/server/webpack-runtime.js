@@ -126,10 +126,14 @@
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
 <<<<<<< HEAD
+<<<<<<< HEAD
 /******/ 		__webpack_require__.h = () => ("5db27adc37dcb157")
 =======
 /******/ 		__webpack_require__.h = () => ("4be3508ffb717197")
 >>>>>>> regionsCardMethod
+=======
+/******/ 		__webpack_require__.h = () => ("1c8da547f5f06bc8")
+>>>>>>> levels
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
