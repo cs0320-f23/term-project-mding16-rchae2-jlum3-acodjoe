@@ -25,6 +25,7 @@ type LevelsType = {
 };
 
 interface recipeProps {
+  currentUserID: string,
   regions: LevelsType;
   selectedRegion: string;
   afriCarib: Map<number, string[]>;
@@ -40,8 +41,10 @@ function Page(props : recipeProps) {
   const [userLevel, setUserLevel] = useState(0);
   const [realRecipeList, setRecipeList] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
+  const [selectedRegion, setSelectedRegion] = useState("")
   
   useEffect(() => {
+    setSelectedRegion("afriCarib")
     // const selectedString = props.selectedRegion
     console.log("INITIATING RECIPES USER EFFECT LOOP")
     console.log("user level = ", userLevel)
@@ -120,10 +123,98 @@ function Page(props : recipeProps) {
     )
   }
 
+  function completedClick(): void {
+    //update the database
+    console.log("old region", props.regions)
+
+    // const fieldsToUpdate = {
+    //   regions: {
+    //     ...props.regions,
+    //     userLevel: userLevel + 1, // Update the Asia level
+    //   },
+    // };
+
+    // updateDoc(
+    //   doc(getFirestore(), "users", props.currentUserID),
+    //   fieldsToUpdate
+    // );
+    // //update the state that stored regions and respective user level for that region
+    // props.setRegions({
+    //   ...props.regions,
+    //   Asia: props.regions.Asia + 1, // Update the Asia level
+    // });
+
+    if (selectedRegion === "afriCarib"){
+      props.setRegions({
+        ...props.regions,
+        AfriCarib: props.regions.AfriCarib + 1, 
+      });
+      const fieldsToUpdate = {
+        regions: {
+          ...props.regions,
+          AfriCarib: props.regions.AfriCarib + 1,
+        },
+      };
+      updateDoc(
+        doc(getFirestore(), "users", props.currentUserID),
+        fieldsToUpdate
+      );
+
+    } else if (selectedRegion === "asian"){
+      props.setRegions({
+        ...props.regions,
+        Asia: props.regions.Asia + 1, 
+      });
+      const fieldsToUpdate = {
+        regions: {
+          ...props.regions,
+          Asia: props.regions.Asia + 1, 
+        },
+      };
+      updateDoc(
+        doc(getFirestore(), "users", props.currentUserID),
+        fieldsToUpdate
+      );
+
+    } else if (selectedRegion === "europe"){
+      props.setRegions({
+        ...props.regions,
+        Euro: props.regions.Euro + 1,
+      });
+      const fieldsToUpdate = {
+        regions: {
+          ...props.regions,
+          Euro: props.regions.Euro + 1,
+        },
+      };
+      updateDoc(
+        doc(getFirestore(), "users", props.currentUserID),
+        fieldsToUpdate
+      );
+
+    } else if (selectedRegion === "northAm"){
+      props.setRegions({
+        ...props.regions,
+        NorthAm: props.regions.NorthAm + 1, 
+      });
+      const fieldsToUpdate = {
+        regions: {
+          ...props.regions,
+          NorthAm: props.regions.NorthAm + 1, 
+        },
+      };
+      updateDoc(
+        doc(getFirestore(), "users", props.currentUserID),
+        fieldsToUpdate
+      );
+    }
+    console.log("new region", props.regions)
+  }
+
   const completeButton = () => {
     const tickimg = "https://lh3.googleusercontent.com/drive-viewer/AK7aPaBAXgyL4y0Rz3PGYb_0J1ADT1RpLLI402AFlicEo77qsknH93IDPHJCmVjTdlhj0vxlOnZpV_eK2EHXsWbywhXnkrc6DA=s2560"
     return(
-      <button id="completebutton">
+      <button id="completebutton" onClick={completedClick}>
         <div id="buttontext">
           <img id="tick" src={tickimg} referrerPolicy="no-referrer"></img>
           Completed 
@@ -153,7 +244,7 @@ function Page(props : recipeProps) {
     // }
 
     // const recipelist = [recipe1, recipe1, recipe1]
-
+    const recipeListThree = realRecipeList.slice(0,3)
     const settings = {
         className: "center",
         dots: false,
@@ -177,7 +268,7 @@ function Page(props : recipeProps) {
         <Slider {...settings}
         >
           {
-            realRecipeList.map((recipe, idx) => 
+            recipeListThree.map((recipe, idx) => 
             <div id="recipecontainer" className={idx===imageIndex? "slide activeSlide": "slide"} key={idx}>
               <div id="rtext">
                 <div id="recipename">{recipe.get("name")}</div>
