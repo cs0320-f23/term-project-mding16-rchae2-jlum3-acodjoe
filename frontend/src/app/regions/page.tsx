@@ -1,3 +1,4 @@
+import React from "react";
 import "./regions.css";
 import "bootstrap/dist/css/bootstrap.css";
 

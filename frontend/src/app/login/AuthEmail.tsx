@@ -16,7 +16,6 @@ import {
 
 interface authProps {
     auth: firebase.auth.Auth
-    loading: boolean
 }
 
 export default function AuthEmail(props : authProps) {
