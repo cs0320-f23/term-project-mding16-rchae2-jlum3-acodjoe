@@ -1,6 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
+import React, { useEffect, useState, createContext } from "react";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -26,12 +25,6 @@ import {
   getDoc,
 } from "firebase/firestore";
 
-//import components to pass states into
-// import Levels from "./levels/page";
-// import Login from "./login/page";
-// import Recipes from "./recipes/page";
-// import Regions from "./regions/page";
-
 import Levels from "./levels/page";
 import Login from "./login/page";
 import Recipes from "./recipes/page";
@@ -39,19 +32,18 @@ import Regions from "./regions/page";
 import AuthEmail from "./login/AuthEmail";
 import Test from "./test/page";
 
+export type LevelsType = {
+  AfriCarib: number;
+  Asia: number;
+  NorthAm: number;
+  Euro: number;
+};
 
 export default function Page() {
+
   //all states for application
   const [currentUserID, setID] = useState("");
   const [userEmail, setUserEmail] = useState("");
-
-  type LevelsType = {
-    AfriCarib: number;
-    Asia: number;
-    NorthAm: number;
-    Euro: number;
-  };
-
   const [regions, setRegions] = useState<LevelsType>({
     AfriCarib: 1,
     Asia: 1,
@@ -195,23 +187,26 @@ export default function Page() {
             </div>
           }
         />
-        <Route path="regions" element={<Regions />} />
-        <Route path="levels" element={<Levels />} />
-        <Route path="recipes" element={<Recipes />} />
+        <Route path="/regions" element={<Regions />} />
+        <Route path="/levels" element={<Levels />} />
+        <Route path="/recipes" element={<Recipes />} />
         <Route
-          path="test"
+          path="/test"
           element={
-            // <Test currentUserID={currentUserID} userEmail={userEmail}
-            // regions={regions} afriCarib={afriCarib} asian={asian}
-            // europe={europe} northAm={northAm}></Test>
-            <Test
-              currentUserID={currentUserID}
-              setID={setID}
-            ></Test>
+            // <MyContext.Provider value={{currentUserID, userEmail, regions, afriCarib, asian, europe, northAm}}>
+              <Test
+                currentUserID={currentUserID}
+                userEmail={userEmail}
+                regions={regions}
+                afriCarib={afriCarib}
+                asian={asian}
+                europe={europe}
+                northAm={northAm}
+              ></Test>
+            // </MyContext.Provider>
           }
         />
       </Routes>
     </BrowserRouter>
   );
 }
-

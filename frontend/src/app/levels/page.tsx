@@ -1,11 +1,9 @@
 "use client";
 import "./styles.css";
 import React, { useEffect } from "react";
-import Head from "next/head";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "aos/dist/aos.css";
-import Script from "next/script";
-declare module "*.png";
+// declare module "*.png";
 
 interface PageProps {
   // children: React.ReactNode;
@@ -26,9 +24,9 @@ const Page: React.FC<PageProps> = ({ }) => {
 
   return (
     <>
-      <Head>
+      {/* <Head>
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-      </Head>
+      </Head> */}
       <div>
         {/* {children} */}
         <div className="header">
@@ -179,10 +177,10 @@ const Page: React.FC<PageProps> = ({ }) => {
             </div>
           </div>
         </div>
-        <Script
+        {/* <Script
           src="https://unpkg.com/aos@next/dist/aos.js"
           strategy="lazyOnload"
-        />
+        /> */}
       </div>
     </>
   );

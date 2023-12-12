@@ -1,4 +1,5 @@
 "use client"
+import React from "react";
 import "./styles.css"
 import header from "./images/reciperec.png"
 import {SetStateAction, useState} from "react"
@@ -35,7 +36,7 @@ const completeButton = () => {
   )
 }
 
-const recipepage = () => {
+const Recipepage = () => {
   const recipe1 = {
     name: "Peking Duck",
     imagesrc: "https://lh3.googleusercontent.com/drive-viewer/AK7aPaDG-l_kXwjgYHiuPrH3mTx0dlkHD8FoJyhOKnm3yJa6qwVUgdyZ_RSXxZtG3ZDOIMCVcynq-ZebjhvAe66jpP-q6Vx6=s1600",
@@ -111,7 +112,7 @@ function Page() {
   return (
     <div id="recipepage">
       {headerImg()}
-      {recipepage()}
+      {Recipepage()}
       {completeButton()}
     </div>
     )
