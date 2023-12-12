@@ -3,6 +3,15 @@ import "./regions.css";
 import "bootstrap/dist/css/bootstrap.css";
 
 export default function Page() {
+  function buttonOnClick(region) {
+    /*  TODO: connect to rachels page of the given region
+    1. pull region data from database
+    2. pass data to rachel's program
+    3. page transfer? lookinto the href section 
+    */
+    console.log(region); 
+  }
+  
   return (
     <div className="Page">
       <div className="Header">
@@ -24,7 +33,7 @@ export default function Page() {
                 Explore cuisines like Japanese, Chinese, Indian, Vietnamese,
                 Thai, Filipino, Malaysian  
               </p>
-              <a href="#" className="btn btn-primary">
+              <a href="#" className="btn btn-primary" onClick={() => buttonOnClick('Asia')}>
                 Go Here!
               </a>
             </div>
@@ -43,7 +52,7 @@ export default function Page() {
                 Explore cuisines like French, Italian, British, Croatian, Dutch,
                 Irish, Spanish, Polish, Portuguese, Turkish, Greek, Russian
               </p>
-              <a href="#" className="btn btn-primary">
+              <a href="#" className="btn btn-primary" onClick={() => buttonOnClick('Europe')}>
                 Go Here!
               </a>
             </div>
@@ -59,12 +68,12 @@ export default function Page() {
             />
 
             <div className="card-body">
-              <h5 className="card-title">Africa</h5>
+              <h5 className="card-title">Africa and Caribbean</h5>
               <p className="card-text">
                 Explore cusines like Jamaican, Egyptian, Moroccan, Kenyan,
                 Tunisian
               </p>
-              <a href="#" className="btn btn-primary">
+              <a href="#" className="btn btn-primary" onClick={() => buttonOnClick('Africa')}>
                 Go Here!
               </a>
             </div>
@@ -82,7 +91,7 @@ export default function Page() {
               <p className="card-text">
                 Explore cuisines like Canadian, American, Mexican 
               </p>
-              <a href="levels" className="btn btn-primary">
+              <a href="levels" className="btn btn-primary" onClick={() => buttonOnClick('NorthAmerica')}>
                 Go Here!
               </a>
             </div>
