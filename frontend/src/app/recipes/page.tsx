@@ -35,19 +35,20 @@ interface recipeProps {
 }
 
 function Page(props : recipeProps) {
+  const [dataLoaded, setDataLoaded] = useState(false);
   const [regionMap, setRegionMap] = useState(new Map());
-  const [userLevel, setUserLevel] = useState(1);
+  const [userLevel, setUserLevel] = useState(0);
   const [realRecipeList, setRecipeList] = useState([]);
-
+  const [imageIndex, setImageIndex] = useState(0);
+  
   useEffect(() => {
     // const selectedString = props.selectedRegion
     console.log("INITIATING RECIPES USER EFFECT LOOP")
     console.log("user level = ", userLevel)
-    const mockString = "asian";
-    const selectedString = mockString;
+    const selectedString = props.selectedRegion;
 
-    setRegionMap(props.europe)
-    setUserLevel(props.regions.Euro)
+    setRegionMap(props.afriCarib)
+    setUserLevel(props.regions.AfriCarib)
     // if (selectedString === "afriCarib"){
     //   setRegionMap(props.afriCarib)
     //   setUserLevel(props.regions.AfriCarib)
@@ -92,6 +93,7 @@ function Page(props : recipeProps) {
             catch (err){
               console.log("ERROR WITH API:", err)
           }
+            setDataLoaded(true)
           }
           mealCall().then(setRecipeList[realRecipeList.push(currRecipe)])
         })
@@ -113,7 +115,7 @@ function Page(props : recipeProps) {
           {"Once you’ve completed it, select the completed button,\
           and the next level will be unlocked!"}
           <br></br>
-          {"Happy cooking! ** NOTE: Recipes might take a minute to load. Please be patient!"}</div>
+          {"Happy cooking!"}</div>
         </div>
     )
   }
@@ -151,8 +153,6 @@ function Page(props : recipeProps) {
     // }
 
     // const recipelist = [recipe1, recipe1, recipe1]
-
-    const [imageIndex, setImageIndex] = useState(0);
 
     const settings = {
         className: "center",
@@ -207,7 +207,7 @@ function Page(props : recipeProps) {
     return (
       <div id="recipepage">
         {headerImg()}
-        {Recipepage()}
+        {dataLoaded && Recipepage()}
         {completeButton()}
       </div>
       )
