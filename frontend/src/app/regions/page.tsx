@@ -1,17 +1,22 @@
 import React from "react";
 import "./regions.css";
 import "bootstrap/dist/css/bootstrap.css";
-import { Dispatch, SetStateAction, useEffect, useState, useContext } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+  useContext,
+} from "react";
 
 interface regionProps {
   selectedRegion: string;
   setSelectRegion: Dispatch<SetStateAction<string>>;
 }
 
-function onClick(region : string,  props: regionProps){
-
-  props.setSelectRegion(region)
-  console.log(region)
+function onClick(region: string, props: regionProps) {
+  props.setSelectRegion(region);
+  console.log(region);
 }
 
 export default function Page(props: regionProps) {
@@ -36,7 +41,11 @@ export default function Page(props: regionProps) {
                 Explore cuisines like Japanese, Chinese, Indian, Vietnamese,
                 Thai, Filipino, Malaysian  
               </p>
-              <a href="/levels/asian" className="btn btn-primary" onClick={() => onClick('Asia', props)}>
+              <a
+                href="/levels/asian"
+                className="btn btn-primary"
+                onClick={() => onClick("Asia", props)}
+              >
                 Go Here!
               </a>
             </div>
@@ -55,7 +64,11 @@ export default function Page(props: regionProps) {
                 Explore cuisines like French, Italian, British, Croatian, Dutch,
                 Irish, Spanish, Polish, Portuguese, Turkish, Greek, Russian
               </p>
-              <a href="/levels/europe" className="btn btn-primary" onClick={() => onClick('Euro', props)}>
+              <a
+                href="/levels/europe"
+                className="btn btn-primary"
+                onClick={() => onClick("Euro", props)}
+              >
                 Go Here!
               </a>
             </div>
@@ -71,12 +84,16 @@ export default function Page(props: regionProps) {
             />
 
             <div className="card-body">
-              <h5 className="card-title">Africa</h5>
+              <h5 className="card-title">Africa and Caribbean</h5>
               <p className="card-text">
                 Explore cusines like Jamaican, Egyptian, Moroccan, Kenyan,
                 Tunisian
               </p>
-              <a href="levels/afriCarib" className="btn btn-primary" onClick={() => onClick('AfriCarib', props)}>
+              <a
+                href="levels/afriCarib"
+                className="btn btn-primary"
+                onClick={() => onClick("AfriCarib", props)}
+              >
                 Go Here!
               </a>
             </div>
@@ -94,7 +111,11 @@ export default function Page(props: regionProps) {
               <p className="card-text">
                 Explore cuisines like Canadian, American, Mexican 
               </p>
-              <a href="levels/northAm" className="btn btn-primary" onClick={() => onClick('NorthAm', props)}>
+              <a
+                href="levels/northAm"
+                className="btn btn-primary"
+                onClick={() => onClick("NorthAm", props)}
+              >
                 Go Here!
               </a>
             </div>
