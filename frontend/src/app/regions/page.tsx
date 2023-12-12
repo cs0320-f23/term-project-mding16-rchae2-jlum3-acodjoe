@@ -1,8 +1,20 @@
 import React from "react";
 import "./regions.css";
 import "bootstrap/dist/css/bootstrap.css";
+import { Dispatch, SetStateAction, useEffect, useState, useContext } from "react";
 
-export default function Page() {
+interface regionProps {
+  selectedRegion: string;
+  setSelectRegion: Dispatch<SetStateAction<string>>;
+}
+
+function onClick(region : string,  props: regionProps){
+
+  props.setSelectRegion(region)
+  console.log(region)
+}
+
+export default function Page(props: regionProps) {
   return (
     <div className="Page">
       <div className="Header">
@@ -24,7 +36,7 @@ export default function Page() {
                 Explore cuisines like Japanese, Chinese, Indian, Vietnamese,
                 Thai, Filipino, Malaysian  
               </p>
-              <a href="#" className="btn btn-primary">
+              <a href="/levels/asian" className="btn btn-primary" onClick={() => onClick('Asia', props)}>
                 Go Here!
               </a>
             </div>
@@ -43,7 +55,7 @@ export default function Page() {
                 Explore cuisines like French, Italian, British, Croatian, Dutch,
                 Irish, Spanish, Polish, Portuguese, Turkish, Greek, Russian
               </p>
-              <a href="#" className="btn btn-primary">
+              <a href="/levels/europe" className="btn btn-primary" onClick={() => onClick('Euro', props)}>
                 Go Here!
               </a>
             </div>
@@ -64,7 +76,7 @@ export default function Page() {
                 Explore cusines like Jamaican, Egyptian, Moroccan, Kenyan,
                 Tunisian
               </p>
-              <a href="#" className="btn btn-primary">
+              <a href="levels/afriCarib" className="btn btn-primary" onClick={() => onClick('AfriCarib', props)}>
                 Go Here!
               </a>
             </div>
@@ -82,7 +94,7 @@ export default function Page() {
               <p className="card-text">
                 Explore cuisines like Canadian, American, Mexican 
               </p>
-              <a href="levels" className="btn btn-primary">
+              <a href="levels/northAm" className="btn btn-primary" onClick={() => onClick('NorthAm', props)}>
                 Go Here!
               </a>
             </div>

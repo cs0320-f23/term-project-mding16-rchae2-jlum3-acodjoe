@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import "firebaseui/dist/firebaseui.css";
 import firebase from "firebase/compat/app";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import './app/login/login.css'
+import "./app/login/login.css";
 import {
   getFirestore,
   addDoc,
@@ -14,7 +14,7 @@ import {
   getDoc,
 } from "firebase/firestore";
 
-import Levels from "./app/levels/page";
+import NorthAmerica from "./app/levels/northAm/page";
 import Recipes from "./app/recipes/page";
 import Regions from "./app/regions/page";
 import AuthEmail from "./app/login/AuthEmail";
@@ -38,7 +38,7 @@ export default function App() {
     Euro: 1,
   });
 
-  // const [selectedRegion, setSelectRegion] = useState("");
+  const [selectedRegion, setSelectRegion] = useState("");
 
   const [afriCarib, setAfriCarib] = useState<Map<number, string[]>>(new Map());
   const [asian, setAsian] = useState<Map<number, string[]>>(new Map());
@@ -174,9 +174,9 @@ export default function App() {
             </div>
           }
         />
-        <Route path="/regions" element={<Regions />} />
-        <Route path="/levels" element={<Levels />} />
-        <Route path="/recipes" element={<Recipes />} />
+        <Route path="/regions" element={<Regions selectedRegion={selectedRegion} setSelectRegion={setSelectRegion} />} />
+        <Route path="/levels/northAm" element={<NorthAmerica regions={regions}/>} />
+        <Route path="/recipes" element={<Recipes regions={regions} selectedRegion={selectedRegion} afriCarib={afriCarib} asian={asian} europe={europe} northAm={northAm} setRegions={setRegions} />} />
         <Route
           path="/test"
           element={
@@ -190,6 +190,8 @@ export default function App() {
               europe={europe}
               northAm={northAm}
               setRegions={setRegions}
+              selectedRegion={selectedRegion}
+              setSelectRegion={setSelectRegion}
             ></Test>
             // </MyContext.Provider>
           }

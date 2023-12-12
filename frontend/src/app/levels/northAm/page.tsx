@@ -5,13 +5,20 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "aos/dist/aos.css";
 // declare module "*.png";
 
+type LevelsType = {
+  AfriCarib: number;
+  Asia: number;
+  NorthAm: number;
+  Euro: number;
+};
+
 interface PageProps {
   // children: React.ReactNode;
   // progress: number;
-  // regions: Map<String, number>;
+  regions: LevelsType;
 }
 
-const Page: React.FC<PageProps> = ({ }) => {
+const Page: React.FC<PageProps> = ({}) => {
   useEffect(() => {
     // Initialize AOS when the component mounts on the client side
     import("aos").then((AOS) => {
@@ -43,7 +50,7 @@ const Page: React.FC<PageProps> = ({ }) => {
           <div className="overflow-scroll">
             <div className="row" id="row1">
               <div className="col-sm" data-aos="zoom-in">
-                <a href="http://localhost:3000">
+                <a href="/recipes">
                   <img
                     className="levelbubble grow-on-hover"
                     src={"/level1.png"}

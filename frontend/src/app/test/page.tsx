@@ -27,18 +27,21 @@ interface testProps {
   europe: Map<number, string[]>;
   northAm: Map<number, string[]>;
   setRegions: Dispatch<SetStateAction<LevelsType>>;
+  selectedRegion: string;
+  setSelectRegion: Dispatch<SetStateAction<string>>;
+
 }
 
 export default function Page(props : testProps) {
   //api call to get recipe steps, ingredients, etc.
   useEffect(() => {
-    if (props.asian[props.regions.Asia] !== undefined) {
-      for (const recipe of props.asian[props.regions.Asia]) {
-        const document = doc(getFirestore(), "recipes", recipe);
-        getDoc(document).then((gotRecipe) => {
-          console.log(gotRecipe.data().recipe);
-          console.log(gotRecipe.data().ingredients);
-          console.log(gotRecipe.data().instructions);
+    if (props.asian[props.regions.Asia] !== undefined) { // if user level is not undefined for that region 
+      for (const recipe of props.asian[props.regions.Asia]) { // looping through string[]
+        const document = doc(getFirestore(), "recipes", recipe); // getting the recipe from database
+        getDoc(document).then((gotRecipe) => { 
+          console.log(gotRecipe.data().recipe); // name of recipe
+          console.log(gotRecipe.data().ingredients); // list of ingredients 
+          console.log(gotRecipe.data().instructions); // list of instructions 
         });
       }
     }
@@ -64,8 +67,13 @@ export default function Page(props : testProps) {
     });
   }
 
+  useEffect(() => {
+    console.log(props.selectedRegion)
+  }, [props.selectedRegion])
+
   return (
     <div>
+      <div>user region selected {props.selectedRegion}</div>
       <div>user id {props.currentUserID}</div>
       <div>user email {props.userEmail}</div>
       <div>user africa level {props.regions.AfriCarib}</div>
