@@ -9,11 +9,11 @@ declare module "*.png";
 
 interface PageProps {
   // children: React.ReactNode;
-  progress: number;
-  regions: Map<String, String>;
+  // progress: number;
+  // regions: Map<String, number>;
 }
 
-const Page: React.FC<PageProps> = ({ progress }) => {
+const Page: React.FC<PageProps> = ({ }) => {
   useEffect(() => {
     // Initialize AOS when the component mounts on the client side
     import("aos").then((AOS) => {
