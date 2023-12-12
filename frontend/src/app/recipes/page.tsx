@@ -44,14 +44,15 @@ function Page(props : recipeProps) {
   const [selectedRegion, setSelectedRegion] = useState("")
   
   useEffect(() => {
-    setSelectedRegion("afriCarib")
+    setSelectedRegion("afriCarib") // should be props.selectedRegion later on when everything is integrated
+
     // const selectedString = props.selectedRegion
     console.log("INITIATING RECIPES USER EFFECT LOOP")
     console.log("user level = ", userLevel)
     const selectedString = props.selectedRegion;
 
-    setRegionMap(props.afriCarib)
-    setUserLevel(props.regions.AfriCarib)
+    setRegionMap(props.afriCarib) // change when everything is integrated
+    setUserLevel(props.regions.AfriCarib) // change when everything is integrated
     // if (selectedString === "afriCarib"){
     //   setRegionMap(props.afriCarib)
     //   setUserLevel(props.regions.AfriCarib)
