@@ -51,8 +51,8 @@ function Page(props : recipeProps) {
     console.log("user level = ", userLevel)
     const selectedString = props.selectedRegion;
 
-    setRegionMap(props.afriCarib) // change when everything is integrated
-    setUserLevel(props.regions.AfriCarib) // change when everything is integrated
+    setRegionMap(props.asian) // change when everything is integrated
+    setUserLevel(props.regions.Asia) // change when everything is integrated
     // if (selectedString === "afriCarib"){
     //   setRegionMap(props.afriCarib)
     //   setUserLevel(props.regions.AfriCarib)
