@@ -215,12 +215,15 @@ function Page(props : recipeProps) {
   const completeButton = () => {
     const tickimg = "https://lh3.googleusercontent.com/drive-viewer/AK7aPaBAXgyL4y0Rz3PGYb_0J1ADT1RpLLI402AFlicEo77qsknH93IDPHJCmVjTdlhj0vxlOnZpV_eK2EHXsWbywhXnkrc6DA=s2560"
     return(
-      <button id="completebutton" onClick={completedClick}>
+      // NEED TO MAKE THIS LINK TO THE CORRECT PLACE
+      <a href="/levels" id="completebuttonref"> 
+        <button id="completebutton" onClick={completedClick}>
         <div id="buttontext">
           <img id="tick" src={tickimg} referrerPolicy="no-referrer"></img>
           Completed 
         </div>
         </button>
+      </a>
     )
   }
 

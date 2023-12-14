@@ -66,6 +66,9 @@ body {
 #completebutton{
     background-color: #AAD59F;
     border-radius: 10px;
+}
+
+#completebuttonref{
     margin-bottom: 30px;
     margin-left: auto;
     margin-right: auto;
