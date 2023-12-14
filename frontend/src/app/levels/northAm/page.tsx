@@ -3,6 +3,7 @@ import "./americanstyles.css";
 import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "aos/dist/aos.css";
+import {useNavigate} from 'react-router-dom'
 // declare module "*.png";
 
 type LevelsType = {
@@ -33,6 +34,11 @@ const Page: React.FC<PageProps> = ({ regions }) => {
   const fullRows = Math.floor(totalLevels / 4);
   const remainingBubbles = totalLevels % 4;
   const progress = (regions.NorthAm / totalLevels) * 100;
+  const navigate = useNavigate()
+
+  function bubbleclick() {
+    navigate("/recipes")
+  }
 
   return (
     <>
@@ -71,12 +77,13 @@ const Page: React.FC<PageProps> = ({ regions }) => {
                       alt={`Level ${currLevel}`}
                     />
                   ) : (
-                    <a href={"/recipes"}>
+                    <a >
                       {/* Use the current level number in the URL */}
                       <img
                         className={`levelbubble grow-on-hover`}
                         src={levelImage}
                         alt={`Level ${currLevel}`}
+                        onClick = {bubbleclick}
                       />
                     </a>
                   );

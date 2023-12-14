@@ -6,6 +6,8 @@ import { SetStateAction, useState } from "react";
 import Slider from "react-slick";
 import { Dispatch, useEffect, useContext } from "react";
 import { useGlobalContext } from "../context/store";
+import {useNavigate} from 'react-router-dom'
+
 import {
   getFirestore,
   addDoc,
@@ -140,27 +142,11 @@ function Page(props: recipeProps) {
       </div>
     );
   };
+  const navigate = useNavigate()
 
   function completedClick(): void {
     //update the database
     console.log("old region", props.regions);
-
-    // const fieldsToUpdate = {
-    //   regions: {
-    //     ...props.regions,
-    //     userLevel: userLevel + 1, // Update the Asia level
-    //   },
-    // };
-
-    // updateDoc(
-    //   doc(getFirestore(), "users", props.currentUserID),
-    //   fieldsToUpdate
-    // );
-    // //update the state that stored regions and respective user level for that region
-    // props.setRegions({
-    //   ...props.regions,
-    //   Asia: props.regions.Asia + 1, // Update the Asia level
-    // });
 
     if (selectedRegion === "afriCarib") {
       props.setRegions({
@@ -177,6 +163,7 @@ function Page(props: recipeProps) {
         doc(getFirestore(), "users", props.currentUserID),
         fieldsToUpdate
       );
+      navigate('/levels/AfriCarib')
     } else if (selectedRegion === "asian") {
       props.setRegions({
         ...props.regions,
@@ -192,6 +179,7 @@ function Page(props: recipeProps) {
         doc(getFirestore(), "users", props.currentUserID),
         fieldsToUpdate
       );
+      navigate('/levels/Asia')
     } else if (selectedRegion === "europe") {
       props.setRegions({
         ...props.regions,
@@ -207,6 +195,7 @@ function Page(props: recipeProps) {
         doc(getFirestore(), "users", props.currentUserID),
         fieldsToUpdate
       );
+      navigate('/levels/Euro')
     } else if (selectedRegion === "northAm") {
       props.setRegions({
         ...props.regions,
@@ -222,6 +211,7 @@ function Page(props: recipeProps) {
         doc(getFirestore(), "users", props.currentUserID),
         fieldsToUpdate
       );
+      navigate('/levels/NorthAM')
     }
     console.log("new region", props.regions);
   }
@@ -231,7 +221,7 @@ function Page(props: recipeProps) {
       "https://lh3.googleusercontent.com/drive-viewer/AK7aPaBAXgyL4y0Rz3PGYb_0J1ADT1RpLLI402AFlicEo77qsknH93IDPHJCmVjTdlhj0vxlOnZpV_eK2EHXsWbywhXnkrc6DA=s2560";
     return (
       // NEED TO MAKE THIS LINK TO THE CORRECT PLACE
-      <a href="/levels" id="completebuttonref">
+      <a id="completebuttonref">
         <button id="completebutton" onClick={completedClick}>
           <div id="buttontext">
             <img id="tick" src={tickimg} referrerPolicy="no-referrer"></img>

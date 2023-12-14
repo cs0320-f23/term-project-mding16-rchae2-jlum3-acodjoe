@@ -1,6 +1,7 @@
 import React from "react";
 import "./regions.css";
 import "bootstrap/dist/css/bootstrap.css";
+import {useNavigate} from 'react-router-dom'
 import {
   Dispatch,
   SetStateAction,
@@ -20,24 +21,27 @@ function waitThreeMinutes() {
   });
 }
 
-async function onClick(region: string, props: regionProps, event : React.MouseEvent<HTMLAnchorElement>) {
-  event.preventDefault();
-
-  props.setSelectRegion(region);
-  console.log(props.selectedRegion);
-
-  // window.setTimeout(() => {
-  //   window.location.assign("/regions");
-  // }, 999999999999999999999999999999999999999999 * 999999999999999999999999999999999999999999);
-
-  // console.log("drive");
-  // await waitThreeMinutes(); // Wait for 3 minutes
-  //{selectedRegion: '', setSelectRegion: ƒ}
-
-  window.location.href = "/levels/" + region;
-}
 
 export default function Page(props: regionProps) {
+  const navigate = useNavigate()
+  async function onClick(region: string, props: regionProps, event : React.MouseEvent<HTMLAnchorElement>) {
+    event.preventDefault();
+  
+    props.setSelectRegion(region);
+    console.log(props.selectedRegion);
+    navigate('/levels/' + region)
+  
+    // window.setTimeout(() => {
+    //   window.location.assign("/regions");
+    // }, 999999999999999999999999999999999999999999 * 999999999999999999999999999999999999999999);
+  
+    // console.log("drive");
+    // await waitThreeMinutes(); // Wait for 3 minutes
+    //{selectedRegion: '', setSelectRegion: ƒ}
+  
+    // window.location.href = "/levels/" + region;
+  }
+
   useEffect(() => {
     console.log(props.selectedRegion);
   }, [props.selectedRegion]);
@@ -64,7 +68,7 @@ export default function Page(props: regionProps) {
                 Thai, Filipino, Malaysian      
               </p>
               <a
-                href="/levels/asian"
+                // href="/levels/asian"
                 className="btn btn-primary"
                 onClick={(e) => onClick("Asia", props, e)}
               >
@@ -91,7 +95,7 @@ export default function Page(props: regionProps) {
                 Tunisian
               </p>
               <a
-                href="levels/afriCarib"
+                // href="levels/afriCarib"
                 className="btn btn-primary"
                 onClick={(e) => onClick("AfriCarib", props, e)}
               >
@@ -116,7 +120,7 @@ export default function Page(props: regionProps) {
                 Irish, Spanish, Polish, Portuguese, Turkish, Greek, Russian
               </p>
               <a
-                href="/levels/europe"
+                // href="/levels/europe"
                 className="btn btn-primary"
                 onClick={(e) => onClick("Euro", props, e)}
               >
@@ -142,7 +146,7 @@ export default function Page(props: regionProps) {
               </p>
               <a
                 // href="levels/northAm"
-                href="#"
+                // href="#"
                 className="btn btn-primary"
                 onClick={(e) => onClick("NorthAm", props, e)}
               >
