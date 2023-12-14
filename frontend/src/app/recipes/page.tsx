@@ -45,31 +45,37 @@ function Page(props : recipeProps) {
   const [selectedRegionStr, setSelectedRegionStr] = useState("")
   
   useEffect(() => {
-    setSelectedRegion("asian") // should be props.selectedRegion later on when everything is integrated
-    setSelectedRegionStr("Asia")
     // const selectedString = props.selectedRegion
     console.log("INITIATING RECIPES USER EFFECT LOOP")
     console.log("user level = ", userLevel)
     const selectedString = props.selectedRegion;
 
-    setRegionMap(props.asian) // change when everything is integrated
-    setUserLevel(props.regions.Asia) // change when everything is integrated
-    // if (selectedString === "afriCarib"){
-    //   setRegionMap(props.afriCarib)
-    //   setUserLevel(props.regions.AfriCarib)
+    // setRegionMap(props.asian) // change when everything is integrated
+    // setUserLevel(props.regions.Asia) // change when everything is integrated
+    if (selectedString === "afriCarib"){
+      setRegionMap(props.afriCarib)
+      setUserLevel(props.regions.AfriCarib)
+      setSelectedRegion("afriCarib") 
+      setSelectedRegionStr("Africa + Caribbean")
 
-    // } else if (selectedString === "asian"){
-    //   setRegionMap(props.asian)
-    //   setUserLevel(props.regions.Asia)
+    } else if (selectedString === "asian"){
+      setRegionMap(props.asian)
+      setUserLevel(props.regions.Asia)
+      setSelectedRegion("asian") 
+      setSelectedRegionStr("Asia")
 
-    // } else if (selectedString === "europe"){
-    //   setRegionMap(props.europe)
-    //   setUserLevel(props.regions.Euro)
+    } else if (selectedString === "europe"){
+      setRegionMap(props.europe)
+      setUserLevel(props.regions.Euro)
+      setSelectedRegion("europe") 
+      setSelectedRegionStr("Europe")
 
-    // } else if (selectedString === "northAm"){
-    //   setRegionMap(props.northAm)
-    //   setUserLevel(props.regions.NorthAm)
-    // }
+    } else if (selectedString === "northAm"){
+      setRegionMap(props.northAm)
+      setUserLevel(props.regions.NorthAm)
+      setSelectedRegion("northAm") 
+      setSelectedRegionStr("North America")
+    }
 
     if (regionMap[userLevel] !== undefined) { // if user level is not undefined for that region 
       for (const recipe of regionMap[userLevel]) { // looping through string[]
