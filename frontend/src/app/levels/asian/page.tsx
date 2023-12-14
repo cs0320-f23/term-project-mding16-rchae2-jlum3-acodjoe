@@ -1,9 +1,9 @@
 "use client";
 import "./asianstyles.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "aos/dist/aos.css";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 // declare module "*.png";
 
 type LevelsType = {
@@ -20,6 +20,7 @@ interface PageProps {
 }
 
 const Page: React.FC<PageProps> = ({ regions }) => {
+  const [progress, setProgress] = useState<number>(0);
   useEffect(() => {
     const initAOS = async () => {
       const AOS = await import("aos");
@@ -29,17 +30,22 @@ const Page: React.FC<PageProps> = ({ regions }) => {
     initAOS();
   }, [regions]); // Reinitialize AOS when regions change
 
+  useEffect(() => {
+    const newProgress = (regions.Asia / totalLevels) * 100;
+    setProgress(newProgress);
+  }, [regions.Asia]);
+
   const selectlevel = "/selectlevel.png";
   const totalLevels = 17;
   const fullRows = Math.floor(totalLevels / 4);
   const remainingBubbles = totalLevels % 4;
-  const progress = (regions.NorthAm / totalLevels) * 100;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function bubbleclick() {
-    navigate("/recipes")
+    const newProgress = (regions.Asia / totalLevels) * 100;
+    setProgress(newProgress);
+    navigate("/recipes");
   }
-  
 
   return (
     <>
@@ -50,7 +56,7 @@ const Page: React.FC<PageProps> = ({ regions }) => {
             <div className="asia-base-progress"></div>
             <div
               className="asia-overlay-progress"
-              style={{ width: `${90}%` }}
+              style={{ width: `${progress}%` }}
             ></div>
           </div>
         </div>
@@ -78,13 +84,13 @@ const Page: React.FC<PageProps> = ({ regions }) => {
                       alt={`Level ${currLevel}`}
                     />
                   ) : (
-                    <a >
+                    <a>
                       {/* Use the current level number in the URL */}
                       <img
                         className={`levelbubble grow-on-hover`}
                         src={levelImage}
                         alt={`Level ${currLevel}`}
-                        onClick = {bubbleclick}
+                        onClick={bubbleclick}
                       />
                     </a>
                   );
