@@ -38,6 +38,7 @@ export default function App() {
     Euro: 1,
   });
 
+  // const [selectedRegion, setSelectRegion] = useState("");
   const [selectedRegion, setSelectRegion] = useState("");
 
   const [afriCarib, setAfriCarib] = useState<Map<number, string[]>>(new Map());
@@ -176,7 +177,12 @@ export default function App() {
         />
         <Route path="/regions" element={<Regions selectedRegion={selectedRegion} setSelectRegion={setSelectRegion} />} />
         <Route path="/levels/northAm" element={<NorthAmerica regions={regions}/>} />
+
         <Route path="/recipes" element={<Recipes currentUserID= {currentUserID} regions={regions} selectedRegion={selectedRegion} afriCarib={afriCarib} asian={asian} europe={europe} northAm={northAm} setRegions={setRegions} />} />
+
+        <Route path="/recipes" element={<Recipes regions={regions} selectedRegion={selectedRegion} afriCarib={afriCarib} asian={asian} europe={europe} northAm={northAm} setRegions={setRegions} />} />
+
+
         <Route
           path="/test"
           element={

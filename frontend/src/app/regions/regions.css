@@ -49,9 +49,11 @@ body, html {
   }
   
   .AsiaImage {
-    width: 100%;
+    /* width: 100%;
     height: 150%;
-    right:50%;
+    right:50%; */
+    width: 80%;
+    height: auto;
   }
 .Europe{
     position: fixed;
@@ -59,9 +61,11 @@ body, html {
     left: 150px;
 }
 .EuropeImage{
-    bottom:0;
+    /* bottom:0;
     left:5px;
     width: 85%; 
+    height: auto; */
+    width: 80%;
     height: auto;
 }
 .Africa{
@@ -70,9 +74,11 @@ body, html {
     left: 150px;
 }
 .AfricaImage{
-    bottom:0;
+    /* bottom:0;
     left:0;
     width: 80%; 
+    height: auto; */
+    width: 80%;
     height: auto;
 }
 .NorthAmerica {
