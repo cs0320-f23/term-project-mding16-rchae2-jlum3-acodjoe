@@ -42,10 +42,11 @@ function Page(props : recipeProps) {
   const [realRecipeList, setRecipeList] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
   const [selectedRegion, setSelectedRegion] = useState("")
+  const [selectedRegionStr, setSelectedRegionStr] = useState("")
   
   useEffect(() => {
-    setSelectedRegion("afriCarib") // should be props.selectedRegion later on when everything is integrated
-
+    setSelectedRegion("asian") // should be props.selectedRegion later on when everything is integrated
+    setSelectedRegionStr("Asia")
     // const selectedString = props.selectedRegion
     console.log("INITIATING RECIPES USER EFFECT LOOP")
     console.log("user level = ", userLevel)
@@ -116,13 +117,15 @@ function Page(props : recipeProps) {
         <div id="selecttext">
           {"Select one of the following recipes."}
           <br></br>
-          {"Once you’ve completed it, select the completed button,\
-          and the next level will be unlocked!"}
+          {"Once you’ve completed it, select the completed button"}
+          <br></br>
+          {"and the next level will be unlocked!"}
           <br></br>
           {"Happy cooking!"}
           </div>
+          <div id="redrec"></div>
           <div id="recipetext">
-            LEVEL {userLevel}, {selectedRegion}
+            LEVEL {userLevel}, {selectedRegionStr}
           </div>
         </div>
     )
