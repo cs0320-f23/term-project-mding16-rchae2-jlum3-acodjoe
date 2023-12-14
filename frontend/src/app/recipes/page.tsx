@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import React from "react";
-import "./styles.css"
-import header from "./images/reciperec.png"
-import {SetStateAction, useState} from "react"
-import Slider from 'react-slick'
+import "./styles.css";
+import header from "./images/reciperec.png";
+import { SetStateAction, useState } from "react";
+import Slider from "react-slick";
 import { Dispatch, useEffect, useContext } from "react";
 import { useGlobalContext } from "../context/store";
 import {
@@ -13,9 +13,8 @@ import {
   setDoc,
   doc,
   getDoc,
-  updateDoc
+  updateDoc,
 } from "firebase/firestore";
-
 
 type LevelsType = {
   AfriCarib: number;
@@ -25,7 +24,7 @@ type LevelsType = {
 };
 
 interface recipeProps {
-  currentUserID: string,
+  currentUserID: string;
   regions: LevelsType;
   selectedRegion: string;
   afriCarib: Map<number, string[]>;
@@ -35,91 +34,95 @@ interface recipeProps {
   setRegions: Dispatch<SetStateAction<LevelsType>>;
 }
 
-function Page(props : recipeProps) {
+function Page(props: recipeProps) {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [regionMap, setRegionMap] = useState(new Map());
   const [userLevel, setUserLevel] = useState(0);
   const [realRecipeList, setRecipeList] = useState([]);
   const [imageIndex, setImageIndex] = useState(0);
-  const [selectedRegion, setSelectedRegion] = useState("")
-  const [selectedRegionStr, setSelectedRegionStr] = useState("")
-  
+  const [selectedRegion, setSelectedRegion] = useState("");
+  const [selectedRegionStr, setSelectedRegionStr] = useState("");
+
   useEffect(() => {
     // const selectedString = props.selectedRegion
-    console.log("INITIATING RECIPES USER EFFECT LOOP")
-    console.log("user level = ", userLevel)
+    console.log("INITIATING RECIPES USER EFFECT LOOP");
+    console.log("user level = ", userLevel);
     const selectedString = props.selectedRegion;
-    console.log(selectedString)
-
+    console.log(selectedString);
+    console.log("hi");
     // setRegionMap(props.asian) // change when everything is integrated
     // setUserLevel(props.regions.Asia) // change when everything is integrated
-    if (selectedString === "AfriCarib"){
-      setRegionMap(props.afriCarib)
-      setUserLevel(props.regions.AfriCarib)
-      setSelectedRegion("afriCarib") 
-      setSelectedRegionStr("Africa + Caribbean")
-
-    } else if (selectedString === "Asia"){
-      setRegionMap(props.asian)
-      setUserLevel(props.regions.Asia)
-      setSelectedRegion("asian") 
-      setSelectedRegionStr("Asia")
-
-    } else if (selectedString === "Euro"){
-      setRegionMap(props.europe)
-      setUserLevel(props.regions.Euro)
-      setSelectedRegion("europe") 
-      setSelectedRegionStr("Europe")
-
-    } else if (selectedString === "NorthAm"){
-      setRegionMap(props.northAm)
-      setUserLevel(props.regions.NorthAm)
-      setSelectedRegion("northAm") 
-      setSelectedRegionStr("North America")
+    if (selectedString === "AfriCarib") {
+      setRegionMap(props.afriCarib);
+      setUserLevel(props.regions.AfriCarib);
+      setSelectedRegion("afriCarib");
+      setSelectedRegionStr("Africa + Caribbean");
+    } else if (selectedString === "Asia") {
+      setRegionMap(props.asian);
+      setUserLevel(props.regions.Asia);
+      setSelectedRegion("asian");
+      setSelectedRegionStr("Asia");
+    } else if (selectedString === "Euro") {
+      setRegionMap(props.europe);
+      setUserLevel(props.regions.Euro);
+      setSelectedRegion("europe");
+      setSelectedRegionStr("Europe");
+    } else if (selectedString === "NorthAm") {
+      setRegionMap(props.northAm);
+      setUserLevel(props.regions.NorthAm);
+      setSelectedRegion("northAm");
+      setSelectedRegionStr("North America");
     }
 
-    if (regionMap[userLevel] !== undefined) { // if user level is not undefined for that region 
-      for (const recipe of regionMap[userLevel]) { // looping through string[]
+    if (regionMap[userLevel] !== undefined) {
+      // if user level is not undefined for that region
+      for (const recipe of regionMap[userLevel]) {
+        // looping through string[]
         const document = doc(getFirestore(), "recipes", recipe); // getting the recipe from database
         const currRecipe = new Map<String, any>();
-        getDoc(document).then((gotRecipe) => { 
-          async function mealCall(){
-            try{
-            // console.log(gotRecipe.data().recipe); // name of recipe
-            currRecipe.set("name", gotRecipe.data().recipe)
+        getDoc(document).then((gotRecipe) => {
+          async function mealCall() {
+            try {
+              // console.log(gotRecipe.data().recipe); // name of recipe
+              currRecipe.set("name", gotRecipe.data().recipe);
 
-            // console.log(gotRecipe.data().ingredients); // list of ingredients 
-            const ingredientList = gotRecipe.data().ingredients
-            const newIngredientList = ingredientList.filter(function(e){{return (e!="")}})
-            currRecipe.set("ingredients", newIngredientList)
+              // console.log(gotRecipe.data().ingredients); // list of ingredients
+              const ingredientList = gotRecipe.data().ingredients;
+              const newIngredientList = ingredientList.filter(function (e) {
+                {
+                  return e != "";
+                }
+              });
+              currRecipe.set("ingredients", newIngredientList);
 
-            // console.log(gotRecipe.data().instructions); // list of instructions 
-            currRecipe.set("instructions", gotRecipe.data().instructions)
-            console.log("calling meal api", currRecipe.get("name"))
+              // console.log(gotRecipe.data().instructions); // list of instructions
+              currRecipe.set("instructions", gotRecipe.data().instructions);
+              console.log("calling meal api", currRecipe.get("name"));
 
-            // populate recipe object with image and cook time 
-            const recipeObj = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?s=" + currRecipe.get("name"))
-            const jsonRecipe = await recipeObj.json();
-            currRecipe.set("image", jsonRecipe.meals[0].strMealThumb)
+              // populate recipe object with image and cook time
+              const recipeObj = await fetch(
+                "https://www.themealdb.com/api/json/v1/1/search.php?s=" +
+                  currRecipe.get("name")
+              );
+              const jsonRecipe = await recipeObj.json();
+              currRecipe.set("image", jsonRecipe.meals[0].strMealThumb);
+            } catch (err) {
+              console.log("ERROR WITH API:", err);
             }
-            catch (err){
-              console.log("ERROR WITH API:", err)
+            setDataLoaded(true);
           }
-            setDataLoaded(true)
-          }
-          mealCall().then(setRecipeList[realRecipeList.push(currRecipe)])
-        })
+          mealCall().then(setRecipeList[realRecipeList.push(currRecipe)]);
+        });
       }
     }
-  })
+  });
 
   const headerImg = () => {
-    const link = "https://lh3.googleusercontent.com/drive-viewer/AK7aPaAmuhZS3kMQMZm5FiPXzabPsXg4tHI3lE7W2mgdheVTjljrr9xVx3mq_yynrnsrLpjA8mKiCTBaM_vz4Niz2DnejcppGA=s1600"
-    return(
+    const link =
+      "https://lh3.googleusercontent.com/drive-viewer/AK7aPaAmuhZS3kMQMZm5FiPXzabPsXg4tHI3lE7W2mgdheVTjljrr9xVx3mq_yynrnsrLpjA8mKiCTBaM_vz4Niz2DnejcppGA=s1600";
+    return (
       <div id="bluerec">
-        <div id="recipetext">
-          RECIPES
-        </div>
+        <div id="recipetext">RECIPES</div>
         <div id="redrec"></div>
         <div id="selecttext">
           {"Select one of the following recipes."}
@@ -129,18 +132,18 @@ function Page(props : recipeProps) {
           {"and the next level will be unlocked!"}
           <br></br>
           {"Happy cooking!"}
-          </div>
-          <div id="redrec"></div>
-          <div id="recipetext">
-            LEVEL {userLevel}, {selectedRegionStr}
-          </div>
         </div>
-    )
-  }
+        <div id="redrec"></div>
+        <div id="recipetext">
+          LEVEL {userLevel}, {selectedRegionStr}
+        </div>
+      </div>
+    );
+  };
 
   function completedClick(): void {
     //update the database
-    console.log("old region", props.regions)
+    console.log("old region", props.regions);
 
     // const fieldsToUpdate = {
     //   regions: {
@@ -159,10 +162,10 @@ function Page(props : recipeProps) {
     //   Asia: props.regions.Asia + 1, // Update the Asia level
     // });
 
-    if (selectedRegion === "afriCarib"){
+    if (selectedRegion === "afriCarib") {
       props.setRegions({
         ...props.regions,
-        AfriCarib: props.regions.AfriCarib + 1, 
+        AfriCarib: props.regions.AfriCarib + 1,
       });
       const fieldsToUpdate = {
         regions: {
@@ -174,24 +177,22 @@ function Page(props : recipeProps) {
         doc(getFirestore(), "users", props.currentUserID),
         fieldsToUpdate
       );
-
-    } else if (selectedRegion === "asian"){
+    } else if (selectedRegion === "asian") {
       props.setRegions({
         ...props.regions,
-        Asia: props.regions.Asia + 1, 
+        Asia: props.regions.Asia + 1,
       });
       const fieldsToUpdate = {
         regions: {
           ...props.regions,
-          Asia: props.regions.Asia + 1, 
+          Asia: props.regions.Asia + 1,
         },
       };
       updateDoc(
         doc(getFirestore(), "users", props.currentUserID),
         fieldsToUpdate
       );
-
-    } else if (selectedRegion === "europe"){
+    } else if (selectedRegion === "europe") {
       props.setRegions({
         ...props.regions,
         Euro: props.regions.Euro + 1,
@@ -206,16 +207,15 @@ function Page(props : recipeProps) {
         doc(getFirestore(), "users", props.currentUserID),
         fieldsToUpdate
       );
-
-    } else if (selectedRegion === "northAm"){
+    } else if (selectedRegion === "northAm") {
       props.setRegions({
         ...props.regions,
-        NorthAm: props.regions.NorthAm + 1, 
+        NorthAm: props.regions.NorthAm + 1,
       });
       const fieldsToUpdate = {
         regions: {
           ...props.regions,
-          NorthAm: props.regions.NorthAm + 1, 
+          NorthAm: props.regions.NorthAm + 1,
         },
       };
       updateDoc(
@@ -223,27 +223,28 @@ function Page(props : recipeProps) {
         fieldsToUpdate
       );
     }
-    console.log("new region", props.regions)
+    console.log("new region", props.regions);
   }
 
   const completeButton = () => {
-    const tickimg = "https://lh3.googleusercontent.com/drive-viewer/AK7aPaBAXgyL4y0Rz3PGYb_0J1ADT1RpLLI402AFlicEo77qsknH93IDPHJCmVjTdlhj0vxlOnZpV_eK2EHXsWbywhXnkrc6DA=s2560"
-    return(
+    const tickimg =
+      "https://lh3.googleusercontent.com/drive-viewer/AK7aPaBAXgyL4y0Rz3PGYb_0J1ADT1RpLLI402AFlicEo77qsknH93IDPHJCmVjTdlhj0vxlOnZpV_eK2EHXsWbywhXnkrc6DA=s2560";
+    return (
       // NEED TO MAKE THIS LINK TO THE CORRECT PLACE
-      <a href="/levels" id="completebuttonref"> 
+      <a href="/levels" id="completebuttonref">
         <button id="completebutton" onClick={completedClick}>
-        <div id="buttontext">
-          <img id="tick" src={tickimg} referrerPolicy="no-referrer"></img>
-          Completed 
-        </div>
+          <div id="buttontext">
+            <img id="tick" src={tickimg} referrerPolicy="no-referrer"></img>
+            Completed
+          </div>
         </button>
       </a>
-    )
-  }
+    );
+  };
 
   const Recipepage = () => {
-    console.log("RECIPE PAGE LOADING")
-    console.log("RECIPE PAGE: ", realRecipeList)
+    console.log("RECIPE PAGE LOADING");
+    console.log("RECIPE PAGE: ", realRecipeList);
     // ********* MOCK RECIPE *********
     // const recipe1 = {
     //   name: "Peking Duck",
@@ -262,64 +263,68 @@ function Page(props : recipeProps) {
     // }
 
     // const recipelist = [recipe1, recipe1, recipe1]
-    const recipeListThree = realRecipeList.slice(0,3)
+    const recipeListThree = realRecipeList.slice(0, 3);
     const settings = {
-        className: "center",
-        dots: false,
-        centerMode: true,
-        infinite: true,
-        centerPadding: "60px",
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        focusOnSelect: true,
-        speed: 500,
-        beforeChange: (current: any, next: any) => setImageIndex(next)
-    }
+      className: "center",
+      dots: false,
+      centerMode: true,
+      infinite: true,
+      centerPadding: "60px",
+      slidesToShow: 3,
+      slidesToScroll: 1,
+      focusOnSelect: true,
+      speed: 500,
+      beforeChange: (current: any, next: any) => setImageIndex(next),
+    };
 
     /** CITE - carousel package + tutorial - react-slick
-     * https://react-slick.neostack.com/docs/get-started  
+     * https://react-slick.neostack.com/docs/get-started
      * https://www.youtube.com/watch?v=odSfSAoUREU
      * */
-    
-    return(
+
+    return (
       <div id="recipeslider">
-        <Slider {...settings}
-        >
-          {
-            recipeListThree.map((recipe, idx) => 
-            <div id="recipecontainer" className={idx===imageIndex? "slide activeSlide": "slide"} key={idx}>
+        <Slider {...settings}>
+          {recipeListThree.map((recipe, idx) => (
+            <div
+              id="recipecontainer"
+              className={idx === imageIndex ? "slide activeSlide" : "slide"}
+              key={idx}
+            >
               <div id="rtext">
                 <div id="recipename">{recipe.get("name")}</div>
                 {/* <div id="recipebody"><b>Cook Time:</b> {recipe.cooktime}</div> */}
                 <div id="recipebody">
                   <b>Ingredients:</b>
-                  {recipe.get("ingredients").map((item, index) => 
-                      (<li key={index}>{item}</li>))}
+                  {recipe.get("ingredients").map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
                 </div>
                 <div id="recipebody">
                   <b>Instructions:</b>
                   <br></br>
-                  {recipe.get("instructions").map((item, index) => 
-                      (<li key={index}>{item}</li>))}
-                  </div>
+                  {recipe.get("instructions").map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </div>
               </div>
               <div id="rimgcontainer">
                 <img id="rimg" src={recipe.get("image")}></img>
               </div>
-            </div>)
-          }
+            </div>
+          ))}
         </Slider>
       </div>
-    )
-  }
+    );
+  };
 
-    return (
-      <div id="recipepage">
-        {headerImg()}
-        {dataLoaded && Recipepage()}
-        {completeButton()}
-      </div>
-      )
+  return (
+    <div id="recipepage">
+      {headerImg()}
+      {dataLoaded && Recipepage()}
+      {completeButton()}
+    </div>
+  );
 }
 
 export default Page;
