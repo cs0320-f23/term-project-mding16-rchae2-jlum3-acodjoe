@@ -49,28 +49,29 @@ function Page(props : recipeProps) {
     console.log("INITIATING RECIPES USER EFFECT LOOP")
     console.log("user level = ", userLevel)
     const selectedString = props.selectedRegion;
+    console.log(selectedString)
 
     // setRegionMap(props.asian) // change when everything is integrated
     // setUserLevel(props.regions.Asia) // change when everything is integrated
-    if (selectedString === "afriCarib"){
+    if (selectedString === "AfriCarib"){
       setRegionMap(props.afriCarib)
       setUserLevel(props.regions.AfriCarib)
       setSelectedRegion("afriCarib") 
       setSelectedRegionStr("Africa + Caribbean")
 
-    } else if (selectedString === "asian"){
+    } else if (selectedString === "Asia"){
       setRegionMap(props.asian)
       setUserLevel(props.regions.Asia)
       setSelectedRegion("asian") 
       setSelectedRegionStr("Asia")
 
-    } else if (selectedString === "europe"){
+    } else if (selectedString === "Euro"){
       setRegionMap(props.europe)
       setUserLevel(props.regions.Euro)
       setSelectedRegion("europe") 
       setSelectedRegionStr("Europe")
 
-    } else if (selectedString === "northAm"){
+    } else if (selectedString === "NorthAm"){
       setRegionMap(props.northAm)
       setUserLevel(props.regions.NorthAm)
       setSelectedRegion("northAm") 
