@@ -180,7 +180,6 @@ export default function App() {
 
         <Route path="/recipes" element={<Recipes currentUserID= {currentUserID} regions={regions} selectedRegion={selectedRegion} afriCarib={afriCarib} asian={asian} europe={europe} northAm={northAm} setRegions={setRegions} />} />
 
-        <Route path="/recipes" element={<Recipes regions={regions} selectedRegion={selectedRegion} afriCarib={afriCarib} asian={asian} europe={europe} northAm={northAm} setRegions={setRegions} />} />
 
 
         <Route
