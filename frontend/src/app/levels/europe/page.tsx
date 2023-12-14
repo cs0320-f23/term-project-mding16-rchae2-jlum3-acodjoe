@@ -1,5 +1,5 @@
 "use client";
-import "./americanstyles.css";
+import "./europestyles.css";
 import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "aos/dist/aos.css";
@@ -29,7 +29,7 @@ const Page: React.FC<PageProps> = ({ regions }) => {
   }, [regions]); // Reinitialize AOS when regions change
 
   const selectlevel = "/selectlevel.png";
-  const totalLevels = 17;
+  const totalLevels = 32;
   const fullRows = Math.floor(totalLevels / 4);
   const remainingBubbles = totalLevels % 4;
   const progress = (regions.NorthAm / totalLevels) * 100;
@@ -38,12 +38,12 @@ const Page: React.FC<PageProps> = ({ regions }) => {
     <>
       <div>
         <div className="header">
-          <div className="country"> NORTH AMERICA </div>
-          <div className="na-progress-container">
-            <div className="na-base-progress"></div>
+          <div className="country"> EUROPE </div>
+          <div className="progress-container">
+            <div className="base-progress"></div>
             <div
-              className="na-overlay-progress"
-              style={{ width: `${90}%` }}
+              className="overlay-progress"
+              style={{ width: `${progress}%` }}
             ></div>
           </div>
         </div>
@@ -59,7 +59,7 @@ const Page: React.FC<PageProps> = ({ regions }) => {
                   const levelKey = `level${currLevel}`;
                   let levelImage = `/level${currLevel}.png`;
 
-                  const isGreyedOut = regions.NorthAm < currLevel;
+                  const isGreyedOut = regions.Euro < currLevel;
                   if (isGreyedOut) {
                     levelImage = "/lockedlevel.png";
                   }

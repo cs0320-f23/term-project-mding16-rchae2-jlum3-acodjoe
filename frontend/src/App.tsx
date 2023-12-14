@@ -14,7 +14,10 @@ import {
   getDoc,
 } from "firebase/firestore";
 
+import Asia from "./app/levels/asian/page";
+import AfriCarib from "./app/levels/afriCarib/page";
 import NorthAmerica from "./app/levels/northAm/page";
+import Europe from "./app/levels/europe/page";
 import Recipes from "./app/recipes/page";
 import Regions from "./app/regions/page";
 import AuthEmail from "./app/login/AuthEmail";
@@ -174,9 +177,40 @@ export default function App() {
             </div>
           }
         />
-        <Route path="/regions" element={<Regions selectedRegion={selectedRegion} setSelectRegion={setSelectRegion} />} />
-        <Route path="/levels/northAm" element={<NorthAmerica regions={regions}/>} />
-        <Route path="/recipes" element={<Recipes regions={regions} selectedRegion={selectedRegion} afriCarib={afriCarib} asian={asian} europe={europe} northAm={northAm} setRegions={setRegions} />} />
+        <Route
+          path="/regions"
+          element={
+            <Regions
+              selectedRegion={selectedRegion}
+              setSelectRegion={setSelectRegion}
+            />
+          }
+        />
+
+        <Route
+          path="/levels/afriCarib"
+          element={<AfriCarib regions={regions} />}
+        />
+        <Route path="/levels/asian" element={<Asia regions={regions} />} />
+        <Route
+          path="/levels/northAm"
+          element={<NorthAmerica regions={regions} />}
+        />
+        <Route path="/levels/europe" element={<Europe regions={regions} />} />
+        <Route
+          path="/recipes"
+          element={
+            <Recipes
+              regions={regions}
+              selectedRegion={selectedRegion}
+              afriCarib={afriCarib}
+              asian={asian}
+              europe={europe}
+              northAm={northAm}
+              setRegions={setRegions}
+            />
+          }
+        />
         <Route
           path="/test"
           element={

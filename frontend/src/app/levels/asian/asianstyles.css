@@ -1,0 +1,148 @@
+@font-face {
+  font-family: "RammettoOne-Regular";
+  src: url("RammettoOne-Regular.ttf");
+}
+
+.country {
+  color: rgb(255, 255, 255) !important;
+  padding-left: 8vw;
+  padding-top: 5vh;
+  font-size: 3.7vw;
+  font-family: "RammettoOne-Regular";
+  font-weight: 1000;
+  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-color: black;
+}
+
+body {
+  background-color: #c5fffc !important;
+  padding-bottom: 5vh;
+}
+
+.header {
+  background-color: #41e4ee;
+  height: 20vh;
+  border-bottom: 4px solid black !important;
+  border-color: black !important;
+  display: flex;
+  border-top: 4px solid black !important;
+  overflow-x: hidden;
+}
+
+.asia-progress-container {
+  position: relative;
+  width: 500px;
+  height: 10px;
+  border-radius: 1vw;
+  padding-top: 6.5vh;
+  padding-left: 30vw;
+}
+
+.asia-base-progress {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: white; /* Set your base color */
+  border-radius: 1vw;
+  border: 4px solid black;
+  padding-right: 3vw;
+}
+
+.asia-overlay-progress {
+  position: absolute;
+  height: 100%;
+  border-radius: 1vw;
+  background-color: #2fcf78;
+  transition: 0.3s ease; /* Add smooth transition if needed */
+  border: 4px solid black;
+}
+
+.selectlevel {
+  transform: translateY(-10%);
+  animation: floater 1.5s infinite;
+  transition: ease 0.5s;
+  width: 40vw !important;
+  padding-top: 2vh;
+  padding-left: 6vw;
+}
+
+.levels-container {
+  display: grid;
+  padding-top: 5vh;
+  justify-content: center;
+}
+
+#bubbles-container {
+  display: grid;
+  justify-content: center;
+  padding-left: 6vw;
+  padding-top: 3vh;
+  /* overflow-y: visible; */
+}
+
+.over-container {
+  height: 53vh;
+  width: 70vw;
+  padding-bottom: 10vh;
+  /* overflow-y: auto !important;
+  overflow-x: visible !important;
+  overflow: scroll; */
+}
+
+#empty-block {
+  height: 10vh;
+}
+.levelbubble {
+  width: 10vw;
+  overflow: hidden;
+}
+
+.row {
+  padding-top: 3vh;
+  padding-bottom: 4vh;
+}
+
+.col-sm {
+  margin: 3vw;
+}
+
+#row2 {
+  padding-top: 7vh;
+  padding-left: 2vw;
+}
+
+#row3 {
+  padding-top: 7vh;
+  padding-left: 2vw;
+}
+
+#row4 {
+  padding-top: 7vh;
+  padding-left: 2vw;
+  padding-bottom: 7vh;
+}
+
+#carouselExampleControls {
+  height: 50vh;
+}
+
+.grow-on-hover {
+  transition: transform 0.3s ease; /* Add a smooth transition effect */
+}
+
+.grow-on-hover:hover {
+  transform: scale(
+    1.2
+  ); /* Increase the scale on hover (adjust the value as needed) */
+}
+
+@keyframes floater {
+  0% {
+    transform: translateY(-10%);
+    transition: ease 0.5s;
+  }
+  50% {
+    transform: translateY(10%);
+    transition: ease 0.5s;
+  }
+}
