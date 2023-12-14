@@ -38,6 +38,10 @@ async function onClick(region: string, props: regionProps, event : React.MouseEv
 }
 
 export default function Page(props: regionProps) {
+  useEffect(() => {
+    console.log(props.selectedRegion);
+  }, [props.selectedRegion]);
+  
   return (
     <div className="Page">
       <div className="Header">
