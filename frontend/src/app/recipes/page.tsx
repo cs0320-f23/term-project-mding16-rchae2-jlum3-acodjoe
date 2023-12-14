@@ -119,7 +119,11 @@ function Page(props : recipeProps) {
           {"Once you’ve completed it, select the completed button,\
           and the next level will be unlocked!"}
           <br></br>
-          {"Happy cooking!"}</div>
+          {"Happy cooking!"}
+          </div>
+          <div id="recipetext">
+            LEVEL {userLevel}, {selectedRegion}
+          </div>
         </div>
     )
   }
