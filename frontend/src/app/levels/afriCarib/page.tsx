@@ -1,5 +1,5 @@
 "use client";
-import "./americanstyles.css";
+import "./afriCarib.css";
 import React, { useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "aos/dist/aos.css";
@@ -38,7 +38,7 @@ const Page: React.FC<PageProps> = ({ regions }) => {
     <>
       <div>
         <div className="header">
-          <div className="country"> NORTH AMERICA </div>
+          <div className="country"> AFRICAN / CARRIBEAN </div>
           <div className="na-progress-container">
             <div className="na-base-progress"></div>
             <div
@@ -71,7 +71,7 @@ const Page: React.FC<PageProps> = ({ regions }) => {
                       alt={`Level ${currLevel}`}
                     />
                   ) : (
-                    <a href={"/recipes"}>
+                    <a href={`/recipes/${currLevel}`}>
                       {/* Use the current level number in the URL */}
                       <img
                         className={`levelbubble grow-on-hover`}
@@ -107,7 +107,7 @@ const Page: React.FC<PageProps> = ({ regions }) => {
                     src={levelImage}
                   />
                 ) : (
-                  <a href={"/recipes"}>
+                  <a href={`/recipes/${currLevel}`}>
                     <img
                       className={`levelbubble grow-on-hover`}
                       src={levelImage}
