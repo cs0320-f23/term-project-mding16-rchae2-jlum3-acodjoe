@@ -189,15 +189,15 @@ export default function App() {
         />
 
         <Route
-          path="/levels/afriCarib"
+          path="/levels/AfriCarib"
           element={<AfriCarib regions={regions} />}
         />
-        <Route path="/levels/asian" element={<Asia regions={regions} />} />
+        <Route path="/levels/Asia" element={<Asia regions={regions} />} />
         <Route
-          path="/levels/northAm"
+          path="/levels/NorthAm"
           element={<NorthAmerica regions={regions} />}
         />
-        <Route path="/levels/europe" element={<Europe regions={regions} />} />
+        <Route path="/levels/Euro" element={<Europe regions={regions} />} />
         <Route
           path="/recipes"
           element={

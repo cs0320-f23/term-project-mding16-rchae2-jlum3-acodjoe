@@ -71,7 +71,7 @@ const Page: React.FC<PageProps> = ({ regions }) => {
                       alt={`Level ${currLevel}`}
                     />
                   ) : (
-                    <a href={`/recipes/${currLevel}`}>
+                    <a href={`/recipes`}>
                       {/* Use the current level number in the URL */}
                       <img
                         className={`levelbubble grow-on-hover`}
@@ -107,7 +107,7 @@ const Page: React.FC<PageProps> = ({ regions }) => {
                     src={levelImage}
                   />
                 ) : (
-                  <a href={`/recipes/${currLevel}`}>
+                  <a href={`/recipes`}>
                     <img
                       className={`levelbubble grow-on-hover`}
                       src={levelImage}
