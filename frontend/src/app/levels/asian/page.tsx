@@ -32,6 +32,7 @@ const Page: React.FC<PageProps> = ({ regions }) => {
 
   useEffect(() => {
     const newProgress = (regions.Asia / totalLevels) * 100;
+    console.log("this is regions map output", regions.Asia);
     setProgress(newProgress);
   }, [regions.Asia]);
 

@@ -1,5 +1,11 @@
 "use client";
-import React, { Dispatch, SetStateAction, useEffect, useState, useContext } from "react";
+import React, {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+  useContext,
+} from "react";
 import { useGlobalContext } from "../context/store";
 import {
   getFirestore,
@@ -8,7 +14,7 @@ import {
   setDoc,
   doc,
   getDoc,
-  updateDoc
+  updateDoc,
 } from "firebase/firestore";
 
 type LevelsType = {
@@ -29,23 +35,24 @@ interface testProps {
   setRegions: Dispatch<SetStateAction<LevelsType>>;
   selectedRegion: string;
   setSelectRegion: Dispatch<SetStateAction<string>>;
-
 }
 
-export default function Page(props : testProps) {
+export default function Page(props: testProps) {
   //api call to get recipe steps, ingredients, etc.
   useEffect(() => {
-    if (props.asian[props.regions.Asia] !== undefined) { // if user level is not undefined for that region 
-      for (const recipe of props.asian[props.regions.Asia]) { // looping through string[]
+    if (props.asian[props.regions.Asia] !== undefined) {
+      // if user level is not undefined for that region
+      for (const recipe of props.asian[props.regions.Asia]) {
+        // looping through string[]
         const document = doc(getFirestore(), "recipes", recipe); // getting the recipe from database
-        getDoc(document).then((gotRecipe) => { 
+        getDoc(document).then((gotRecipe) => {
           console.log(gotRecipe.data().recipe); // name of recipe
-          console.log(gotRecipe.data().ingredients); // list of ingredients 
-          console.log(gotRecipe.data().instructions); // list of instructions 
+          console.log(gotRecipe.data().ingredients); // list of ingredients
+          console.log(gotRecipe.data().instructions); // list of instructions
         });
       }
     }
-  }, [props.asian, props.regions.Asia])
+  }, [props.asian, props.regions.Asia]);
 
   //api call to update user level for given region -- this example increments the Asia level
   function onClick(): void {
@@ -68,8 +75,8 @@ export default function Page(props : testProps) {
   }
 
   useEffect(() => {
-    console.log(props.selectedRegion)
-  }, [props.selectedRegion])
+    console.log(props.selectedRegion);
+  }, [props.selectedRegion]);
 
   return (
     <div>

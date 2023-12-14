@@ -145,25 +145,20 @@ export default function App() {
   };
 
   const WelcomeLogin = () => {
-    const loginbear = "https://lh3.googleusercontent.com/drive-viewer/AEYmBYTCoyqF0dYaU-N4Cl7BwFCPGHrS73V-loDuCKW42C9whBip5E-jXKn-wuanwguOe97-jvwFcUKKzORzBFCD2XdMT9D6=s1600"
+    const loginbear =
+      "https://lh3.googleusercontent.com/drive-viewer/AEYmBYTCoyqF0dYaU-N4Cl7BwFCPGHrS73V-loDuCKW42C9whBip5E-jXKn-wuanwguOe97-jvwFcUKKzORzBFCD2XdMT9D6=s1600";
     return (
       <div id="welcomepage">
         <div id="bearimg">
-          <img 
-           id = "bear"
-           src={loginbear}
-           referrerPolicy="no-referrer"
-           >
-          </img>
+          <img id="bear" src={loginbear} referrerPolicy="no-referrer"></img>
         </div>
-        <div id="loginwrapper">
-        <div id="welcomelogin">
-          <div id="welcometext">WELCOME TO CHEFBEAR</div>
-          <div>{Auth()}</div>
-        </div>
+        <div className="loginwrapper grow-on-hover">
+          <div id="welcomelogin">
+            <div id="welcometext">WELCOME TO CHEFBEAR</div>
+            <div>{Auth()}</div>
+          </div>
         </div>
       </div>
-      
     );
   };
 
@@ -177,14 +172,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <div id="welcome">
-              {WelcomeLogin()}
-            </div>
-          }
-        />
+        <Route path="/" element={<div id="welcome">{WelcomeLogin()}</div>} />
         <Route
           path="/regions"
           element={
