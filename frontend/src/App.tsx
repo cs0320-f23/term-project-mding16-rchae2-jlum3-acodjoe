@@ -145,18 +145,26 @@ export default function App() {
   };
 
   const WelcomeLogin = () => {
+    const loginbear = "https://lh3.googleusercontent.com/drive-viewer/AEYmBYTCoyqF0dYaU-N4Cl7BwFCPGHrS73V-loDuCKW42C9whBip5E-jXKn-wuanwguOe97-jvwFcUKKzORzBFCD2XdMT9D6=s1600"
     return (
-      <div id="loginwrapper">
+      <div id="welcomepage">
+        <div id="bearimg">
+          <img 
+           id = "bear"
+           src={loginbear}
+           referrerPolicy="no-referrer"
+           >
+          </img>
+        </div>
+        <div id="loginwrapper">
         <div id="welcomelogin">
           <div id="welcometext">WELCOME TO CHEFBEAR</div>
           <div>{Auth()}</div>
         </div>
+        </div>
       </div>
+      
     );
-  };
-
-  const WelcomeBear = () => {
-    return <div id="welcomebear">welcomebear</div>;
   };
 
   // useEffect(() => {
@@ -173,7 +181,6 @@ export default function App() {
           path="/"
           element={
             <div id="welcome">
-              {WelcomeBear()}
               {WelcomeLogin()}
             </div>
           }
