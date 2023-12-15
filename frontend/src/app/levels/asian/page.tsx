@@ -17,9 +17,10 @@ interface PageProps {
   // children: React.ReactNode;
   // progress: number;
   regions: LevelsType;
+  loggedIn: boolean;
 }
 
-const Page: React.FC<PageProps> = ({ regions }) => {
+const Page: React.FC<PageProps> = ({ regions, loggedIn }) => {
   const [progress, setProgress] = useState<number>(0);
   useEffect(() => {
     const initAOS = async () => {
@@ -35,6 +36,14 @@ const Page: React.FC<PageProps> = ({ regions }) => {
     console.log("this is regions map output", regions.Asia);
     setProgress(newProgress);
   }, [regions.Asia]);
+
+  // const nav = useNavigate();
+  // useEffect(() => {
+  //   // Redirect to another page when showContent is set to false
+  //   if (!loggedIn) {
+  //     nav("/"); // Specify the path you want to redirect to
+  //   }
+  // }, [loggedIn, nav]);
 
   const selectlevel = "/selectlevel.png";
   const totalLevels = 17;
@@ -73,7 +82,7 @@ const Page: React.FC<PageProps> = ({ regions }) => {
                   const levelKey = `level${currLevel}`;
                   let levelImage = `/level${currLevel}.png`;
 
-                  const isGreyedOut = regions.NorthAm < currLevel;
+                  const isGreyedOut = regions.Asia < currLevel;
                   if (isGreyedOut) {
                     levelImage = "/lockedlevel.png";
                   }
@@ -111,7 +120,7 @@ const Page: React.FC<PageProps> = ({ regions }) => {
                 const levelKey = `level${currLevel}`;
                 let levelImage = `/level${currLevel}.png`;
 
-                const isGreyedOut = regions.NorthAm < currLevel;
+                const isGreyedOut = regions.Asia < currLevel;
                 if (isGreyedOut) {
                   levelImage = "/lockedlevel.png";
                 }

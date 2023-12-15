@@ -17,9 +17,10 @@ interface PageProps {
   // children: React.ReactNode;
   // progress: number;
   regions: LevelsType;
+  loggedIn: boolean;
 }
 
-const Page: React.FC<PageProps> = ({ regions }) => {
+const Page: React.FC<PageProps> = ({ regions, loggedIn }) => {
   const [progress, setProgress] = useState<number>(0);
   useEffect(() => {
     const initAOS = async () => {
@@ -34,6 +35,14 @@ const Page: React.FC<PageProps> = ({ regions }) => {
     const newProgress = (regions.Euro / totalLevels) * 100;
     setProgress(newProgress);
   }, [regions.Euro]);
+
+  // const nav = useNavigate();
+  // useEffect(() => {
+  //   // Redirect to another page when showContent is set to false
+  //   if (!loggedIn) {
+  //     nav("/"); // Specify the path you want to redirect to
+  //   }
+  // }, [loggedIn, nav]);
 
   const selectlevel = "/selectlevel.png";
   const totalLevels = 32;
@@ -110,7 +119,7 @@ const Page: React.FC<PageProps> = ({ regions }) => {
                 const levelKey = `level${currLevel}`;
                 let levelImage = `/level${currLevel}.png`;
 
-                const isGreyedOut = regions.NorthAm < currLevel;
+                const isGreyedOut = regions.Euro < currLevel;
                 if (isGreyedOut) {
                   levelImage = "/lockedlevel.png";
                 }

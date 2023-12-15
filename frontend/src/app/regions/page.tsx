@@ -13,6 +13,7 @@ import {
 interface regionProps {
   selectedRegion: string;
   setSelectRegion: Dispatch<SetStateAction<string>>;
+  loggedIn: boolean;
 }
 
 function waitThreeMinutes() {
@@ -45,6 +46,13 @@ export default function Page(props: regionProps) {
   useEffect(() => {
     console.log(props.selectedRegion);
   }, [props.selectedRegion]);
+
+  // useEffect(() => {
+  //   // Redirect to another page when showContent is set to false
+  //   if (!props.loggedIn) {
+  //     navigate("/"); // Specify the path you want to redirect to
+  //   }
+  // }, [props.loggedIn]);
   
   return (
     <div className="Page">

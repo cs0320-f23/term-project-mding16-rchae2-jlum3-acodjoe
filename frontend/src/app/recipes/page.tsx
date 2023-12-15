@@ -34,7 +34,10 @@ interface recipeProps {
   europe: Map<number, string[]>;
   northAm: Map<number, string[]>;
   setRegions: Dispatch<SetStateAction<LevelsType>>;
+  loggedIn: boolean;
 }
+
+
 
 function Page(props: recipeProps) {
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -44,6 +47,14 @@ function Page(props: recipeProps) {
   const [imageIndex, setImageIndex] = useState(0);
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedRegionStr, setSelectedRegionStr] = useState("");
+
+  // const nav = useNavigate();
+  // useEffect(() => {
+  //   // Redirect to another page when showContent is set to false
+  //   if (!props.loggedIn) {
+  //     nav("/"); // Specify the path you want to redirect to
+  //   }
+  // }, [props.loggedIn, nav]);
 
   useEffect(() => {
     // const selectedString = props.selectedRegion

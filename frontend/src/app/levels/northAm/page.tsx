@@ -17,9 +17,10 @@ interface PageProps {
   // children: React.ReactNode;
   // progress: number;
   regions: LevelsType;
+  loggedIn: boolean;
 }
 
-const Page: React.FC<PageProps> = ({ regions }) => {
+const Page: React.FC<PageProps> = ({ regions, loggedIn }) => {
   useEffect(() => {
     const initAOS = async () => {
       const AOS = await import("aos");
@@ -30,6 +31,14 @@ const Page: React.FC<PageProps> = ({ regions }) => {
   }, [regions]); // Reinitialize AOS when regions change
 
   const [progress, setProgress] = useState<number>(0);
+
+    // const nav = useNavigate();
+    // useEffect(() => {
+    //   // Redirect to another page when showContent is set to false
+    //   if (!loggedIn) {
+    //     nav("/"); // Specify the path you want to redirect to
+    //   }
+    // }, [loggedIn, nav]);
 
   useEffect(() => {
     console.log(regions.NorthAm);

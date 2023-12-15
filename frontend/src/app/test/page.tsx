@@ -16,6 +16,8 @@ import {
   getDoc,
   updateDoc,
 } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
+
 
 type LevelsType = {
   AfriCarib: number;
@@ -23,6 +25,7 @@ type LevelsType = {
   NorthAm: number;
   Euro: number;
 };
+
 
 interface testProps {
   currentUserID: string;
@@ -35,6 +38,7 @@ interface testProps {
   setRegions: Dispatch<SetStateAction<LevelsType>>;
   selectedRegion: string;
   setSelectRegion: Dispatch<SetStateAction<string>>;
+  loggedIn: boolean
 }
 
 export default function Page(props: testProps) {
@@ -53,6 +57,7 @@ export default function Page(props: testProps) {
       }
     }
   }, [props.asian, props.regions.Asia]);
+
 
   //api call to update user level for given region -- this example increments the Asia level
   function onClick(): void {
@@ -80,38 +85,50 @@ export default function Page(props: testProps) {
 
   return (
     <div>
-      <div>user region selected {props.selectedRegion}</div>
-      <div>user id {props.currentUserID}</div>
-      <div>user email {props.userEmail}</div>
-      <div>user africa level {props.regions.AfriCarib}</div>
-      <div>user asia level {props.regions.Asia}</div>
-      <div>user north america level {props.regions.NorthAm}</div>
-      <div>user europe level {props.regions.Euro}</div>
       <div>
-        africa recipes for africa level{" "}
-        {props.afriCarib[props.regions.AfriCarib]}
+        {props.loggedIn ? (
+          <div>
+            <div>user region selected {props.selectedRegion}</div>
+            <div>user id {props.currentUserID}</div>
+            <div>user email {props.userEmail}</div>
+            <div>user africa level {props.regions.AfriCarib}</div>
+            <div>user asia level {props.regions.Asia}</div>
+            <div>user north america level {props.regions.NorthAm}</div>
+            <div>user europe level {props.regions.Euro}</div>
+            <div>
+              africa recipes for africa level{" "}
+              {props.afriCarib[props.regions.AfriCarib]}
+            </div>
+            <div>
+              asia recipes for asia level {props.asian[props.regions.Asia]}
+            </div>
+            <div>
+              europe recipes for europe level {props.europe[props.regions.Euro]}
+            </div>
+            <div>
+              north america recipes for north america level{" "}
+              {props.northAm[props.regions.NorthAm]}
+            </div>
+            <button
+              style={{
+                backgroundColor: "#7CFC00", // Light Green
+                color: "white",
+                padding: "10px",
+                borderRadius: "5px",
+                border: "none",
+                cursor: "pointer",
+              }}
+              onClick={onClick}
+            >
+              Complete
+            </button>
+          </div>
+        ) : (
+          <p>This content is displayed when showContent is false.</p>
+        )}
+
+        {/* Your other components */}
       </div>
-      <div>asia recipes for asia level {props.asian[props.regions.Asia]}</div>
-      <div>
-        europe recipes for europe level {props.europe[props.regions.Euro]}
-      </div>
-      <div>
-        north america recipes for north america level{" "}
-        {props.northAm[props.regions.NorthAm]}
-      </div>
-      <button
-        style={{
-          backgroundColor: "#7CFC00", // Light Green
-          color: "white",
-          padding: "10px",
-          borderRadius: "5px",
-          border: "none",
-          cursor: "pointer",
-        }}
-        onClick={onClick}
-      >
-        Complete
-      </button>
     </div>
   );
 }

@@ -22,6 +22,7 @@ import Recipes from "./app/recipes/page";
 import Regions from "./app/regions/page";
 import AuthEmail from "./app/login/AuthEmail";
 import Test from "./app/test/page";
+import { log } from "console";
 
 export type LevelsType = {
   AfriCarib: number;
@@ -48,6 +49,8 @@ export default function App() {
   const [asian, setAsian] = useState<Map<number, string[]>>(new Map());
   const [europe, setEurope] = useState<Map<number, string[]>>(new Map());
   const [northAm, setNorthAm] = useState<Map<number, string[]>>(new Map());
+
+  const [loggedIn, setLoggedIn] = useState(false);
 
   //firestore settings (for login)
   const firebaseConfig = {
@@ -126,17 +129,22 @@ export default function App() {
               .catch((error) => {
                 console.error("Error adding document:", error);
               });
+              // setLoggedIn(true);
           } else {
             console.log("You are already signed in!");
             setID(gotDoc.id);
             setUserEmail(gotDoc.data().userEmail);
             setRegions(gotDoc.data().regions);
+            // setLoggedIn(false);
             // console.log(gotDoc.data().userEmail);
             // console.log(gotDoc.data().regions);
           }
         });
+        
+        console.log("logged in:", loggedIn)
       } else {
         console.log("Authentication error:", user);
+        // setLoggedIn(false);
       }
     });
   }, [auth]);
@@ -179,20 +187,27 @@ export default function App() {
             <Regions
               selectedRegion={selectedRegion}
               setSelectRegion={setSelectRegion}
+              loggedIn={loggedIn}
             />
           }
         />
 
         <Route
           path="/levels/AfriCarib"
-          element={<AfriCarib regions={regions} />}
+          element={<AfriCarib regions={regions} loggedIn={loggedIn} />}
         />
-        <Route path="/levels/Asia" element={<Asia regions={regions} />} />
+        <Route
+          path="/levels/Asia"
+          element={<Asia regions={regions} loggedIn={loggedIn} />}
+        />
         <Route
           path="/levels/NorthAm"
-          element={<NorthAmerica regions={regions} />}
+          element={<NorthAmerica regions={regions} loggedIn={loggedIn} />}
         />
-        <Route path="/levels/Euro" element={<Europe regions={regions} />} />
+        <Route
+          path="/levels/Euro"
+          element={<Europe regions={regions} loggedIn={loggedIn} />}
+        />
         <Route
           path="/recipes"
           element={
@@ -205,6 +220,7 @@ export default function App() {
               northAm={northAm}
               setRegions={setRegions}
               currentUserID={currentUserID}
+              loggedIn={loggedIn}
             />
           }
         />
@@ -223,6 +239,7 @@ export default function App() {
               setRegions={setRegions}
               selectedRegion={selectedRegion}
               setSelectRegion={setSelectRegion}
+              loggedIn={loggedIn}
             ></Test>
             // </MyContext.Provider>
           }
