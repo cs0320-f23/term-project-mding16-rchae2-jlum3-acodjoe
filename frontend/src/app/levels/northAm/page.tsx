@@ -1,6 +1,6 @@
 "use client";
 import "./americanstyles.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "aos/dist/aos.css";
 import { useNavigate } from "react-router-dom";
@@ -18,9 +18,16 @@ interface PageProps {
   // progress: number;
   regions: LevelsType;
   loggedIn: boolean;
+  levelClicked: number;
+  setLevelClicked: Dispatch<SetStateAction<Number>>;
 }
 
-const Page: React.FC<PageProps> = ({ regions, loggedIn }) => {
+const Page: React.FC<PageProps> = ({
+  regions,
+  loggedIn,
+  levelClicked,
+  setLevelClicked,
+}) => {
   useEffect(() => {
     const initAOS = async () => {
       const AOS = await import("aos");
@@ -32,13 +39,13 @@ const Page: React.FC<PageProps> = ({ regions, loggedIn }) => {
 
   const [progress, setProgress] = useState<number>(0);
 
-    // const nav = useNavigate();
-    // useEffect(() => {
-    //   // Redirect to another page when showContent is set to false
-    //   if (!loggedIn) {
-    //     nav("/"); // Specify the path you want to redirect to
-    //   }
-    // }, [loggedIn, nav]);
+  // const nav = useNavigate();
+  // useEffect(() => {
+  //   // Redirect to another page when showContent is set to false
+  //   if (!loggedIn) {
+  //     nav("/"); // Specify the path you want to redirect to
+  //   }
+  // }, [loggedIn, nav]);
 
   useEffect(() => {
     console.log(regions.NorthAm);
@@ -52,9 +59,11 @@ const Page: React.FC<PageProps> = ({ regions, loggedIn }) => {
   const remainingBubbles = totalLevels % 4;
   const navigate = useNavigate();
 
-  function bubbleclick() {
+  function bubbleclick(currLevel: number) {
     const newProgress = (regions.NorthAm / totalLevels) * 100;
     setProgress(newProgress);
+    setLevelClicked(currLevel);
+    console.log(levelClicked);
     navigate("/recipes");
   }
 
@@ -101,7 +110,7 @@ const Page: React.FC<PageProps> = ({ regions, loggedIn }) => {
                         className={`levelbubble grow-on-hover`}
                         src={levelImage}
                         alt={`Level ${currLevel}`}
-                        onClick={bubbleclick}
+                        onClick={() => bubbleclick(currLevel)}
                       />
                     </a>
                   );

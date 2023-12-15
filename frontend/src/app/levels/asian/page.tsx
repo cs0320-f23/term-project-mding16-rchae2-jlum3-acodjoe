@@ -1,6 +1,6 @@
 "use client";
 import "./asianstyles.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "aos/dist/aos.css";
 import { useNavigate } from "react-router-dom";
@@ -18,9 +18,16 @@ interface PageProps {
   // progress: number;
   regions: LevelsType;
   loggedIn: boolean;
+  levelClicked: Number;
+  setLevelClicked: Dispatch<SetStateAction<Number>>;
 }
 
-const Page: React.FC<PageProps> = ({ regions, loggedIn }) => {
+const Page: React.FC<PageProps> = ({
+  regions,
+  loggedIn,
+  levelClicked,
+  setLevelClicked,
+}) => {
   const [progress, setProgress] = useState<number>(0);
   useEffect(() => {
     const initAOS = async () => {
@@ -51,9 +58,11 @@ const Page: React.FC<PageProps> = ({ regions, loggedIn }) => {
   const remainingBubbles = totalLevels % 4;
   const navigate = useNavigate();
 
-  function bubbleclick() {
+  function bubbleclick(currLevel: Number) {
     const newProgress = (regions.Asia / totalLevels) * 100;
     setProgress(newProgress);
+    setLevelClicked(currLevel);
+    console.log(levelClicked);
     navigate("/recipes");
   }
 
@@ -95,12 +104,11 @@ const Page: React.FC<PageProps> = ({ regions, loggedIn }) => {
                     />
                   ) : (
                     <a>
-                      {/* Use the current level number in the URL */}
                       <img
                         className={`levelbubble grow-on-hover`}
                         src={levelImage}
                         alt={`Level ${currLevel}`}
-                        onClick={bubbleclick}
+                        onClick={() => bubbleclick(currLevel)}
                       />
                     </a>
                   );
@@ -113,7 +121,7 @@ const Page: React.FC<PageProps> = ({ regions, loggedIn }) => {
                 })}
               </div>
             ))}
-            {/* Render remaining bubbles in the last row */}
+            {/* Render the odd number of bubbles! */}
             <div className="row" key={`row${fullRows + 1}`}>
               {Array.from({ length: remainingBubbles }).map((_, colIndex) => {
                 const currLevel = fullRows * 4 + colIndex + 1;

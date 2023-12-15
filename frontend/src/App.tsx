@@ -44,12 +44,12 @@ export default function App() {
 
   // const [selectedRegion, setSelectRegion] = useState("");
   const [selectedRegion, setSelectRegion] = useState("");
-
   const [afriCarib, setAfriCarib] = useState<Map<number, string[]>>(new Map());
   const [asian, setAsian] = useState<Map<number, string[]>>(new Map());
   const [europe, setEurope] = useState<Map<number, string[]>>(new Map());
   const [northAm, setNorthAm] = useState<Map<number, string[]>>(new Map());
 
+  const [levelClicked, setLevelClicked] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false);
 
   //firestore settings (for login)
@@ -129,7 +129,7 @@ export default function App() {
               .catch((error) => {
                 console.error("Error adding document:", error);
               });
-              // setLoggedIn(true);
+            // setLoggedIn(true);
           } else {
             console.log("You are already signed in!");
             setID(gotDoc.id);
@@ -140,8 +140,8 @@ export default function App() {
             // console.log(gotDoc.data().regions);
           }
         });
-        
-        console.log("logged in:", loggedIn)
+
+        console.log("logged in:", loggedIn);
       } else {
         console.log("Authentication error:", user);
         // setLoggedIn(false);
@@ -194,19 +194,40 @@ export default function App() {
 
         <Route
           path="/levels/AfriCarib"
-          element={<AfriCarib regions={regions} loggedIn={loggedIn} />}
+          element={
+            <AfriCarib
+              regions={regions}
+              loggedIn={loggedIn}
+              levelClicked={levelClicked}
+              setLevelClicked={setLevelClicked}
+            />
+          }
         />
         <Route
           path="/levels/Asia"
-          element={<Asia regions={regions} loggedIn={loggedIn} />}
+          element={
+            <Asia
+              regions={regions}
+              loggedIn={loggedIn}
+              levelClicked={levelClicked}
+              setLevelClicked={setLevelClicked}
+            />
+          }
         />
         <Route
           path="/levels/NorthAm"
-          element={<NorthAmerica regions={regions} loggedIn={loggedIn} />}
+          element={<NorthAmerica regions={regions} loggedIn={loggedIn} levelClicked={levelClicked} setLevelClicked={setLevelClicked} />}
         />
         <Route
           path="/levels/Euro"
-          element={<Europe regions={regions} loggedIn={loggedIn} />}
+          element={
+            <Europe
+              regions={regions}
+              loggedIn={loggedIn}
+              levelClicked={levelClicked}
+              setLevelClicked={setLevelClicked}
+            />
+          }
         />
         <Route
           path="/recipes"
@@ -221,6 +242,7 @@ export default function App() {
               setRegions={setRegions}
               currentUserID={currentUserID}
               loggedIn={loggedIn}
+              levelClicked={levelClicked}
             />
           }
         />

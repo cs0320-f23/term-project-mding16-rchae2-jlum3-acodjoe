@@ -6,7 +6,7 @@ import { SetStateAction, useState } from "react";
 import Slider from "react-slick";
 import { Dispatch, useEffect, useContext } from "react";
 import { useGlobalContext } from "../context/store";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
 import {
   getFirestore,
@@ -35,9 +35,8 @@ interface recipeProps {
   northAm: Map<number, string[]>;
   setRegions: Dispatch<SetStateAction<LevelsType>>;
   loggedIn: boolean;
+  levelClicked: number;
 }
-
-
 
 function Page(props: recipeProps) {
   const [dataLoaded, setDataLoaded] = useState(false);
@@ -62,27 +61,44 @@ function Page(props: recipeProps) {
     console.log("user level = ", userLevel);
     const selectedString = props.selectedRegion;
     console.log(selectedString);
+    console.log("this is the clickedLevel", props.levelClicked);
     console.log("hi");
     // setRegionMap(props.asian) // change when everything is integrated
     // setUserLevel(props.regions.Asia) // change when everything is integrated
     if (selectedString === "AfriCarib") {
       setRegionMap(props.afriCarib);
-      setUserLevel(props.regions.AfriCarib);
+      if (props.levelClicked !== props.regions.AfriCarib) {
+        setUserLevel(props.levelClicked);
+      } else {
+        setUserLevel(props.regions.AfriCarib);
+      }
       setSelectedRegion("afriCarib");
       setSelectedRegionStr("Africa + Caribbean");
     } else if (selectedString === "Asia") {
       setRegionMap(props.asian);
-      setUserLevel(props.regions.Asia);
+      if (props.levelClicked !== props.regions.Asia) {
+        setUserLevel(props.levelClicked);
+      } else {
+        setUserLevel(props.regions.Asia);
+      }
       setSelectedRegion("asian");
       setSelectedRegionStr("Asia");
     } else if (selectedString === "Euro") {
       setRegionMap(props.europe);
-      setUserLevel(props.regions.Euro);
+      if (props.levelClicked !== props.regions.Euro) {
+        setUserLevel(props.levelClicked);
+      } else {
+        setUserLevel(props.regions.Euro);
+      }
       setSelectedRegion("europe");
       setSelectedRegionStr("Europe");
     } else if (selectedString === "NorthAm") {
       setRegionMap(props.northAm);
-      setUserLevel(props.regions.NorthAm);
+      if (props.levelClicked !== props.regions.NorthAm) {
+        setUserLevel(props.levelClicked);
+      } else {
+        setUserLevel(props.regions.NorthAm);
+      }
       setSelectedRegion("northAm");
       setSelectedRegionStr("North America");
     }
@@ -153,7 +169,7 @@ function Page(props: recipeProps) {
       </div>
     );
   };
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   function completedClick(): void {
     //update the database
@@ -174,7 +190,7 @@ function Page(props: recipeProps) {
         doc(getFirestore(), "users", props.currentUserID),
         fieldsToUpdate
       );
-      navigate('/levels/AfriCarib')
+      navigate("/levels/AfriCarib");
     } else if (selectedRegion === "asian") {
       props.setRegions({
         ...props.regions,
@@ -190,7 +206,7 @@ function Page(props: recipeProps) {
         doc(getFirestore(), "users", props.currentUserID),
         fieldsToUpdate
       );
-      navigate('/levels/Asia')
+      navigate("/levels/Asia");
     } else if (selectedRegion === "europe") {
       props.setRegions({
         ...props.regions,
@@ -206,7 +222,7 @@ function Page(props: recipeProps) {
         doc(getFirestore(), "users", props.currentUserID),
         fieldsToUpdate
       );
-      navigate('/levels/Euro')
+      navigate("/levels/Euro");
     } else if (selectedRegion === "northAm") {
       props.setRegions({
         ...props.regions,
@@ -222,7 +238,7 @@ function Page(props: recipeProps) {
         doc(getFirestore(), "users", props.currentUserID),
         fieldsToUpdate
       );
-      navigate('/levels/NorthAM')
+      navigate("/levels/NorthAM");
     }
     console.log("new region", props.regions);
   }
