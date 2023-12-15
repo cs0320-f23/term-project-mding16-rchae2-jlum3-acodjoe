@@ -5,6 +5,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "aos/dist/aos.css";
 import { useNavigate } from "react-router-dom";
 // declare module "*.png";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { loggedIn } from "../../../Atom.tsx";
 
 type LevelsType = {
   AfriCarib: number;
@@ -17,14 +19,12 @@ interface PageProps {
   // children: React.ReactNode;
   // progress: number;
   regions: LevelsType;
-  loggedIn: boolean;
   levelClicked: Number;
   setLevelClicked: Dispatch<SetStateAction<Number>>;
 }
 
 const Page: React.FC<PageProps> = ({
   regions,
-  loggedIn,
   levelClicked,
   setLevelClicked,
 }) => {
@@ -57,6 +57,12 @@ const Page: React.FC<PageProps> = ({
   const fullRows = Math.floor(totalLevels / 4);
   const remainingBubbles = totalLevels % 4;
   const navigate = useNavigate();
+    const isLoggedIn = useRecoilValue(loggedIn);
+    const setLoggedIn = useSetRecoilState(loggedIn);
+
+    if (isLoggedIn === false) {
+      navigate("/");
+    }
 
   function bubbleclick(currLevel: Number) {
     const newProgress = (regions.Asia / totalLevels) * 100;
@@ -70,7 +76,18 @@ const Page: React.FC<PageProps> = ({
     <>
       <div>
         <div className="header">
-          <div className="country"> ASIA </div>
+          <div className="country">
+            <a>
+              <img
+                src="/Vector.png"
+                className="arrow"
+                width={25}
+                height={40}
+                onClick={() => navigate("/regions")}
+              />
+            </a>
+            ASIA
+          </div>
           <div className="asia-progress-container">
             <div className="asia-base-progress"></div>
             <div

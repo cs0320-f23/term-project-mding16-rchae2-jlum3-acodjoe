@@ -17,7 +17,8 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
-
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { loggedIn } from "../../Atom.tsx";
 
 type LevelsType = {
   AfriCarib: number;
@@ -38,10 +39,23 @@ interface testProps {
   setRegions: Dispatch<SetStateAction<LevelsType>>;
   selectedRegion: string;
   setSelectRegion: Dispatch<SetStateAction<string>>;
-  loggedIn: boolean
 }
 
 export default function Page(props: testProps) {
+  const isLoggedIn = useRecoilValue(loggedIn);
+  const setLoggedIn = useSetRecoilState(loggedIn);
+
+  const nav = useNavigate();
+  if (isLoggedIn === false) {
+      nav("/"); 
+  }
+  // useEffect(() => {
+  //   // Redirect to another page when showContent is set to false
+  //   if (!isLoggedIn) {
+  //     nav("/"); // Specify the path you want to redirect to
+  //   }
+  // }, [isLoggedIn]);
+
   //api call to get recipe steps, ingredients, etc.
   useEffect(() => {
     if (props.asian[props.regions.Asia] !== undefined) {
@@ -57,7 +71,6 @@ export default function Page(props: testProps) {
       }
     }
   }, [props.asian, props.regions.Asia]);
-
 
   //api call to update user level for given region -- this example increments the Asia level
   function onClick(): void {

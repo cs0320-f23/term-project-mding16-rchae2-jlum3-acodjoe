@@ -1,4 +1,5 @@
 "use client";
+import {atom} from "recoil";
 import React, { useEffect, useState } from "react";
 // Import the functions you need from the SDKs you need
 import "firebaseui/dist/firebaseui.css";
@@ -21,8 +22,13 @@ import Europe from "./app/levels/europe/page";
 import Recipes from "./app/recipes/page";
 import Regions from "./app/regions/page";
 import AuthEmail from "./app/login/AuthEmail";
+// import Atom from "./Atom";
 import Test from "./app/test/page";
 import { log } from "console";
+import { RecoilRoot, useSetRecoilState, useRecoilValue } from "recoil";
+import { loggedIn } from "./Atom.tsx";
+
+
 
 export type LevelsType = {
   AfriCarib: number;
@@ -30,6 +36,7 @@ export type LevelsType = {
   NorthAm: number;
   Euro: number;
 };
+
 
 export default function App() {
   //all states for application
@@ -50,7 +57,9 @@ export default function App() {
   const [northAm, setNorthAm] = useState<Map<number, string[]>>(new Map());
 
   const [levelClicked, setLevelClicked] = useState(0);
-  const [loggedIn, setLoggedIn] = useState(false);
+  // const [loggedIn, setLoggedIn] = useState(false);
+  const isLoggedIn = useRecoilValue(loggedIn);
+  const setLoggedIn = useSetRecoilState(loggedIn);
 
   //firestore settings (for login)
   const firebaseConfig = {
@@ -129,7 +138,6 @@ export default function App() {
               .catch((error) => {
                 console.error("Error adding document:", error);
               });
-            // setLoggedIn(true);
           } else {
             console.log("You are already signed in!");
             setID(gotDoc.id);
@@ -140,8 +148,10 @@ export default function App() {
             // console.log(gotDoc.data().regions);
           }
         });
-
         console.log("logged in:", loggedIn);
+        setLoggedIn(true);
+
+
       } else {
         console.log("Authentication error:", user);
         // setLoggedIn(false);
@@ -178,95 +188,95 @@ export default function App() {
   // }, [currentUserID, userEmail, regions, afriCarib]);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<div id="welcome">{WelcomeLogin()}</div>} />
-        <Route
-          path="/regions"
-          element={
-            <Regions
-              selectedRegion={selectedRegion}
-              setSelectRegion={setSelectRegion}
-              loggedIn={loggedIn}
-            />
-          }
-        />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<div id="welcome">{WelcomeLogin()}</div>} />
+          <Route
+            path="/regions"
+            element={
+              <Regions
+                selectedRegion={selectedRegion}
+                setSelectRegion={setSelectRegion}
+              />
+            }
+          />
 
-        <Route
-          path="/levels/AfriCarib"
-          element={
-            <AfriCarib
-              regions={regions}
-              loggedIn={loggedIn}
-              levelClicked={levelClicked}
-              setLevelClicked={setLevelClicked}
-            />
-          }
-        />
-        <Route
-          path="/levels/Asia"
-          element={
-            <Asia
-              regions={regions}
-              loggedIn={loggedIn}
-              levelClicked={levelClicked}
-              setLevelClicked={setLevelClicked}
-            />
-          }
-        />
-        <Route
-          path="/levels/NorthAm"
-          element={<NorthAmerica regions={regions} loggedIn={loggedIn} levelClicked={levelClicked} setLevelClicked={setLevelClicked} />}
-        />
-        <Route
-          path="/levels/Euro"
-          element={
-            <Europe
-              regions={regions}
-              loggedIn={loggedIn}
-              levelClicked={levelClicked}
-              setLevelClicked={setLevelClicked}
-            />
-          }
-        />
-        <Route
-          path="/recipes"
-          element={
-            <Recipes
-              regions={regions}
-              selectedRegion={selectedRegion}
-              afriCarib={afriCarib}
-              asian={asian}
-              europe={europe}
-              northAm={northAm}
-              setRegions={setRegions}
-              currentUserID={currentUserID}
-              loggedIn={loggedIn}
-              levelClicked={levelClicked}
-            />
-          }
-        />
-        <Route
-          path="/test"
-          element={
-            // <MyContext.Provider value={{currentUserID, userEmail, regions, afriCarib, asian, europe, northAm}}>
-            <Test
-              currentUserID={currentUserID}
-              userEmail={userEmail}
-              regions={regions}
-              afriCarib={afriCarib}
-              asian={asian}
-              europe={europe}
-              northAm={northAm}
-              setRegions={setRegions}
-              selectedRegion={selectedRegion}
-              setSelectRegion={setSelectRegion}
-              loggedIn={loggedIn}
-            ></Test>
-            // </MyContext.Provider>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+          <Route
+            path="/levels/AfriCarib"
+            element={
+              <AfriCarib
+                regions={regions}
+                levelClicked={levelClicked}
+                setLevelClicked={setLevelClicked}
+              />
+            }
+          />
+          <Route
+            path="/levels/Asia"
+            element={
+              <Asia
+                regions={regions}
+                levelClicked={levelClicked}
+                setLevelClicked={setLevelClicked}
+              />
+            }
+          />
+          <Route
+            path="/levels/NorthAm"
+            element={
+              <NorthAmerica
+                regions={regions}
+                levelClicked={levelClicked}
+                setLevelClicked={setLevelClicked}
+              />
+            }
+          />
+          <Route
+            path="/levels/Euro"
+            element={
+              <Europe
+                regions={regions}
+                levelClicked={levelClicked}
+                setLevelClicked={setLevelClicked}
+              />
+            }
+          />
+          <Route
+            path="/recipes"
+            element={
+              <Recipes
+                regions={regions}
+                selectedRegion={selectedRegion}
+                afriCarib={afriCarib}
+                asian={asian}
+                europe={europe}
+                northAm={northAm}
+                setRegions={setRegions}
+                currentUserID={currentUserID}
+                levelClicked={levelClicked}
+              />
+            }
+          />
+          <Route
+            path="/test"
+            element={
+              // <MyContext.Provider value={{currentUserID, userEmail, regions, afriCarib, asian, europe, northAm}}>
+              <Test
+                currentUserID={currentUserID}
+                userEmail={userEmail}
+                regions={regions}
+                afriCarib={afriCarib}
+                asian={asian}
+                europe={europe}
+                northAm={northAm}
+                setRegions={setRegions}
+                selectedRegion={selectedRegion}
+                setSelectRegion={setSelectRegion}
+              ></Test>
+              // </MyContext.Provider>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
   );
 }

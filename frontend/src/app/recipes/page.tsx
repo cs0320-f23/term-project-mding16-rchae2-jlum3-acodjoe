@@ -7,6 +7,8 @@ import Slider from "react-slick";
 import { Dispatch, useEffect, useContext } from "react";
 import { useGlobalContext } from "../context/store";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { loggedIn } from "../../Atom.tsx";
 
 import {
   getFirestore,
@@ -34,7 +36,6 @@ interface recipeProps {
   europe: Map<number, string[]>;
   northAm: Map<number, string[]>;
   setRegions: Dispatch<SetStateAction<LevelsType>>;
-  loggedIn: boolean;
   levelClicked: number;
 }
 
@@ -54,6 +55,13 @@ function Page(props: recipeProps) {
   //     nav("/"); // Specify the path you want to redirect to
   //   }
   // }, [props.loggedIn, nav]);
+    const isLoggedIn = useRecoilValue(loggedIn);
+    const setLoggedIn = useSetRecoilState(loggedIn);
+
+    const nav = useNavigate();
+    if (isLoggedIn === false) {
+      nav("/");
+    }
 
   useEffect(() => {
     // const selectedString = props.selectedRegion
@@ -151,9 +159,20 @@ function Page(props: recipeProps) {
       "https://lh3.googleusercontent.com/drive-viewer/AK7aPaAmuhZS3kMQMZm5FiPXzabPsXg4tHI3lE7W2mgdheVTjljrr9xVx3mq_yynrnsrLpjA8mKiCTBaM_vz4Niz2DnejcppGA=s1600";
     return (
       <div id="bluerec">
-        <div id="recipetext">RECIPES</div>
+        <div id="recipetext">
+          <a>
+            <img
+              src="./Vector.png"
+              id="arrow"
+              width={25}
+              height={40}
+              onClick={() => nav(`/levels/${props.selectedRegion}`)}
+            />
+          </a>
+          RECIPES
+        </div>
         <div id="redrec"></div>
-        <div id="selecttext">
+        {/* <div id="selecttext">
           {"Select one of the following recipes."}
           <br></br>
           {"Once you’ve completed it, select the completed button"}
@@ -162,7 +181,7 @@ function Page(props: recipeProps) {
           <br></br>
           {"Happy cooking!"}
         </div>
-        <div id="redrec"></div>
+        <div id="redrec"></div> */}
         <div id="recipetext">
           LEVEL {userLevel}, {selectedRegionStr}
         </div>

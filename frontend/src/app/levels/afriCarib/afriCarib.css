@@ -3,6 +3,17 @@
   src: url("RammettoOne-Regular.ttf");
 }
 
+.arrow{
+  margin-right: 50px;
+  transition: transform 0.3s ease;
+}
+
+.arrow:hover {
+  transform: scale(
+    1.2
+  );
+}
+
 .country {
   color: rgb(255, 255, 255) !important;
   padding-left: 4.2vw !important;
@@ -35,7 +46,7 @@ body {
   height: 10px;
   border-radius: 1vw;
   padding-top: 6.5vh;
-  padding-left: 10vw;
+  padding-left: 8vw;
 }
 
 .na-base-progress {

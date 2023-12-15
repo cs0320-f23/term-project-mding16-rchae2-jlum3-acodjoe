@@ -9,11 +9,13 @@ import {
   useState,
   useContext,
 } from "react";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { loggedIn } from "../../Atom.tsx";
+
 
 interface regionProps {
   selectedRegion: string;
   setSelectRegion: Dispatch<SetStateAction<string>>;
-  loggedIn: boolean;
 }
 
 function waitThreeMinutes() {
@@ -25,6 +27,12 @@ function waitThreeMinutes() {
 
 export default function Page(props: regionProps) {
   const navigate = useNavigate()
+  const isLoggedIn = useRecoilValue(loggedIn);
+  const setLoggedIn = useSetRecoilState(loggedIn);
+
+  if (isLoggedIn === false) {
+    navigate("/");
+  }
   async function onClick(region: string, props: regionProps, event : React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
   

@@ -4,6 +4,8 @@ import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "aos/dist/aos.css";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { loggedIn } from "../../../Atom.tsx";
 // declare module "*.png";
 
 type LevelsType = {
@@ -17,14 +19,12 @@ interface PageProps {
   // children: React.ReactNode;
   // progress: number;
   regions: LevelsType;
-  loggedIn: boolean;
   levelClicked: number;
   setLevelClicked: Dispatch<SetStateAction<Number>>;
 }
 
 const Page: React.FC<PageProps> = ({
   regions,
-  loggedIn,
   levelClicked,
   setLevelClicked,
 }) => {
@@ -57,6 +57,12 @@ const Page: React.FC<PageProps> = ({
   const fullRows = Math.floor(totalLevels / 4);
   const remainingBubbles = totalLevels % 4;
   const navigate = useNavigate();
+    const isLoggedIn = useRecoilValue(loggedIn);
+    const setLoggedIn = useSetRecoilState(loggedIn);
+
+    if (isLoggedIn === false) {
+      navigate("/");
+    }
 
   function bubbleclick(currLevel: number) {
     const newProgress = (regions.AfriCarib / totalLevels) * 100;
@@ -69,7 +75,18 @@ const Page: React.FC<PageProps> = ({
     <>
       <div>
         <div className="header">
-          <div className="country"> AFRICAN / CARRIBEAN </div>
+          <div className="country">
+            <a>
+              <img
+                src="/Vector.png"
+                className="arrow"
+                width={25}
+                height={40}
+                onClick={() => navigate("/regions")}
+              />
+            </a>
+            AFRICA / CARIBBEAN
+          </div>
           <div className="na-progress-container">
             <div className="na-base-progress"></div>
             <div
