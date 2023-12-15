@@ -176,20 +176,23 @@ function Page(props: recipeProps) {
     console.log("old region", props.regions);
 
     if (selectedRegion === "afriCarib") {
-      props.setRegions({
-        ...props.regions,
-        AfriCarib: props.regions.AfriCarib + 1,
-      });
-      const fieldsToUpdate = {
-        regions: {
+      // TODO: MAKE SURE TO TAKE A LOOK AT THIS AS IT IS A TEMP FIX
+      if (props.levelClicked === props.regions.AfriCarib) {
+        props.setRegions({
           ...props.regions,
           AfriCarib: props.regions.AfriCarib + 1,
-        },
-      };
-      updateDoc(
-        doc(getFirestore(), "users", props.currentUserID),
-        fieldsToUpdate
-      );
+        });
+        const fieldsToUpdate = {
+          regions: {
+            ...props.regions,
+            AfriCarib: props.regions.AfriCarib + 1,
+          },
+        };
+        updateDoc(
+          doc(getFirestore(), "users", props.currentUserID),
+          fieldsToUpdate
+        );
+      }
       navigate("/levels/AfriCarib");
     } else if (selectedRegion === "asian") {
       props.setRegions({
