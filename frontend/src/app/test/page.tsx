@@ -85,50 +85,38 @@ export default function Page(props: testProps) {
 
   return (
     <div>
+      <div>user region selected {props.selectedRegion}</div>
+      <div>user id {props.currentUserID}</div>
+      <div>user email {props.userEmail}</div>
+      <div>user africa level {props.regions.AfriCarib}</div>
+      <div>user asia level {props.regions.Asia}</div>
+      <div>user north america level {props.regions.NorthAm}</div>
+      <div>user europe level {props.regions.Euro}</div>
       <div>
-        {props.loggedIn ? (
-          <div>
-            <div>user region selected {props.selectedRegion}</div>
-            <div>user id {props.currentUserID}</div>
-            <div>user email {props.userEmail}</div>
-            <div>user africa level {props.regions.AfriCarib}</div>
-            <div>user asia level {props.regions.Asia}</div>
-            <div>user north america level {props.regions.NorthAm}</div>
-            <div>user europe level {props.regions.Euro}</div>
-            <div>
-              africa recipes for africa level{" "}
-              {props.afriCarib[props.regions.AfriCarib]}
-            </div>
-            <div>
-              asia recipes for asia level {props.asian[props.regions.Asia]}
-            </div>
-            <div>
-              europe recipes for europe level {props.europe[props.regions.Euro]}
-            </div>
-            <div>
-              north america recipes for north america level{" "}
-              {props.northAm[props.regions.NorthAm]}
-            </div>
-            <button
-              style={{
-                backgroundColor: "#7CFC00", // Light Green
-                color: "white",
-                padding: "10px",
-                borderRadius: "5px",
-                border: "none",
-                cursor: "pointer",
-              }}
-              onClick={onClick}
-            >
-              Complete
-            </button>
-          </div>
-        ) : (
-          <p>This content is displayed when showContent is false.</p>
-        )}
-
-        {/* Your other components */}
+        africa recipes for africa level{" "}
+        {props.afriCarib[props.regions.AfriCarib]}
       </div>
+      <div>asia recipes for asia level {props.asian[props.regions.Asia]}</div>
+      <div>
+        europe recipes for europe level {props.europe[props.regions.Euro]}
+      </div>
+      <div>
+        north america recipes for north america level{" "}
+        {props.northAm[props.regions.NorthAm]}
+      </div>
+      <button
+        style={{
+          backgroundColor: "#7CFC00", // Light Green
+          color: "white",
+          padding: "10px",
+          borderRadius: "5px",
+          border: "none",
+          cursor: "pointer",
+        }}
+        onClick={onClick}
+      >
+        Complete
+      </button>
     </div>
   );
 }
