@@ -55,13 +55,13 @@ function Page(props: recipeProps) {
   //     nav("/"); // Specify the path you want to redirect to
   //   }
   // }, [props.loggedIn, nav]);
-    const isLoggedIn = useRecoilValue(loggedIn);
-    const setLoggedIn = useSetRecoilState(loggedIn);
+  const isLoggedIn = useRecoilValue(loggedIn);
+  const setLoggedIn = useSetRecoilState(loggedIn);
 
-    const nav = useNavigate();
-    if (isLoggedIn === false) {
-      nav("/");
-    }
+  const nav = useNavigate();
+  if (isLoggedIn === false) {
+    nav("/");
+  }
 
   useEffect(() => {
     // const selectedString = props.selectedRegion
@@ -214,52 +214,58 @@ function Page(props: recipeProps) {
       }
       navigate("/levels/AfriCarib");
     } else if (selectedRegion === "asian") {
-      props.setRegions({
-        ...props.regions,
-        Asia: props.regions.Asia + 1,
-      });
-      const fieldsToUpdate = {
-        regions: {
+      if (props.levelClicked === props.regions.Asia) {
+        props.setRegions({
           ...props.regions,
           Asia: props.regions.Asia + 1,
-        },
-      };
-      updateDoc(
-        doc(getFirestore(), "users", props.currentUserID),
-        fieldsToUpdate
-      );
+        });
+        const fieldsToUpdate = {
+          regions: {
+            ...props.regions,
+            Asia: props.regions.Asia + 1,
+          },
+        };
+        updateDoc(
+          doc(getFirestore(), "users", props.currentUserID),
+          fieldsToUpdate
+        );
+      }
       navigate("/levels/Asia");
     } else if (selectedRegion === "europe") {
-      props.setRegions({
-        ...props.regions,
-        Euro: props.regions.Euro + 1,
-      });
-      const fieldsToUpdate = {
-        regions: {
+      if (props.levelClicked === props.regions.Euro) {
+        props.setRegions({
           ...props.regions,
           Euro: props.regions.Euro + 1,
-        },
-      };
-      updateDoc(
-        doc(getFirestore(), "users", props.currentUserID),
-        fieldsToUpdate
-      );
+        });
+        const fieldsToUpdate = {
+          regions: {
+            ...props.regions,
+            Euro: props.regions.Euro + 1,
+          },
+        };
+        updateDoc(
+          doc(getFirestore(), "users", props.currentUserID),
+          fieldsToUpdate
+        );
+      }
       navigate("/levels/Euro");
     } else if (selectedRegion === "northAm") {
-      props.setRegions({
-        ...props.regions,
-        NorthAm: props.regions.NorthAm + 1,
-      });
-      const fieldsToUpdate = {
-        regions: {
+      if (props.levelClicked === props.regions.NorthAm) {
+        props.setRegions({
           ...props.regions,
           NorthAm: props.regions.NorthAm + 1,
-        },
-      };
-      updateDoc(
-        doc(getFirestore(), "users", props.currentUserID),
-        fieldsToUpdate
-      );
+        });
+        const fieldsToUpdate = {
+          regions: {
+            ...props.regions,
+            NorthAm: props.regions.NorthAm + 1,
+          },
+        };
+        updateDoc(
+          doc(getFirestore(), "users", props.currentUserID),
+          fieldsToUpdate
+        );
+      }
       navigate("/levels/NorthAM");
     }
     console.log("new region", props.regions);
