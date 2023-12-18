@@ -198,6 +198,17 @@ public class ChefBear{
     this.regionToCountry.put("North American", northAmericanCountries);
   }
 
+  public void callPopulateMap(){
+    this.populateMap();
+  }
+
+  /**
+   * defensive oprogramming
+   */
+  public HashMap<String, List<String>> getRegionToCountry(){
+    return (HashMap<String, List<String>>) this.regionToCountry.clone();
+  }
+
   /**
    * Function that processes the recipe object and adds it to the regionToRecipeList hashmap
    * @param region
@@ -210,6 +221,22 @@ public class ChefBear{
       }
       regionToRecipeList.get(region).add(recipe);
     }
+  }
+  /**
+   *
+   * a function exclusively used for testing
+   */
+  public HashMap<String, List<ParsedRecipe>> getRegionToRecipeList(){
+    return (HashMap<String, List<ParsedRecipe>>) this.regionToRecipeList.clone();
+  }
+
+  /**
+   *
+   * a function exclusively used for testing
+   */
+  public HashMap<String, List<ParsedRecipe>> testProcessRecipeHelper(String region, ParsedRecipe recipe){
+    this.processRecipe(region, recipe);
+    return (HashMap<String, List<ParsedRecipe>>) this.regionToRecipeList.clone();
   }
 
   private void printSampleData() {

@@ -9,7 +9,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { loggedIn } from "../../../Atom.tsx";
 
 type LevelsType = {
-  AfriCarib: number;
+  AfriCarib: number
   Asia: number;
   NorthAm: number;
   Euro: number;
