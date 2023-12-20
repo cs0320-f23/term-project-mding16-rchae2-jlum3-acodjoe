@@ -327,6 +327,10 @@ function Page(props: recipeProps) {
      * https://www.youtube.com/watch?v=odSfSAoUREU
      * */
 
+    /**
+     * CITE: MEALDB API https://www.themealdb.com/api.php 
+     */
+
     return (
       <div id="recipeslider">
         <Slider {...settings}>
