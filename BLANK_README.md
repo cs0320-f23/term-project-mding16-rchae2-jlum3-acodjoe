@@ -52,6 +52,8 @@ Once you have logged in, you have the option to choose between four different re
   These regions are not representative of all the existing countries and cuisines in the world. We hope to expand our coverage in future versions. 
   <br> </br>
 <img src="images/regions.png" alt="Regions page" >
+ <br> </br>
+ Once you have selected a region, you will be brought to the levels page where you see all the possible levels you can unlock in the region. The screenshot below shows a user currently at level 3. DISCLAIMER: recipes in ChefBear are sorted into "levels" by a difficulty score based on number of ingredients and number of instructions. We recognize that this is not a realistic representation of how cultures determine recipe difficutly. In the future, we hope to develop a more nuanced definition of difficulty.
 <img src="images/levels.png" alt="Levels page" >
 <img src="images/recipes.png" alt="Recipes page">
 <img src="images/updatelevels.png" alt="Updated levels page" >
