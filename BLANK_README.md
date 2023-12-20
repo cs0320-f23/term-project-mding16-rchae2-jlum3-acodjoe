@@ -54,8 +54,14 @@ Once you have logged in, you have the option to choose between four different re
 <img src="images/regions.png" alt="Regions page" >
  <br> </br>
  Once you have selected a region, you will be brought to the levels page where you see all the possible levels you can unlock in the region. The screenshot below shows a user currently at level 3. DISCLAIMER: recipes in ChefBear are sorted into "levels" by a difficulty score based on number of ingredients and number of instructions. We recognize that this is not a realistic representation of how cultures determine recipe difficutly. In the future, we hope to develop a more nuanced definition of difficulty.
+  <br> </br>
 <img src="images/levels.png" alt="Levels page" >
+ <br> </br>
+ Once you select a level, you get 3 recipes generated for you to pick from. This part is up to you! Choose your favorite and get cooking. Once you are done, click the "completed" button to move on to the next level.
+  <br> </br>
 <img src="images/recipes.png" alt="Recipes page">
+ <br> </br>
+ This is what your levels page will look like once you have completed a level. Level 4 has unlocked! Happy Cooking!
 <img src="images/updatelevels.png" alt="Updated levels page" >
 
 
