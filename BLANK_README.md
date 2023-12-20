@@ -123,7 +123,6 @@ Clone the repo
 * [TheMealDB - meal database](https://www.themealdb.com/api.php)
 * [othneildrew - README template](https://github.com/othneildrew/Best-README-Template/blob/master/README.md)
 * [Chris DeSilva - carousel design tutorial](https://www.youtube.com/watch?v=odSfSAoUREU)
-* []()
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
