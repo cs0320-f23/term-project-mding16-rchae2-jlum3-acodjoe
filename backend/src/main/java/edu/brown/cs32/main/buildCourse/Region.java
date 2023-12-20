@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/*
+ * Class that holds all of the recipes and levels for each region
+ */
 public class Region{
   private List<ParsedRecipe> recipeList;
   private String region;
@@ -15,6 +18,9 @@ public class Region{
     this.recipeList = recipeList;
   }
 
+  /*
+   * Function that calculates the number of levels for each region
+   */
   public Map<String, List<String>> levelSort() {
     Map<String, List<String>> diff = this.difficultySort();
     Map<String, List<String>> output = new HashMap<>();
@@ -40,7 +46,9 @@ public class Region{
   }
 
 
-
+/*
+ * Function that sorts the recipes based on the difficulty scores 
+ */
   public Map<String, List<String>> difficultySort() {
     Map<String, List<String>> output = new HashMap<>();
     for (ParsedRecipe recipe : this.recipeList) {
@@ -61,12 +69,11 @@ public class Region{
     return this.region;
   }
 
+  /*
+   * Function to print out what each region looks like
+   */
   @Override
   public String toString() {
-//    return "Region{" +
-//        "name=" + this.region +
-//        ", recipe list=" + this.recipeList +
-//        '}';
     return "Region{" + this.region + '}';
   }
 

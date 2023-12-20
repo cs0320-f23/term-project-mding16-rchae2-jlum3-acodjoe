@@ -3,7 +3,7 @@ import java.io.FileNotFoundException;
 import spark.Spark;
 import static spark.Spark.after;
 
-/** Server class for using all endpoint including loadcsv, viewcsv, searchcsv, and broadbandcsv. */
+/** Server class for our ChefBear app */
 public class Server {
   private final int port = 3233;
 
@@ -14,7 +14,6 @@ public class Server {
     Spark.port(this.port);
     Spark.init();
 
-//    Spark.get("/searchjson", new SearchJsonHandler());
     System.out.println("Server started at http://localhost:" + this.port);
     Spark.awaitInitialization();
   }

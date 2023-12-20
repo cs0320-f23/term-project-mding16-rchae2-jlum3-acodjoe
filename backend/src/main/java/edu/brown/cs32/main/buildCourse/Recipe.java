@@ -4,6 +4,10 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Recipe object that is used as an intermediary object between the JSON object 
+ * from the API call, which will be later parsed properly into the ParsedRecipe object.
+ */
 public class Recipe {
   public String idMeal;
   public String strMeal;
@@ -63,9 +67,14 @@ public class Recipe {
 
   }
 
+  /*
+   * Parsing through all of the strMeasure fields and making it into one field 
+   */
   public List<String> parseIngredients() throws NoSuchFieldException, IllegalAccessException {
     List<String> ingredients = new ArrayList<>();
     for (int i = 1; i <= 20; i++) {
+      // Source: Used to parse through the strMeasure(Num) fields   
+      // https://stackoverflow.com/questions/10638826/java-reflection-impact-of-setaccessibletrue
       Field field = getClass().getDeclaredField("strIngredient" + i );
       field.setAccessible(true);
       String ingredient =  (String) field.get(this);
@@ -75,6 +84,11 @@ public class Recipe {
     }
     return ingredients;
   }
+
+  /*
+   * Function that prints out the intermediary object to ensure that moshi object 
+   * is populated into this Recipe object correctly
+   */
   @Override
   public String toString() {
     return "Recipe{" +

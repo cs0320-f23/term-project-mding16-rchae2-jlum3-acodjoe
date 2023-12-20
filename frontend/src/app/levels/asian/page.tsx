@@ -8,6 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { loggedIn } from "../../../Atom.tsx";
 
+/**
+ * Map that contains the user's current level for each region
+ */
 type LevelsType = {
   AfriCarib: number;
   Asia: number;
@@ -15,14 +18,18 @@ type LevelsType = {
   Euro: number;
 };
 
+/**
+ * Shared props for the Levels page
+ */
 interface PageProps {
-  // children: React.ReactNode;
-  // progress: number;
   regions: LevelsType;
   levelClicked: Number;
   setLevelClicked: Dispatch<SetStateAction<Number>>;
 }
 
+/**
+ * Page with all of the levels populating based on the number of levels for each region
+ */
 const Page: React.FC<PageProps> = ({
   regions,
   levelClicked,
@@ -57,13 +64,14 @@ const Page: React.FC<PageProps> = ({
   const fullRows = Math.floor(totalLevels / 4);
   const remainingBubbles = totalLevels % 4;
   const navigate = useNavigate();
-    const isLoggedIn = useRecoilValue(loggedIn);
-    const setLoggedIn = useSetRecoilState(loggedIn);
+  const isLoggedIn = useRecoilValue(loggedIn);
+  const setLoggedIn = useSetRecoilState(loggedIn);
 
-    if (isLoggedIn === false) {
-      navigate("/");
-    }
+  if (isLoggedIn === false) {
+    navigate("/");
+  }
 
+  // Function that is called to navigate to the recipe page when levelBubble is clicked
   function bubbleclick(currLevel: Number) {
     const newProgress = (regions.Asia / totalLevels) * 100;
     setProgress(newProgress);
@@ -171,141 +179,6 @@ const Page: React.FC<PageProps> = ({
                 );
               })}
             </div>
-
-            {/* <div className="row" id="row1">
-              <div className="col-sm" data-aos="zoom-in">
-                <a href="/recipes">
-                  <img
-                    className="levelbubble grow-on-hover"
-                    src={"/level1.png"}
-                  ></img>
-                </a>
-              </div>
-              <div className="col-sm" data-aos="zoom-in">
-                <a>
-                  <img
-                    className="levelbubble grow-on-hover"
-                    src={"/level2.png"}
-                  ></img>
-                </a>
-              </div>
-              <div className="col-sm" data-aos="zoom-in">
-                <a>
-                  <img
-                    className="levelbubble grow-on-hover"
-                    src={"/level3.png"}
-                  ></img>
-                </a>
-              </div>
-              <div className="col-sm" data-aos="zoom-in">
-                <a>
-                  <img
-                    className="levelbubble grow-on-hover"
-                    src={"/level4.png"}
-                  ></img>
-                </a>
-              </div>
-            </div>
-            <div className="row" id="row2">
-              <div className="col-sm" data-aos="zoom-in">
-                <a>
-                  <img
-                    className="levelbubble grow-on-hover"
-                    src={"/level5.png"}
-                  ></img>
-                </a>
-              </div>
-              <div className="col-sm" data-aos="zoom-in">
-                <a>
-                  <img
-                    className="levelbubble grow-on-hover"
-                    src={"/level6.png"}
-                  ></img>
-                </a>
-              </div>
-              <div className="col-sm" data-aos="zoom-in">
-                <img
-                  className="levelbubble grow-on-hover"
-                  src={"/level7.png"}
-                ></img>
-              </div>
-              <div className="col-sm" data-aos="zoom-in">
-                <a>
-                  <img
-                    className="levelbubble grow-on-hover"
-                    src={"/level8.png"}
-                  ></img>
-                </a>
-              </div>
-            </div>
-            <div className="row" id="row3">
-              <div className="col-sm">
-                <a>
-                  <img
-                    className="levelbubble grow-on-hover"
-                    src={"/level9.png"}
-                  ></img>
-                </a>
-              </div>
-              <div className="col-sm">
-                <a>
-                  <img
-                    className="levelbubble grow-on-hover"
-                    src={"/level10.png"}
-                  ></img>
-                </a>
-              </div>
-              <div className="col-sm">
-                <a>
-                  <img
-                    className="levelbubble grow-on-hover"
-                    src={"/level11.png"}
-                  ></img>
-                </a>
-              </div>
-              <div className="col-sm">
-                <a>
-                  <img
-                    className="levelbubble grow-on-hover"
-                    src={"/level12.png"}
-                  ></img>
-                </a>
-              </div>
-            </div>
-            <div className="row" id="row4">
-              <div className="col-sm">
-                <a>
-                  <img
-                    className="levelbubble grow-on-hover"
-                    src={"/level13.png"}
-                  ></img>
-                </a>
-              </div>
-              <div className="col-sm">
-                <a>
-                  <img
-                    className="levelbubble grow-on-hover"
-                    src={"/level14.png"}
-                  ></img>
-                </a>
-              </div>
-              <div className="col-sm">
-                <a>
-                  <img
-                    className="levelbubble grow-on-hover"
-                    src={"/level15.png"}
-                  ></img>
-                </a>
-              </div>
-              <div className="col-sm">
-                <a>
-                  <img
-                    className="levelbubble grow-on-hover"
-                    src={"/level16.png"}
-                  ></img>
-                </a>
-              </div>
-    </div>*/}
           </div>
         </div>
         {/* <Script

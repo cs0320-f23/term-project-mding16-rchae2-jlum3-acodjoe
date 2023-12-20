@@ -20,7 +20,11 @@ import edu.brown.cs32.main.buildCourse.MoshiObjects.*;
 import java.util.Map;
 import java.util.Objects;
 
-
+/*
+ * Class for the ChefBear backend functionality, which focuses on preprocessing
+ * the data from the MealDB API and then parsing such data into our respective 
+ * objects to fill up our database.
+ */
 public class ChefBear{
   private HashMap<String, List<String>> regionToCountry = new HashMap<>();
   private HashMap<String, List<ParsedRecipe>> regionToRecipeList = new HashMap<>();
@@ -41,12 +45,7 @@ public class ChefBear{
   public static void main(String[] args){
     ChefBear chefBear = new ChefBear();
     chefBear.populateMap();
-    System.out.println(chefBear.regionToCountry);
     chefBear.setup();
-//    chefBear.recipeDB.get("Montreal Smoked Meat");
-//    System.out.println(chefBear.regionToRecipeList);
-//    System.out.println(chefBear.RegionList);
-//    chefBear.printSampleData();
   }
 
   /**
@@ -73,7 +72,6 @@ public class ChefBear{
             // If valid connection, read and deserialize response
             try {
               BufferedReader lineTraverse = new BufferedReader(new InputStreamReader(countryConnection.getInputStream()));
-              // String jsonString = new Buffer().readFrom(countryConnection.getInputStream());
               StringBuilder stringBuilder = new StringBuilder();
               String line = lineTraverse.readLine();
               while (line!=null){
@@ -84,14 +82,11 @@ public class ChefBear{
               Moshi moshi = new Moshi.Builder().build();
               Type type = Types.newParameterizedType(Meal.class, List.class, SubMeal.class); // output of json
               JsonAdapter<Meal> adapter = moshi.adapter(type);
-//              System.out.println("Meal API Response" + stringBuilder.toString());
               Meal currMeal = adapter.fromJson(stringBuilder.toString());
-//              System.out.println("Printing the Meal Class" + currMeal.toString());
               // ***************** THIRD LOOP ********************
               // LOOPING THROUGH EACH RECIPE PER COUNTRY
               if (currMeal != null && currMeal.meals != null && !currMeal.meals.isEmpty()) {
-                for (SubMeal submeal : currMeal.meals) { // TODO: might have to change this bc currMeal.meals may not format into submeal properly
-//                  System.out.println("ParsedSubmeal: " + submeal.toString());
+                for (SubMeal submeal : currMeal.meals) {
                   // API CALL 2
                   String recipeAPICall =
                       "https://www.themealdb.com/api/json/v1/1/search.php?s=" + submeal.strMeal;
@@ -110,20 +105,14 @@ public class ChefBear{
                       }
                       lineTraverseTwo.close();
                       Moshi moshiTwo = new Moshi.Builder().build();
-//                    // Type typeTwo = Recipe.class; // output of json
                       JsonAdapter<RecipeWrapper> recipeAdapter = moshiTwo.adapter(RecipeWrapper.class);
-                      // System.out.println("JSON Version of RecipeWrapper: " + stringBuilderTwo.toString());
                       RecipeWrapper currRecipe = recipeAdapter.fromJson(stringBuilderTwo.toString());
 
                       Recipe recipeObject = currRecipe.meals.get(0);
-//                      System.out.println("Recipe Object " + recipeObject.toString());
-
                       ParsedRecipe parsedRecipe = new ParsedRecipe(recipeObject);
-//                      System.out.println("Parsed Object " + parsedRecipe.toString());
 
-//                    // System.out.println("Recipe Object" + currRecipe.toString());
                       //Adding Recipe to the regionToRecipeList
-                      processRecipe(region, parsedRecipe); // TODO: UNCOMMENT THIS
+                      processRecipe(region, parsedRecipe); 
                     } catch (IOException e ) {
                       System.err.println(e);
                     } catch (NoSuchFieldException e) {
@@ -135,7 +124,6 @@ public class ChefBear{
                     }
                   } else {
                     // NO SUCH RECIPE FOUND IN API
-
                   }
                 }
               }
@@ -144,11 +132,9 @@ public class ChefBear{
             } finally {
               countryConnection.disconnect();
             }
-
           } else{
             // NO SUCH COUNTRY FOUND IN API
           }
-
         } catch (IOException e) {
           e.printStackTrace();
         }
@@ -157,29 +143,18 @@ public class ChefBear{
       Region regionObject = new Region(region, regionToRecipeList.get(region));
       RegionList.add(regionObject);
       }
+
     // After all of the regions are done iterating, add Regions to the database
-//    System.out.println(RegionList);
-//    for (Region r : RegionList){
-//      System.out.println(r);
-//      if (Objects.equals(r.getRegion(), "African/Caribbean")) {
-//        System.out.println(r.levelSort());
-//      }
-//
-//    }
-
-
      for (Region r : RegionList){
        Map<String, List<String>> levels = r.levelSort();
        this.regionDB.add(r.getRegion(), levels);
        for (ParsedRecipe recipe : r.getRecipeList()) {
          this.recipeDB.add(recipe.name, recipe.difficultyScore, recipe.instructions, recipe.ingredients, recipe.image);
        }
-       //break; //TODO: edit this to eventually add everything
        }
 
 
   }
-
 
   /**
    * Setting up the region to country list
@@ -203,7 +178,7 @@ public class ChefBear{
   }
 
   /**
-   * defensive oprogramming
+   * Defensive Programming
    */
   public HashMap<String, List<String>> getRegionToCountry(){
     return (HashMap<String, List<String>>) this.regionToCountry.clone();
@@ -224,7 +199,7 @@ public class ChefBear{
   }
   /**
    *
-   * a function exclusively used for testing
+   * a Function exclusively used for testing
    */
   public HashMap<String, List<ParsedRecipe>> getRegionToRecipeList(){
     return (HashMap<String, List<ParsedRecipe>>) this.regionToRecipeList.clone();
