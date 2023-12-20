@@ -62,37 +62,41 @@ Once you have logged in, you have the option to choose between four different re
 <img src="images/recipes.png" alt="Recipes page">
  <br> </br>
  This is what your levels page will look like once you have completed a level. Level 4 has unlocked! Happy Cooking!
+  <br> </br>
 <img src="images/updatelevels.png" alt="Updated levels page" >
 
 
 ### Built With
-
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
-
+React, Bootstrap, Firebase
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 
 <!-- GETTING STARTED -->
 ## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
 * npm
   ```sh
-  npm install npm@latest -g
+  npm install
   ```
+* react-router-dom
+  ```sh
+  npm install react-router-dom
+  ```
+* react-slick
+  ```sh
+  npm install react-slick
+  ```
+  ```sh
+  npm install --save @types/react-slick
+  ```
+* firebase
+  ```sh
+  npm install firebase
+  ```
+
 
 ### Installation
 
@@ -219,3 +223,5 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [Bootstrap-url]: https://getbootstrap.com
 [JQuery.com]: https://img.shields.io/badge/jQuery-0769AD?style=for-the-badge&logo=jquery&logoColor=white
 [JQuery-url]: https://jquery.com 
+[Firebase]: images/Firebase.png
+[Firebase-url]: https://firebase.google.com/docs
