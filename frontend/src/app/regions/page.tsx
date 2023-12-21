@@ -12,55 +12,54 @@ import {
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { loggedIn } from "../../Atom.tsx";
 
-
+/**
+ * interfaxce rperesenting relevant props to the regions page
+ */
 interface regionProps {
-  selectedRegion: string;
-  setSelectRegion: Dispatch<SetStateAction<string>>;
+  selectedRegion: string; // the region the user selectesd
+  setSelectRegion: Dispatch<SetStateAction<string>>; // setting the selecter region
 }
-
+/**
+ * a fucntion mainly for debigging purposes that waits three minutes
+ * @returns a promise that waits for three minutes
+ */
 function waitThreeMinutes() {
   return new Promise(resolve => {
-    setTimeout(resolve, 180000); // 180,000 milliseconds = 3 minutes
+    setTimeout(resolve, 180000); 
   });
 }
 
-
+/**
+ * @param props, relevant shred states for the page
+ * @returns the html setup for a page
+ */
 export default function Page(props: regionProps) {
   const navigate = useNavigate()
   const isLoggedIn = useRecoilValue(loggedIn);
   const setLoggedIn = useSetRecoilState(loggedIn);
 
-  if (isLoggedIn === false) {
+  if (isLoggedIn === false) { // if use login is gflase --> redirect
     navigate("/");
   }
+  /**
+   * handles the click of a region
+   * @param region the region to naivvigate to
+   * @param props shared props
+   */
   async function onClick(region: string, props: regionProps, event : React.MouseEvent<HTMLAnchorElement>) {
     event.preventDefault();
   
     props.setSelectRegion(region);
     console.log(props.selectedRegion);
     navigate('/levels/' + region)
-  
-    // window.setTimeout(() => {
-    //   window.location.assign("/regions");
-    // }, 999999999999999999999999999999999999999999 * 999999999999999999999999999999999999999999);
-  
-    // console.log("drive");
-    // await waitThreeMinutes(); // Wait for 3 minutes
-    //{selectedRegion: '', setSelectRegion: ƒ}
-  
-    // window.location.href = "/levels/" + region;
   }
-
+  /**
+   * a useeffect mainly used for debigging purposes
+   */
   useEffect(() => {
     console.log(props.selectedRegion);
   }, [props.selectedRegion]);
 
-  // useEffect(() => {
-  //   // Redirect to another page when showContent is set to false
-  //   if (!props.loggedIn) {
-  //     navigate("/"); // Specify the path you want to redirect to
-  //   }
-  // }, [props.loggedIn]);
   
   return (
     <div className="Page">

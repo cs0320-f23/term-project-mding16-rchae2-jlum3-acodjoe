@@ -19,14 +19,18 @@ import {
   getDoc,
   updateDoc,
 } from "firebase/firestore";
-
+/**
+ * a data type that dictates the type of level we are on
+ */
 type LevelsType = {
   AfriCarib: number;
   Asia: number;
   NorthAm: number;
   Euro: number;
 };
-
+/**
+ * an interface defining relevant shared props throughout the code (fed form app.tsx)
+ */
 interface recipeProps {
   currentUserID: string;
   regions: LevelsType;
@@ -38,7 +42,11 @@ interface recipeProps {
   setRegions: Dispatch<SetStateAction<LevelsType>>;
   levelClicked: number;
 }
-
+/**
+ * 
+ * @param props relevant shared props throughout the code (fed form app.tsx)
+ * @returns the recipes page
+ */
 function Page(props: recipeProps) {
   const [dataLoaded, setDataLoaded] = useState(false);
   const [regionMap, setRegionMap] = useState(new Map());
@@ -48,21 +56,17 @@ function Page(props: recipeProps) {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedRegionStr, setSelectedRegionStr] = useState("");
 
-  // const nav = useNavigate();
-  // useEffect(() => {
-  //   // Redirect to another page when showContent is set to false
-  //   if (!props.loggedIn) {
-  //     nav("/"); // Specify the path you want to redirect to
-  //   }
-  // }, [props.loggedIn, nav]);
-  const isLoggedIn = useRecoilValue(loggedIn);
-  const setLoggedIn = useSetRecoilState(loggedIn);
+  const isLoggedIn = useRecoilValue(loggedIn); // determines login staus
+  const setLoggedIn = useSetRecoilState(loggedIn); // sets login staus  
 
   const nav = useNavigate();
+
+  // ensures user is logged in e=beofre proceeding 
   if (isLoggedIn === false) {
     nav("/");
   }
 
+  // sets the selected region accordingly
   useEffect(() => {
     // const selectedString = props.selectedRegion
     console.log("INITIATING RECIPES USER EFFECT LOOP");
@@ -172,16 +176,6 @@ function Page(props: recipeProps) {
           RECIPES
         </div>
         <div id="redrec"></div>
-        {/* <div id="selecttext">
-          {"Select one of the following recipes."}
-          <br></br>
-          {"Once you’ve completed it, select the completed button"}
-          <br></br>
-          {"and the next level will be unlocked!"}
-          <br></br>
-          {"Happy cooking!"}
-        </div>
-        <div id="redrec"></div> */}
         <div id="recipetext">
           LEVEL {userLevel}, {selectedRegionStr}
         </div>
@@ -195,7 +189,6 @@ function Page(props: recipeProps) {
     console.log("old region", props.regions);
 
     if (selectedRegion === "afriCarib") {
-      // TODO: MAKE SURE TO TAKE A LOOK AT THIS AS IT IS A TEMP FIX
       if (props.levelClicked === props.regions.AfriCarib) {
         props.setRegions({
           ...props.regions,
