@@ -9,14 +9,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Used to add and retrieve from region database, which stores regions and recipes for each level.
+ */
 public class RegionDB {
 
   private Firestore db;
 
+  /**
+   * Takes in database instance.
+   * @param db firebase
+   */
   public RegionDB(Firestore db) {
     this.db = db;
   }
 
+  /**
+   * Adds to region database.
+   *
+   * @param region region name
+   * @param levels map from level to list of recipes in given level
+   */
   public void add(String region, Map<String, List<String>> levels) {
     try {
       Map<String, Object> data = new HashMap<>();
@@ -28,7 +41,5 @@ public class RegionDB {
     } catch (Exception e) {
       e.printStackTrace();
     }
-
   }
-
 }

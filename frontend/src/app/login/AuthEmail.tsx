@@ -14,17 +14,24 @@ import {
   signInWithPopup,
 } from "firebase/auth";
 
+/**
+ * Auth object that is shared between firestore authentication and database.
+ */
 interface authProps {
     auth: firebase.auth.Auth
 }
 
+/**
+ * Defines settings and display for Google authentication.
+ * @param props authProps
+ * @returns firebase auth ui component
+ */
 export default function AuthEmail(props : authProps) {
 
   var uiConfig = {
     signInSuccessUrl: "/regions",
     signInFlow: "popup",
     signInOptions: [
-      // Leave the lines as is for the providers you want to offer your users.
       {
         provider: GoogleAuthProvider.PROVIDER_ID,
         clientId: `${process.env.NEXT_PUBLIC_CLIENT_ID}`,
@@ -36,9 +43,6 @@ export default function AuthEmail(props : authProps) {
       },
     ],
     credentialHelper: firebaseui.auth.CredentialHelper.GOOGLE_YOLO,
-    // tosUrl and privacyPolicyUrl accept either url string or a callback
-    // function.
-    // Terms of service url/callback.
     tosUrl: "your terms of service url",
     // Privacy policy url/callback.
     privacyPolicyUrl: function () {

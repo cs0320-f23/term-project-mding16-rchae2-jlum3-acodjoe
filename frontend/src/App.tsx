@@ -28,8 +28,9 @@ import { log } from "console";
 import { RecoilRoot, useSetRecoilState, useRecoilValue } from "recoil";
 import { loggedIn } from "./Atom.tsx";
 
-
-
+/**
+ * Type that defines user level for given region.
+ */
 export type LevelsType = {
   AfriCarib: number;
   Asia: number;
@@ -37,7 +38,9 @@ export type LevelsType = {
   Euro: number;
 };
 
-
+/**
+ * Main class where shared states are defined and passed into different components.
+ */
 export default function App() {
   //all states for application
   const [currentUserID, setID] = useState("");
@@ -49,7 +52,6 @@ export default function App() {
     Euro: 1,
   });
 
-  // const [selectedRegion, setSelectRegion] = useState("");
   const [selectedRegion, setSelectRegion] = useState("");
   const [afriCarib, setAfriCarib] = useState<Map<number, string[]>>(new Map());
   const [asian, setAsian] = useState<Map<number, string[]>>(new Map());
@@ -57,7 +59,6 @@ export default function App() {
   const [northAm, setNorthAm] = useState<Map<number, string[]>>(new Map());
 
   const [levelClicked, setLevelClicked] = useState(0);
-  // const [loggedIn, setLoggedIn] = useState(false);
   const isLoggedIn = useRecoilValue(loggedIn);
   const setLoggedIn = useSetRecoilState(loggedIn);
 
@@ -123,7 +124,6 @@ export default function App() {
             };
 
             const data = {
-              // Your data fields here
               userID: user.uid,
               userEmail: user.email,
               regions: levels,
@@ -143,9 +143,6 @@ export default function App() {
             setID(gotDoc.id);
             setUserEmail(gotDoc.data().userEmail);
             setRegions(gotDoc.data().regions);
-            // setLoggedIn(false);
-            // console.log(gotDoc.data().userEmail);
-            // console.log(gotDoc.data().regions);
           }
         });
         console.log("logged in:", loggedIn);
@@ -154,7 +151,6 @@ export default function App() {
 
       } else {
         console.log("Authentication error:", user);
-        // setLoggedIn(false);
       }
     });
   }, [auth]);
@@ -179,13 +175,6 @@ export default function App() {
       </div>
     );
   };
-
-  // useEffect(() => {
-  //   console.log(currentUserID);
-  //   console.log(userEmail);
-  //   console.log(regions);
-  //   console.log(afriCarib);
-  // }, [currentUserID, userEmail, regions, afriCarib]);
 
   return (
       <BrowserRouter>
@@ -260,7 +249,6 @@ export default function App() {
           <Route
             path="/test"
             element={
-              // <MyContext.Provider value={{currentUserID, userEmail, regions, afriCarib, asian, europe, northAm}}>
               <Test
                 currentUserID={currentUserID}
                 userEmail={userEmail}
@@ -273,7 +261,6 @@ export default function App() {
                 selectedRegion={selectedRegion}
                 setSelectRegion={setSelectRegion}
               ></Test>
-              // </MyContext.Provider>
             }
           />
         </Routes>

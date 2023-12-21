@@ -20,14 +20,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Database class that defines account settings (i.e. API keys) and firebase app initialilzation.
+ */
 public class Database {
 
   public Firestore db;
 
+  /**
+   * Initialize firebase.
+   */
   public Database() {
     try {
       System.out.println("Current Working Directory: " + System.getProperty("user.dir"));
-
       FileInputStream serviceAccount = new FileInputStream("./src/main/java/edu/brown/cs32/main/database/ServiceAccountKey.json");
       FirebaseOptions options = FirebaseOptions.builder().setCredentials(GoogleCredentials.fromStream(serviceAccount)).build();
       FirebaseApp.initializeApp(options);
@@ -35,7 +40,5 @@ public class Database {
     } catch (Exception e) {
       e.printStackTrace();
     }
-
   }
-
 }

@@ -13,14 +13,14 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import { loggedIn } from "../../Atom.tsx";
 
 /**
- * interfaxce rperesenting relevant props to the regions page
+ * interface rperesenting relevant props to the regions page
  */
 interface regionProps {
   selectedRegion: string; // the region the user selectesd
   setSelectRegion: Dispatch<SetStateAction<string>>; // setting the selecter region
 }
 /**
- * a fucntion mainly for debigging purposes that waits three minutes
+ * a function mainly for debugging purposes that waits three minutes
  * @returns a promise that waits for three minutes
  */
 function waitThreeMinutes() {
@@ -38,7 +38,7 @@ export default function Page(props: regionProps) {
   const isLoggedIn = useRecoilValue(loggedIn);
   const setLoggedIn = useSetRecoilState(loggedIn);
 
-  if (isLoggedIn === false) { // if use login is gflase --> redirect
+  if (isLoggedIn === false) { // if use login is false --> redirect
     navigate("/");
   }
   /**
@@ -54,7 +54,7 @@ export default function Page(props: regionProps) {
     navigate('/levels/' + region)
   }
   /**
-   * a useeffect mainly used for debigging purposes
+   * a useeffect mainly used for debugging purposes
    */
   useEffect(() => {
     console.log(props.selectedRegion);

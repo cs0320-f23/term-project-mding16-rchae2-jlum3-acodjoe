@@ -6,7 +6,6 @@ import React, {
   useState,
   useContext,
 } from "react";
-import { useGlobalContext } from "../context/store";
 import {
   getFirestore,
   addDoc,
@@ -20,6 +19,9 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { loggedIn } from "../../Atom.tsx";
 
+/**
+ * Type that defines user level for given region.
+ */
 type LevelsType = {
   AfriCarib: number;
   Asia: number;
@@ -27,7 +29,9 @@ type LevelsType = {
   Euro: number;
 };
 
-
+/**
+ * Props for test component, which was used to mock accessing and changing shared states.
+ */
 interface testProps {
   currentUserID: string;
   userEmail: string;
@@ -41,6 +45,12 @@ interface testProps {
   setSelectRegion: Dispatch<SetStateAction<string>>;
 }
 
+/**
+ * Testing page to ensure proper state access and changes.
+ * 
+ * @param props testProps
+ * @returns component representing test page
+ */
 export default function Page(props: testProps) {
   const isLoggedIn = useRecoilValue(loggedIn);
   const setLoggedIn = useSetRecoilState(loggedIn);
@@ -49,19 +59,11 @@ export default function Page(props: testProps) {
   if (isLoggedIn === false) {
       nav("/"); 
   }
-  // useEffect(() => {
-  //   // Redirect to another page when showContent is set to false
-  //   if (!isLoggedIn) {
-  //     nav("/"); // Specify the path you want to redirect to
-  //   }
-  // }, [isLoggedIn]);
 
   //api call to get recipe steps, ingredients, etc.
   useEffect(() => {
     if (props.asian[props.regions.Asia] !== undefined) {
-      // if user level is not undefined for that region
       for (const recipe of props.asian[props.regions.Asia]) {
-        // looping through string[]
         const document = doc(getFirestore(), "recipes", recipe); // getting the recipe from database
         getDoc(document).then((gotRecipe) => {
           console.log(gotRecipe.data().recipe); // name of recipe
@@ -119,7 +121,7 @@ export default function Page(props: testProps) {
       </div>
       <button
         style={{
-          backgroundColor: "#7CFC00", // Light Green
+          backgroundColor: "#7CFC00", 
           color: "white",
           padding: "10px",
           borderRadius: "5px",

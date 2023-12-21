@@ -10,14 +10,30 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * Used to add and retrieve from recipe database, which stores recipe name, instructions. etc.
+ */
 public class RecipeDB {
 
   private Firestore db;
 
+  /**
+   * Takes in database instance.
+   * @param db firebase
+   */
   public RecipeDB(Firestore db) {
     this.db = db;
   }
 
+  /**
+   * Adds to recipe database.
+   *
+   * @param name recipe name
+   * @param difficultyScore recipe's difficulty score
+   * @param instructions recipe instructions
+   * @param ingredients recipe ingredients
+   * @param image recipe image link
+   */
   public void add(String name, int difficultyScore, List<String> instructions, List<String> ingredients, String image) {
     try {
       Map<String, Object> data = new HashMap<>();
@@ -35,6 +51,11 @@ public class RecipeDB {
 
   }
 
+  /**
+   * Retrieves from recipe db.
+   *
+   * @param recipe recipe name/key
+   */
   public void get(String recipe) {
     try {
       DocumentReference docRef = db.collection("recipes").document(recipe);
@@ -48,6 +69,5 @@ public class RecipeDB {
     } catch (Exception e) {
       e.printStackTrace();
     }
-
   }
 }

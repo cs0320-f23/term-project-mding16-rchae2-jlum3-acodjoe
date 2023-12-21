@@ -5,7 +5,6 @@ import header from "./images/reciperec.png";
 import { SetStateAction, useState } from "react";
 import Slider from "react-slick";
 import { Dispatch, useEffect, useContext } from "react";
-import { useGlobalContext } from "../context/store";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { loggedIn } from "../../Atom.tsx";

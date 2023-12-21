@@ -1,7 +1,6 @@
 import { test, expect } from "@playwright/test";
 
 function generateRandomEmail() {
-  // Local part of the email (random string)
   const randomString = Math.random().toString(36).substring(2, 10);
   const domain = "test.com"; 
   const email = `${randomString}@${domain}`;
