@@ -77,6 +77,13 @@ React, Bootstrap, Firebase
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
+* start application and run tests
+  ```sh
+  npm run start
+  ```
+  ```sh
+  npx playwright test
+  ```
 * npm
   ```sh
   npm install
