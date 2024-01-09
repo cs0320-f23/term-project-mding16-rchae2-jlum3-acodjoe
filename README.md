@@ -10,7 +10,7 @@
   <p align="center">
     ChefBear is a "duolingo for cooking" that aims to promote diversity in the cooking realm and increase exposure to  diverse foods that are not always easily accessible for anyone from novice chefs, home cooks, to anyone curious about demystifying cultural recipes.
     <br></br>
-    Created by: Michelle Ding, Ariana Codjoe, Jeremy Lum, Rachel Chae
+    Created by: Ariana Codjoe, Jeremy Lum, Michelle Ding, Rachel Chae
   </p>
 </div>
 
